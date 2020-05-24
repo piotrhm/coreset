@@ -2,14 +2,10 @@ import numpy as np
 import common.utils as utils
 
 class LightweightCoreset:
-    def __init__(self, X, c, k, eps):
+    def __init__(self, X, k, eps):
         self.X = X
-        self.c = c
         self.k = k
         self.eps = eps
-
-    def set_c(self, c):
-        self.c = c
 
     def set_k(self, k):
         self.k = k
@@ -17,11 +13,13 @@ class LightweightCoreset:
     def set_X(self, X):
         self.X = X
 
-    def _calc_m(self):
-        #Calculating coreset size
+    def _compute_m(self):
+        #Computing coreset size
         self.m = np.int64(self.X.shape[1]*self.k*np.log2(self.k)/np.power(self.eps, 2))
+        if self.m > self.X.shape[0]*0.2:
+            self.m = int(self.k * 0.01 * self.X.shape[0])
     
-    def _calc_coreset(self):
+    def _compute_coreset(self):
         #Algorithm 1 Lightweight coreset construction
         dist = np.power(self.X-self.X.mean(axis=0), 2).sum(axis=1)
         q = 0.5/self.X.shape[0] + 0.5*dist/dist.sum()
@@ -31,8 +29,7 @@ class LightweightCoreset:
         return X_cs, w_cs
 
     @utils.timeit
-    def calc(self):
-        #self._calc_m()
-        #print(self.m)
-        self.m = 100
-        return self._calc_coreset()
+    def compute(self):
+        self._compute_m()
+        print("coreset size: ", self.m)
+        return self._compute_coreset()
