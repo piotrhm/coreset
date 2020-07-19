@@ -2,6 +2,7 @@ import common.input as input
 import algorithm.lightweight.coreset as alc
 import common.utils as utils
 import matplotlib.pyplot as plt
+import numpy as np
 
 from sklearn.cluster import KMeans
 
@@ -34,9 +35,7 @@ cost_cs = test_coreset()
 cost_opt = utils.cost_function(data, opt, centers)
 
 print(cost, cost_cs, cost_opt)
-print(cost_cs/cost)
-print(cost-cost_cs)
-print("no coreset: {:.1%} ".format(cost/cost_opt))
-print("coreset: {:.1%} ".format(cost_cs/cost_opt))
+print("no coreset: {:.1%} ".format(np.abs(cost_opt-cost)/cost_opt))
+print("coreset: {:.1%} ".format(np.abs(cost_opt-cost_cs)/cost_opt))
 
 #plt.show()

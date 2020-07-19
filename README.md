@@ -5,7 +5,10 @@ Piotr Helm
 
 ## Algorithms
 
-### Gradient Descent
+### Geometric Decomposition
+
+For computing nearest neighbors I used sklearn classifier.
+https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html
 
 ### Lightweight Coreset
 
