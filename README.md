@@ -10,6 +10,7 @@ Piotr Helm
 Implemented algorithms:
 
 Farthest Point Algorithm from [3][4]
+
 Fast Constant Factor Approximation from [2]
 
 For computing nearest neighbors I used sklearn classifier.
