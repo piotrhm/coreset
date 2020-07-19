@@ -107,7 +107,7 @@ class GeometricDecomposition:
         L = self._calc_L(A)
 
         # picking random sample from X
-        gamma = 2
+        gamma = 3
         sample_size = int(np.ceil(gamma * k * np.log(n)))
         if sample_size >= n:
             return X
@@ -134,6 +134,9 @@ class GeometricDecomposition:
         iter = np.floor(np.log(n))
         min_size = int(n/(np.log(n)))
 
+        # temp const for testing reasons
+        k = int(2 * np.ceil(np.power(n, 1/4)))
+
         while iter:
             C, L = self._compute_fast_factor_approx_coreset(X)
             A = np.concatenate((A, C), axis=0)
@@ -144,7 +147,7 @@ class GeometricDecomposition:
                 break
 
         logging.info(" A size: %d", A.shape[0])
-        logging.info(" Exp A size: %d", int(15*np.log(n)*np.log(n)))
+        logging.info(" Exp A size: %d", int(k*np.log(n)*np.log(n)))
 
         # Compute final Coreset from Approximate Clustering 
 
