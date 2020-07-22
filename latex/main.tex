@@ -1,0 +1,55 @@
+\documentclass[a4paper]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{indentfirst}
+\usepackage[nottoc,numbib]{tocbibind}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage{titlesec}
+\usepackage{textcomp}
+\usepackage{titling}
+\usepackage{tikz}
+\usetikzlibrary{decorations.markings}
+\usepackage{xstring}
+\let\lll\undefined
+\usepackage{amssymb,amsthm,amsmath}
+\usepackage{mathtools}
+\mathtoolsset{showonlyrefs}
+\usepackage[unicode]{hyperref}
+\usepackage{booktabs}
+
+\titleformat{\chapter}[hang]
+    {\Large\fillast}
+    {\oldstylenums{\thechapter} }
+    {0pt}
+    {\scshape\bfseries}
+
+\titleformat{\section}[hang]
+    {\large\fillast}
+    {\oldstylenums{\thesection} }
+    {0pt}
+    {\scshape}
+
+\titleformat{\subsection}[hang]
+    {\large\fillast}
+    {\oldstylenums{\thesubsection} }
+    {0pt}
+    {\itshape\scshape} % chktex 6
+
+\newcommand{\mellin}[2]{\mathcal{M}[#1;#2]}
+\newcommand{\coeffexp}[2]{\left[\frac{#1^{#2}}{
+    \IfSubStr{#2}{+}{(#2)!}
+        {\IfSubStr{#2}{-}{(#2)!}{#2!}}
+    }\right]}
+
+\begin{document}
+\input{00titlepage}
+\input{01abstract}
+\input{02intro}
+\input{03basics}
+\nocite{*}
+\bibliographystyle{acm}
+\bibliography{bibliography}
+\tableofcontents
+\end{document}
