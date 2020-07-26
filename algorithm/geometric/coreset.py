@@ -111,8 +111,8 @@ class GeometricDecomposition:
         beta = int(n/(10*np.log(n)))
 
         #calculate nearest neighbors
-        dist, indicates = self._calc_nearest_neighbors(X,C)
-        info = self._concat(dist, indicates)
+        dist, index = self._calc_nearest_neighbors(X,C)
+        info = self._concat(dist, index)
         R = self._find_good_set(beta, X, C, L, info)
 
         return R
@@ -132,16 +132,53 @@ class GeometricDecomposition:
         sample_size = int(np.ceil(gamma * k * np.log(n)))
         if sample_size >= n:
             return X
-        indices = np.random.choice(X.shape[0], sample_size, replace=False)
-        B = X[indices]
+        index = np.random.choice(X.shape[0], sample_size, replace=False)
+        B = X[index]
 
         # approx centers set
         C = np.unique(np.concatenate((A, B), axis=0), axis=0)
         return C, L
 
-    def _snap_point_into_fake_exp_grid(self, p, P):
+    def _snap_point_into_fake_exp_grid(self, p, P, R):
+        D = np.sqrt(np.power(P - p, 2).sum(axis=1))
+        
+        limit = int(2*np.log(32*self.n))
+        print(limit)
 
-        return 0, 0
+        print(P.shape[0])
+
+        # init S, W 
+        idx = np.random.choice(P.shape[0], 1, replace=False)
+        print(P[idx][0], P.shape[0])
+        S = np.array([[0, 0]])
+        W = np.array([0])
+
+        print(S, W)
+
+        # first round
+        index = np.where(D < R)
+        P_tmp = P[index[0]]
+        D_tmp = D[index[0]]
+        size = len(D_tmp)
+
+        if(size > 0):
+            idx = np.random.choice(size, 1, replace=False)
+            print(P_tmp[idx][0], size)
+            S = np.append(S, P_tmp[idx], axis=0)
+            W = np.append(W, [size], axis=0)
+
+        print(S, W)
+
+        #R2^i
+        R *= 2
+        for i in range(limit):
+            R_tmp = R*np.power(2,i)
+            index = np.where((R_tmp/2 < D) & (D < R_tmp))
+            print(i, R_tmp, index)
+            #P_tmp = np.where()
+
+
+        return S[1:], W[1:]
 
     def _compute_centroid_set(self):
         # Har-Peled and Mazumdar: Coresets for k-maens nad k-median Clustering and their Application.
@@ -192,13 +229,10 @@ class GeometricDecomposition:
 
         for p in A:
             index = np.where(point == p)
-            #print(indicates[0])
             if (len(index[0]) > 0):
-                #print(np.unique(X[indicates[0]], axis=0))
                 P = np.unique(X[index[0]], axis=0)
-                D = np.unique(info[index[0]], axis=0)
-                #print(P, D)
-                S, W = self._snap_point_into_fake_exp_grid(p, P, D)
+                S, W = self._snap_point_into_fake_exp_grid(p, P, R)
+                
 
         #return S, W
         return A
