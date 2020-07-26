@@ -10,7 +10,7 @@ data = input.parse_txt("dataset/s-set/s3.txt")
 opt = input.parse_txt("dataset/s-set/s3-label.pa")
 centers = input.parse_txt("dataset/s-set/s3-cb.txt")
 
-geo = agc.GeometricDecomposition(data, 15, 0.1)
+geo = agc.GeometricDecomposition(data, 5000, 15, 0.1)
 coreset = geo._compute_centroid_set()
 
 @utils.timeit
@@ -32,6 +32,8 @@ cost = test_no_coreset()
 cost_cs = test_coreset()
 cost_opt = utils.cost_function(data, opt, centers)
 
-print(cost, cost_cs, cost_opt)
-print("no coreset: {:.1%} ".format(np.abs(cost_opt-cost)/cost_opt))
-print("coreset: {:.1%} ".format(np.abs(cost_opt-cost_cs)/cost_opt))
+print("cost no coreset ", cost)
+print("cost coreset ", cost_cs)
+print("coreset improvment: {:.1%} ".format(np.abs(cost-cost_cs)/cost))
+
+#plt.show()

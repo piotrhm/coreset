@@ -8,8 +8,9 @@ logging.basicConfig(stream=sys.stderr, level=log_level)
 #logging.info()
 
 class GeometricDecomposition:
-    def __init__(self, X, k, eps):
+    def __init__(self, X, n, k, eps):
         self.X = X
+        self.n = n
         self.k = k
         self.eps = eps
 
@@ -19,6 +20,42 @@ class GeometricDecomposition:
     def set_X(self, X):
         self.X = X
 
+    ### Tools ###
+
+    def _calc_nearest_neighbors(self, X, C):
+        nbrs = NearestNeighbors(n_neighbors=2, algorithm='auto').fit(C)
+        dist, indices = nbrs.kneighbors(X)
+        return dist, indices
+    
+    def _concat(self, dist, index):
+        info = np.ndarray(shape=(dist.shape), dtype=int)
+
+        for i in range(dist.shape[0]):
+            if dist[i][0] > dist[i][1]:
+                info[i][0] = int(dist[i][0])
+                info[i][1] = int(index[i][0])
+            else:
+                info[i][0] = int(dist[i][1])
+                info[i][1] = int(index[i][1])
+        
+        return info
+
+    def _concat_map(self, dist, index, P):
+        info = np.ndarray(shape=(dist.shape[0]), dtype=int)
+        point = np.ndarray(shape=(dist.shape))
+
+        for i in range(dist.shape[0]):
+            if dist[i][0] > dist[i][1]:
+                info[i] = int(dist[i][0])
+                point[i] = P[index[i][0]]
+            else:
+                info[i] = int(dist[i][1])
+                point[i] = P[index[i][1]]
+        
+        return info, point
+
+    ### Implementation ###
+        
     def _farthest_point_algorithm(self, k):
         # F.Gonzalez: Custering to minimize the maximum distance
         X = np.ndarray.copy(self.X)
@@ -34,9 +71,9 @@ class GeometricDecomposition:
             dist = np.maximum(dist, dist_new)
             D = np.amax(dist)
             index = np.where(dist == D)
-            T = np.append(T, X[index], axis=0)
-            X = np.delete(X, index, axis=0)
-            dist = np.delete(dist, index, axis=0)
+            T = np.append(T, X[index[0]], axis=0)
+            X = np.delete(X, index[0], axis=0)
+            dist = np.delete(dist, index[0], axis=0)
 
         return T
 
@@ -45,11 +82,6 @@ class GeometricDecomposition:
         dist = np.sqrt(np.power(X-T[-1], 2).sum(axis=1))
         return int(np.amax(dist))
 
-    def _calc_nearest_neighbors(self, X, C):
-        nbrs = NearestNeighbors(n_neighbors=2, algorithm='auto').fit(C)
-        dist, indices = nbrs.kneighbors(X)
-        return dist, indices
-
     def _find_good_set(self, beta, X, C, L, info):
         n = X.shape[0]
         index = np.random.choice(C.shape[0], 1, replace=False)      
@@ -57,21 +89,19 @@ class GeometricDecomposition:
 
         #P_i = P[2^(i-1)L/n, 2^(i)L/n]
         upper_bound = int(L/(4*n))
-
         while True:
             indicates = info[:,0] < upper_bound
             upper_bound *= 2
 
             P_i = X[indicates]
-            P = np.concatenate((P, P_i), axis=0)
-
+            P = np.unique(np.concatenate((P, P_i), axis=0), axis=0)
             if (P.shape[0] >= n/2):
                 break
             
         for point in P:
             index = np.where(X == point)
             if len(index[0]):
-                X = np.delete(X, index[0][0], axis=0) #check it !!!
+                X = np.delete(X, index[0][0], axis=0)
 
         return X
            
@@ -81,17 +111,8 @@ class GeometricDecomposition:
         beta = int(n/(10*np.log(n)))
 
         #calculate nearest neighbors
-        dist, indices = self._calc_nearest_neighbors(X,C)
-        info = np.ndarray(shape=(dist.shape), dtype=int)
-
-        for i in range(dist.shape[0]):
-            if dist[i][0] > dist[i][1]:
-                info[i][0] = int(dist[i][0])
-                info[i][1] = int(indices[i][0])
-            else:
-                info[i][0] = int(dist[i][1])
-                info[i][1] = int(indices[i][1])
-
+        dist, indicates = self._calc_nearest_neighbors(X,C)
+        info = self._concat(dist, indicates)
         R = self._find_good_set(beta, X, C, L, info)
 
         return R
@@ -115,11 +136,12 @@ class GeometricDecomposition:
         B = X[indices]
 
         # approx centers set
-        C = np.concatenate((A, B), axis=0)
+        C = np.unique(np.concatenate((A, B), axis=0), axis=0)
         return C, L
 
-    def _compute_approx_clutering_coreset(self):
-        return 0
+    def _snap_point_into_fake_exp_grid(self, p, P):
+
+        return 0, 0
 
     def _compute_centroid_set(self):
         # Har-Peled and Mazumdar: Coresets for k-maens nad k-median Clustering and their Application.
@@ -139,20 +161,46 @@ class GeometricDecomposition:
 
         while iter:
             C, L = self._compute_fast_factor_approx_coreset(X)
-            A = np.concatenate((A, C), axis=0)
+            A = np.unique(np.concatenate((A, C), axis=0), axis=0)
             X = self._handle_bad_points(X, C, L)
             iter -= 1
             if X.shape[0] < min_size:
-                A = np.concatenate((A, X), axis=0)
+                A = np.unique(np.concatenate((A, X), axis=0), axis=0)
                 break
+
+        # !!! Lost some point <1% !!!
+        # preparing for next stage of the algorithm
+        X = np.ndarray.copy(self.X)
+        for p in A:
+            index = np.where(X == p)
+            X = np.delete(X, index[0], axis=0)
 
         logging.info(" A size: %d", A.shape[0])
         logging.info(" Exp A size: %d", int(k*np.log(n)*np.log(n)))
+        logging.info(" X size: %d", X.shape[0])
+        logging.info(" A + X = %d, diff = %d", A.shape[0]+X.shape[0], self.X.shape[0] - (A.shape[0]+X.shape[0]))
+        logging.info(" percentage loss = %f", (self.X.shape[0] - (A.shape[0]+X.shape[0]))*100/self.X.shape[0])
 
         # Compute final Coreset from Approximate Clustering 
+        dist, index = self._calc_nearest_neighbors(X, A)
+        info, point = self._concat_map(dist, index, A)
 
-        # TBA
+        value = np.power(X-point, 2).sum(axis=1).sum()
+        R = int(np.sqrt(value/(32*self.n)))
 
+        logging.info(" R value: %d", R)
+
+        for p in A:
+            index = np.where(point == p)
+            #print(indicates[0])
+            if (len(index[0]) > 0):
+                #print(np.unique(X[indicates[0]], axis=0))
+                P = np.unique(X[index[0]], axis=0)
+                D = np.unique(info[index[0]], axis=0)
+                #print(P, D)
+                S, W = self._snap_point_into_fake_exp_grid(p, P, D)
+
+        #return S, W
         return A
 
     def _swap_heuristic(self):
