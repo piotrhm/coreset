@@ -1,8 +1,9 @@
 import numpy as np
-from sklearn.neighbors import NearestNeighbors
 import logging, sys
 import matplotlib.pyplot as plt
 
+from sklearn.neighbors import NearestNeighbors
+from sklearn.cluster import KMeans
 
 log_level = logging.DEBUG
 logging.basicConfig(stream=sys.stderr, level=log_level)
@@ -112,11 +113,11 @@ class GeometricDecomposition:
         return X
            
     def _handle_bad_points(self, X, C, L):
-        #calulate needed constant
+        # Calulate needed constant
         n = X.shape[0]
         beta = int(n/(10*np.log(n)))
 
-        #calculate nearest neighbors
+        # Calculate nearest neighbors
         dist, index = self._calc_nearest_neighbors(X,C)
         info = self._concat(dist, index)
         R = self._find_good_set(beta, X, C, L, info)
@@ -126,14 +127,14 @@ class GeometricDecomposition:
     def _compute_fast_factor_approx_coreset(self, X):
         n = X.shape[0]
 
-        # computing 2-approx k-centers for k ~ (n^(1/4))
+        # Computing 2-approx k-centers for k ~ (n^(1/4))
         alpha = 2
         k = int(alpha * np.ceil(np.power(n, 1/4)))
         
         A = self._farthest_point_algorithm(k)
         L = self._calc_L(A)
 
-        # picking random sample from X
+        # Picking random sample from X
         gamma = 3
         sample_size = int(np.ceil(gamma * k * np.log(n)))
         if sample_size >= n:
@@ -141,16 +142,19 @@ class GeometricDecomposition:
         index = np.random.choice(X.shape[0], sample_size, replace=False)
         B = X[index]
 
-        # approx centers set
+        # Approx centers set
         C = np.unique(np.concatenate((A, B), axis=0), axis=0)
         return C, L
 
     def _snap_point_into_fake_exp_grid(self, p, P, R):
-        # unweighted version
-        D = np.sqrt(np.power(P - p, 2).sum(axis=1))
-        limit = int(2*np.log(32*self.n))
-       
+        # Unweighted version
 
+        ### CONSTANTS ###
+        approx_factor = 32
+
+        D = np.sqrt(np.power(P - p, 2).sum(axis=1))
+        limit = int(2*np.log(approx_factor*self.n))
+       
         ### plt ###
         # plt.cla()
         # if P.shape[0] > 10:
@@ -176,7 +180,6 @@ class GeometricDecomposition:
         R_tmp = R
         for i in range(limit):
             R_tmp *= 2
-            r = int((self.eps*R_tmp)/(10*32*self.X.shape[1]))
             index = np.where((R_tmp/2 < D) & (D < R_tmp))
 
             ### plt ###
@@ -201,6 +204,10 @@ class GeometricDecomposition:
     def _compute_centroid_set(self):
         # Har-Peled and Mazumdar: Coresets for k-maens nad k-median Clustering and their Application.
 
+        ### CONSTANTS ###
+        alpha = 2
+        approx_factor = 32
+
         # Compute Fast Constant Factor Approximation Algorithm
         X = np.ndarray.copy(self.X)
         index = np.random.choice(X.shape[0], 1, replace=False)      
@@ -211,8 +218,8 @@ class GeometricDecomposition:
         iter = np.floor(np.log(n))
         min_size = int(n/(np.log(n)))
 
-        # temp const for testing reasons
-        k = int(2 * np.ceil(np.power(n, 1/4)))
+        # Temp const for testing reasons
+        k = int(alpha * np.ceil(np.power(n, 1/4)))
 
         while iter:
             C, L = self._compute_fast_factor_approx_coreset(X)
@@ -224,7 +231,7 @@ class GeometricDecomposition:
                 break
 
         # !!! Lost some point <1% !!!
-        # preparing for next stage of the algorithm
+        # Preparing for next stage of the algorithm
         X = np.ndarray.copy(self.X)
         for p in A:
             index = np.where(X == p)
@@ -238,10 +245,10 @@ class GeometricDecomposition:
 
         # Compute final Coreset from Approximate Clustering 
         dist, index = self._calc_nearest_neighbors(X, A)
-        info, point = self._concat_map(dist, index, A)
+        _, point = self._concat_map(dist, index, A)
 
         value = np.power(X-point, 2).sum(axis=1).sum()
-        R = int(np.sqrt(value/(32*self.n)))
+        R = int(np.sqrt(value/(approx_factor*self.n)))
 
         logging.info(" R value: %d", R)
 
@@ -257,18 +264,79 @@ class GeometricDecomposition:
                 W = np.append(W, W_tmp, axis=0)
                 
         logging.info(" S size: %d", S.shape[0])
-        return S[1:]
+        return S[1:], W[1:]
 
-    def _swap_heuristic(self):
-        return 0
+    def _swap_heuristic(self, S, W):
+        index = np.random.choice(S.shape[0], self.k, replace=False)
+        C = S[index]
+        S = np.delete(S, index, axis=0)
+
+        dist, index = self._calc_nearest_neighbors(self.X, C)
+        _, centers = self._concat_map(dist, index, C)
+        cost = np.power(np.abs(self.X-centers), 2).sum(axis=1).sum()
+
+        for i in range(1000):
+            print(cost)
+            index_new = np.random.choice(S.shape[0], 1, replace=False)
+            index_current = np.random.choice(C.shape[0], 1, replace=False)
+
+            point = C[index_current]
+            C = np.delete(C, index_current, axis=0)
+            C = np.append(C, S[index_new], axis=0)
+
+            dist, index = self._calc_nearest_neighbors(self.X, C)
+            _, centers = self._concat_map(dist, index, C)
+            cost_new = np.power(np.abs(self.X-centers), 2).sum(axis=1).sum()
+
+            if cost_new < cost:
+                S = np.delete(S, index_new, axis=0)
+                S = np.append(S, point, axis=0)
+                cost = cost_new
+            else:
+                C = np.delete(C, self.k-1, axis=0)
+                C = np.append(C, point, axis=0)
+
+        return C
 
     def _compute_polynomial_approx(self):
         # Local search 
-        # - Build centroid set aka. candidate centers set C == computing corest with large k
-        # - Single/multiple-swap heuristic 
-        return 0
+        # Build centroid set aka. candidate centers set C
+
+        ### CONSTANTS ###
+        c = 1.5
+        log_const = 0.5
+        power_const = 0.1
+
+        d = self.X.shape[1]
+        log = np.log(1/self.eps) if np.log(1/self.eps) > 0 else log_const
+        power = np.power(self.eps, d) if np.power(self.eps, d) > 0 else power_const
+        size = log*power*c
+
+        # Computing centroid set
+        S, W = self._compute_centroid_set()
+        logging.info(" Expected centroid set: %d", size * self.X.shape[0])
+
+        # Single/multiple-swap heuristic
+        logging.info(" Single-swap heuristic - heavy computations")
+        C = self._swap_heuristic(S, W)
+
+        return S, C
 
     def compute(self):
         # Compute polynomial approximation a*OPT -> C
+        Approx, C = self._compute_polynomial_approx()
+
+        plt.scatter(self.X[:, 0], self.X[:, 1])
+
+        # kmeans = KMeans(n_clusters=15, random_state = 0).fit(X=Approx)
+        # plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1])
+
+        plt.scatter(Approx[:, 0], Approx[:, 1])
+        plt.scatter(C[:, 0], C[:, 1])
+
+        kmeans = KMeans(n_clusters=15, random_state = 0).fit(X=self.X)
+        plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1])
+        plt.show()
+
         # Comupte eps ball cover for each center in C
-        return 0
+        return Approx

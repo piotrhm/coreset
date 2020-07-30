@@ -11,7 +11,7 @@ opt = input.parse_txt("dataset/s-set/s3-label.pa")
 centers = input.parse_txt("dataset/s-set/s3-cb.txt")
 
 geo = agc.GeometricDecomposition(data, 5000, 15, 0.5)
-coreset = geo._compute_centroid_set()
+coreset = geo.compute()
 
 @utils.timeit
 def test_no_coreset():
