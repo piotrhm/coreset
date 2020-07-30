@@ -10,7 +10,7 @@ data = input.parse_txt("dataset/s-set/s3.txt")
 opt = input.parse_txt("dataset/s-set/s3-label.pa")
 centers = input.parse_txt("dataset/s-set/s3-cb.txt")
 
-geo = agc.GeometricDecomposition(data, 5000, 15, 0.1)
+geo = agc.GeometricDecomposition(data, 5000, 15, 0.5)
 coreset = geo._compute_centroid_set()
 
 @utils.timeit

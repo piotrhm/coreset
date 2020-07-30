@@ -1,11 +1,17 @@
 import numpy as np
 from sklearn.neighbors import NearestNeighbors
 import logging, sys
+import matplotlib.pyplot as plt
+
 
 log_level = logging.DEBUG
 logging.basicConfig(stream=sys.stderr, level=log_level)
+logging.getLogger('matplotlib').setLevel(logging.WARNING)
 #logging.debug()
 #logging.info()
+
+# TODO
+# add const c for 32
 
 class GeometricDecomposition:
     def __init__(self, X, n, k, eps):
@@ -140,43 +146,55 @@ class GeometricDecomposition:
         return C, L
 
     def _snap_point_into_fake_exp_grid(self, p, P, R):
+        # unweighted version
         D = np.sqrt(np.power(P - p, 2).sum(axis=1))
-        
         limit = int(2*np.log(32*self.n))
-        print(limit)
+       
 
-        print(P.shape[0])
+        ### plt ###
+        # plt.cla()
+        # if P.shape[0] > 10:
+        #     plt.scatter(p[0], p[1])
+        #     plt.scatter(P[:, 0], P[:, 1])
+        ###########
 
         # init S, W 
-        idx = np.random.choice(P.shape[0], 1, replace=False)
-        print(P[idx][0], P.shape[0])
         S = np.array([[0, 0]])
         W = np.array([0])
-
-        print(S, W)
 
         # first round
         index = np.where(D < R)
         P_tmp = P[index[0]]
         D_tmp = D[index[0]]
-        size = len(D_tmp)
-
+        size = len(P_tmp)
+        
         if(size > 0):
             idx = np.random.choice(size, 1, replace=False)
-            print(P_tmp[idx][0], size)
             S = np.append(S, P_tmp[idx], axis=0)
             W = np.append(W, [size], axis=0)
 
-        print(S, W)
-
-        #R2^i
-        R *= 2
+        R_tmp = R
         for i in range(limit):
-            R_tmp = R*np.power(2,i)
+            R_tmp *= 2
+            r = int((self.eps*R_tmp)/(10*32*self.X.shape[1]))
             index = np.where((R_tmp/2 < D) & (D < R_tmp))
-            print(i, R_tmp, index)
-            #P_tmp = np.where()
 
+            ### plt ###
+            # fig = plt.Circle((p[0], p[1]), R_tmp, fill=False)
+            # ax = plt.gca()
+            # ax.add_artist(fig)
+            ###########
+
+            if len(index[0]) > 0:
+                candidates = P[index[0]]
+                size_tmp = int(np.ceil(np.log(len(index[0]))))
+                idx = np.random.choice(len(candidates), size_tmp, replace=False)
+                S = np.append(S, candidates[idx], axis=0)
+               
+        ### plt ###
+        # if P.shape[0] > 10:
+        #     plt.scatter(S[1:, 0], S[1:, 1])
+        #     plt.show()
 
         return S[1:], W[1:]
 
@@ -227,15 +245,19 @@ class GeometricDecomposition:
 
         logging.info(" R value: %d", R)
 
+        S = np.array([[0, 0]])
+        W = np.array([0])
+
         for p in A:
             index = np.where(point == p)
             if (len(index[0]) > 0):
                 P = np.unique(X[index[0]], axis=0)
-                S, W = self._snap_point_into_fake_exp_grid(p, P, R)
+                S_tmp, W_tmp = self._snap_point_into_fake_exp_grid(p, P, R)
+                S = np.append(S, S_tmp, axis=0)
+                W = np.append(W, W_tmp, axis=0)
                 
-
-        #return S, W
-        return A
+        logging.info(" S size: %d", S.shape[0])
+        return S[1:]
 
     def _swap_heuristic(self):
         return 0
