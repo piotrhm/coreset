@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 
 from sklearn.neighbors import NearestNeighbors
 from sklearn.cluster import KMeans
+from progress.bar import Bar
 
 log_level = logging.DEBUG
 logging.basicConfig(stream=sys.stderr, level=log_level)
@@ -60,6 +61,20 @@ class GeometricDecomposition:
                 point[i] = P[index[i][1]]
         
         return info, point
+    
+    def _calc_nearest_center(self, X, C):
+        P = np.ndarray(shape=(X.shape))
+        for idx, point in enumerate(X):
+            dist = np.inf
+            best_center = [0, 0]
+            for center in C:
+                new_dist = np.power(point[0]-center[0], 2) + np.power(point[1]-center[1], 2)
+                if new_dist < dist:
+                    best_center = center
+                    dist = new_dist
+            P[idx] = best_center
+
+        return P
 
     ### Implementation ###
         
@@ -271,22 +286,20 @@ class GeometricDecomposition:
         C = S[index]
         S = np.delete(S, index, axis=0)
 
-        dist, index = self._calc_nearest_neighbors(self.X, C)
-        _, centers = self._concat_map(dist, index, C)
-        cost = np.power(np.abs(self.X-centers), 2).sum(axis=1).sum()
+        centers = self._calc_nearest_center(self.X, C)
+        cost = np.power(self.X-centers, 2).sum(axis=1).sum()
 
-        for i in range(1000):
-            print(cost)
+        bar = Bar('Processing', max=100)
+        for i in range(100):
             index_new = np.random.choice(S.shape[0], 1, replace=False)
             index_current = np.random.choice(C.shape[0], 1, replace=False)
 
             point = C[index_current]
             C = np.delete(C, index_current, axis=0)
             C = np.append(C, S[index_new], axis=0)
-
-            dist, index = self._calc_nearest_neighbors(self.X, C)
-            _, centers = self._concat_map(dist, index, C)
-            cost_new = np.power(np.abs(self.X-centers), 2).sum(axis=1).sum()
+            
+            centers = self._calc_nearest_center(self.X, C)
+            cost_new = np.power(self.X-centers, 2).sum(axis=1).sum()
 
             if cost_new < cost:
                 S = np.delete(S, index_new, axis=0)
@@ -295,6 +308,10 @@ class GeometricDecomposition:
             else:
                 C = np.delete(C, self.k-1, axis=0)
                 C = np.append(C, point, axis=0)
+
+            bar.next()
+        
+        bar.finish()
 
         return C
 
