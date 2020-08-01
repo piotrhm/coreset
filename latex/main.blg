@@ -3,44 +3,46 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: main.aux
 The style file: acm.bst
 Database file #1: bibliography.bib
-You've used 1 entry,
+Warning--empty journal in bachem2017scalable
+You've used 3 entries,
             2253 wiz_defined-function locations,
-            534 strings with 3959 characters,
-and the built_in function-call counts, 301 in all, are:
-= -- 28
-> -- 7
+            548 strings with 4499 characters,
+and the built_in function-call counts, 1043 in all, are:
+= -- 106
+> -- 41
 < -- 0
-+ -- 3
-- -- 2
-* -- 26
-:= -- 54
-add.period$ -- 3
-call.type$ -- 1
-change.case$ -- 4
++ -- 17
+- -- 14
+* -- 68
+:= -- 162
+add.period$ -- 8
+call.type$ -- 3
+change.case$ -- 16
 chr.to.int$ -- 0
-cite$ -- 1
-duplicate$ -- 9
-empty$ -- 28
-format.name$ -- 2
-if$ -- 61
+cite$ -- 4
+duplicate$ -- 51
+empty$ -- 78
+format.name$ -- 14
+if$ -- 227
 int.to.chr$ -- 0
-int.to.str$ -- 1
-missing$ -- 1
-newline$ -- 8
-num.names$ -- 2
-pop$ -- 2
+int.to.str$ -- 3
+missing$ -- 3
+newline$ -- 17
+num.names$ -- 6
+pop$ -- 16
 preamble$ -- 1
-purify$ -- 3
+purify$ -- 13
 quote$ -- 0
-skip$ -- 5
+skip$ -- 43
 stack$ -- 0
-substring$ -- 26
-swap$ -- 2
+substring$ -- 52
+swap$ -- 23
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 4
-warning$ -- 0
-while$ -- 3
-width$ -- 2
-write$ -- 12
+type$ -- 12
+warning$ -- 1
+while$ -- 9
+width$ -- 4
+write$ -- 31
+(There was 1 warning)

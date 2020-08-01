@@ -1,7 +1,7 @@
 \documentclass[a4paper]{report}
 
 \usepackage[utf8]{inputenc}
-\usepackage[english]{babel}
+\usepackage[english, polish]{babel}
 \usepackage[T1]{fontenc}
 \usepackage{indentfirst}
 \usepackage[nottoc,numbib]{tocbibind}
@@ -35,19 +35,19 @@
     {\large\fillast}
     {\oldstylenums{\thesubsection} }
     {0pt}
-    {\itshape\scshape} % chktex 6
+    {\itshape\scshape}
 
-\newcommand{\mellin}[2]{\mathcal{M}[#1;#2]}
-\newcommand{\coeffexp}[2]{\left[\frac{#1^{#2}}{
-    \IfSubStr{#2}{+}{(#2)!}
-        {\IfSubStr{#2}{-}{(#2)!}{#2!}}
-    }\right]}
+\theoremstyle{definition}
+\newtheorem{definition}{Definicja}[chapter]    
 
 \begin{document}
 \input{00titlepage}
 \input{01abstract}
 \input{02intro}
-\input{03basics}
+\input{03preliminaries.tex}
+\input{04lightweight.tex}
+\input{05geo.tex}
+\input{06analysis.tex}
 \nocite{*}
 \bibliographystyle{acm}
 \bibliography{bibliography}

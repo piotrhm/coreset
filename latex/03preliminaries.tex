@@ -1,0 +1,47 @@
+\chapter{Notacja i niezbędne definicje}\label{preliminaries}
+\subsection{K-means}
+
+Zacznijmy od zdefiniowania problemu dla którego będziemy analizować konstrukcje coresetów.
+
+\begin{definition}
+    \emph{Problem K-means.} Niech $X$ to zbiór punktów z $\mathbb{R}^{d}$. 
+    Dla danego $X$ chcemy znalźć zbiór $k$ punktów $Q$, który minimalizuje funkcję $\phi_{X}(Q)$ zdefiniowaną następująco:
+    \begin{equation}
+        \phi_{X}(Q) = \sum_{x \in X} d(x, Q)^{2} = \sum_{x \in X} \min_{q \in Q} || x - q ||_{2}^{2} 
+    \end{equation}
+\end{definition}
+
+\noindent
+Powyższa definicja zakłada, że działamy w przestrzeni euklidesowej.
+Uogólnioną wersję można zdefiniować analogicznie, zamieniając $d$ na odpowiednią funkcję miary w danej przestrzeni.
+
+\begin{definition}
+    \emph{Problem K-means - wersja ważona.} Niech $C$ to zbiór punktów z $\mathbb{R}^{d}$ oraz niech $w$ będzie funkcją $C \rightarrow \mathbb{R}_{\ge0}$. 
+    Dla danego $X$ oraz funkcji $w$ chcemy znalźć zbiór $k$ punktów $Q$, który minimalizuje funkcję $\phi_{X}(Q)$ zdefiniowaną następująco:
+    \begin{equation}
+        \phi_{X}(Q) = \sum_{x \in X} w(x) d(x, Q)^{2}
+    \end{equation}
+\end{definition}
+
+\noindent
+Ewaluację funkcji $\phi$ dla optymalnego rozwiązania oznaczamy $\phi_{OPT}^{k}(X)$. 
+
+\subsection{Coreset}
+
+To jak definujemy coreset ściśle zależy od problemu, który optymalizujemy.
+Zacznijmy od podstawowej definicji coresetu dla problemu \textit{K-means}.
+
+\begin{definition}
+    \emph{Coreset.} Niech $X$ to zbiór punktów z $\mathbb{R}^{d}$ oraz niech $Q$ to dowolny podzbiór $X$ rozmiaru co najwyżej $k$. 
+    Zbiór $C$ nazywamy $(\epsilon, k)$ coresetem jeżeli zachodzi:
+    \begin{equation}
+        |\phi_{X}(Q) - \phi_{C}(Q)| \leq \epsilon\phi_{X}(Q)
+    \end{equation}
+\end{definition}
+
+\noindent
+Zauważmy, że taka definicja daje nam bardzo moce gwarancje teoretyczne.
+Ewaluacji coresetu $\phi_{C}(Q)$ musi aproksymować $\phi_{X}(Q)$ z dokładnością $1+\epsilon$ jednocześnie dla dowolnego zbioru $k$ kandydatów na rozwiązanie $Q$ w kontekście całego zbioru $X$.
+Jest to na tyle istotne, że w literaturze odróżnia się tą wersję nazywając ją \textit{Strong Coreset}.
+
+\noindent

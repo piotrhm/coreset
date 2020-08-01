@@ -1,8 +1,20 @@
 \begin{thebibliography}{1}
 
-\bibitem{prodinger}
-{\sc Prodinger, H.}
-\newblock How to select a loser.
-\newblock {\em Discrete Mathematics 120}, 1 (1993), 149--159.
+\bibitem{bachem2017scalable}
+{\sc Bachem, O., Lucic, M., and Krause, A.}
+\newblock Scalable k-means clustering via lightweight coresets.
+
+\bibitem{10.1145/1007352.1007400}
+{\sc Har-Peled, S., and Mazumdar, S.}
+\newblock On coresets for k-means and k-median clustering.
+\newblock In {\em Proceedings of the Thirty-Sixth Annual ACM Symposium on
+  Theory of Computing\/} (New York, NY, USA, 2004), STOC ’04, Association for
+  Computing Machinery, p.~291–300.
+
+\bibitem{DBLP:journals/ki/MunteanuS18}
+{\sc Munteanu, A., and Schwiegelshohn, C.}
+\newblock Coresets-methods and history: {A} theoreticians design pattern for
+  approximation and streaming algorithms.
+\newblock {\em K{\"{u}}nstliche Intell. 32}, 1 (2018), 37--53.
 
 \end{thebibliography}

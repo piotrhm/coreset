@@ -1,4 +1,12 @@
-\select@language {english}
-\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
-\contentsline {chapter}{\numberline {2}Basics}{2}{chapter.2}
-\contentsline {chapter}{\numberline {3}Bibliography}{3}{chapter.3}
+\select@language {polish}
+\contentsline {chapter}{\numberline {1}Wst\IeC {\k e}p}{1}{chapter.1}
+\contentsline {chapter}{\numberline {2}Notacja i niezb\IeC {\k e}dne definicje}{2}{chapter.2}
+\contentsline {subsection}{\numberline {2.0.1}K-means}{2}{subsection.2.0.1}
+\contentsline {subsection}{\numberline {2.0.2}Coreset}{2}{subsection.2.0.2}
+\contentsline {chapter}{\numberline {3}Lightweight Coreset}{3}{chapter.3}
+\contentsline {section}{\numberline {3.1}Lightweight coreset}{3}{section.3.1}
+\contentsline {section}{\numberline {3.2}Konstrukcja}{3}{section.3.2}
+\contentsline {section}{\numberline {3.3}Analiza}{3}{section.3.3}
+\contentsline {chapter}{\numberline {4}Geometryczna Dekompozycja}{4}{chapter.4}
+\contentsline {chapter}{\numberline {5}Analiza}{5}{chapter.5}
+\contentsline {chapter}{\numberline {6}Bibliografia}{6}{chapter.6}
