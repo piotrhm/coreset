@@ -68,7 +68,7 @@ class GeometricDecomposition:
             dist = np.inf
             best_center = [0, 0]
             for center in C:
-                new_dist = np.power(point[0]-center[0], 2) + np.power(point[1]-center[1], 2)
+                new_dist = np.power(point-center, 2).sum()
                 if new_dist < dist:
                     best_center = center
                     dist = new_dist
@@ -281,16 +281,17 @@ class GeometricDecomposition:
         logging.info(" S size: %d", S.shape[0])
         return S[1:], W[1:]
 
-    def _swap_heuristic(self, S, W):
+    def _swap_heuristic(self, S, W, coverage):
         index = np.random.choice(S.shape[0], self.k, replace=False)
         C = S[index]
         S = np.delete(S, index, axis=0)
 
+        # self.X <-- swap --> S
         centers = self._calc_nearest_center(self.X, C)
         cost = np.power(self.X-centers, 2).sum(axis=1).sum()
 
-        bar = Bar('Processing', max=100)
-        for i in range(100):
+        bar = Bar('Processing', max=coverage)
+        for i in range(coverage):
             index_new = np.random.choice(S.shape[0], 1, replace=False)
             index_current = np.random.choice(C.shape[0], 1, replace=False)
 
@@ -298,6 +299,7 @@ class GeometricDecomposition:
             C = np.delete(C, index_current, axis=0)
             C = np.append(C, S[index_new], axis=0)
             
+            # self.X <-- swap --> S
             centers = self._calc_nearest_center(self.X, C)
             cost_new = np.power(self.X-centers, 2).sum(axis=1).sum()
 
@@ -310,7 +312,6 @@ class GeometricDecomposition:
                 C = np.append(C, point, axis=0)
 
             bar.next()
-        
         bar.finish()
 
         return C
@@ -323,6 +324,7 @@ class GeometricDecomposition:
         c = 1.5
         log_const = 0.5
         power_const = 0.1
+        coverage = 200
 
         d = self.X.shape[1]
         log = np.log(1/self.eps) if np.log(1/self.eps) > 0 else log_const
@@ -335,25 +337,72 @@ class GeometricDecomposition:
 
         # Single/multiple-swap heuristic
         logging.info(" Single-swap heuristic - heavy computations")
-        C = self._swap_heuristic(S, W)
+        centers = self._swap_heuristic(S, W, coverage)
 
-        return S, C
+        return centers
+
+    def _find_radius(self, X, center):
+        radius = 0
+        for point in X:
+            dist = np.power(point-center, 2).sum()
+            radius = dist if dist > radius else radius
+
+        return int(np.sqrt(radius))/2
+
+    def _compute_eps_cover(self, centers):
+        C = self._calc_nearest_center(self.X, centers)
+        coreset = np.array([[0, 0]])
+
+        for center in centers:
+            index = np.where(C == center)
+            points = self.X[index[0]]
+            D = np.sqrt(np.power(points - center, 2).sum(axis=1))
+
+            sample_size = int(self.k*np.log(len(points)))
+            radius = self._find_radius(self.X, center)
+            levels = int(np.ceil(np.log(sample_size)))
+
+            last_radius = 0
+            current_radius = radius/2
+            sample_size_current = sample_size*0.7
+            for i in range(levels):
+                index = np.where((last_radius < D) & (D < current_radius))
+                sample = points[index[0]]
+
+                sample_size_current = sample.shape[0] if sample_size_current > sample.shape[0] else sample_size_current
+                index_coreset = np.random.choice(sample.shape[0], int(sample_size_current), replace=False)
+                
+                coreset = np.append(coreset, points[index_coreset], axis=0)
+
+                #print("rad:", current_radius)
+                #print("size:", len(sample))
+                last_radius = current_radius
+                current_radius += radius/np.power(2,i+2)
+                sample_size_current /= 2
+
+            #print(sample_size, radius, levels, len(points))
+
+        #print(coreset.shape[0])
+        return coreset[1:]
 
     def compute(self):
-        # Compute polynomial approximation a*OPT -> C
-        Approx, C = self._compute_polynomial_approx()
+        # Compute polynomial approximation a*OPT -> centers
+        centers = self._compute_polynomial_approx()
+
+        # Comupte eps ball cover for each center in centers
+        coreset = self._compute_eps_cover(centers)
 
         plt.scatter(self.X[:, 0], self.X[:, 1])
 
         # kmeans = KMeans(n_clusters=15, random_state = 0).fit(X=Approx)
         # plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1])
 
-        plt.scatter(Approx[:, 0], Approx[:, 1])
-        plt.scatter(C[:, 0], C[:, 1])
+        plt.scatter(coreset[:, 0], coreset[:, 1])
 
         kmeans = KMeans(n_clusters=15, random_state = 0).fit(X=self.X)
         plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1])
+        plt.scatter(centers[:, 0], centers[:, 1])
+
         plt.show()
 
-        # Comupte eps ball cover for each center in C
-        return Approx
+        return coreset

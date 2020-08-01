@@ -10,6 +10,7 @@ data = input.parse_txt("dataset/s-set/s3.txt")
 opt = input.parse_txt("dataset/s-set/s3-label.pa")
 centers = input.parse_txt("dataset/s-set/s3-cb.txt")
 
+#Computing geometric decomposition coreset
 geo = agc.GeometricDecomposition(data, 5000, 15, 0.5)
 coreset = geo.compute()
 
