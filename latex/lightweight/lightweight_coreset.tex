@@ -1,2 +1,58 @@
 \section{Lightweight coreset}
-TBA
+
+Zacznijmy od wproadzenia definicji \textit{lightweight coresetu}.
+\begin{definition}
+    \emph{Lightweight coreset dla problemu K-means.} Niech $\epsilon > 0$ oraz $k \in \mathbb{N}$.
+    Niech $X$ to zbiór punktów z $\mathbb{R}^{d}$ wraz ze średnią $\mu(X)$.
+    Zbiór $C$ jest $(\epsilon, k)$ lightweight coresetem dla $X$, jeżeli dla dowolnego zbioru $Q \subset X$ o mocy co najwyżej $k$ zachodzi:
+    \begin{equation}
+        |\phi_{X}(Q) - \phi_{C}(Q)| \leq \frac{\epsilon}{2}\phi_{X}(Q) + \frac{\epsilon}{2}\phi_{X}(\mu(X))
+    \end{equation}
+\end{definition}
+
+\noindent
+Jak możemy zauważyć definicja (3.1) trochę się różni od (2.2).
+Notacje \textit{lightweight} coresetu możemy interpretować jako relaksację gwarancji teoretycznych zdefiniowanych w (2.2).
+Wprowadza ona oprócz błędu multiplikatywnego, błąd addytywny.
+Składnik $\frac{\epsilon}{2}\phi_{X}(Q)$ pozwala na odpowiednie skalowanie błędu aproksymacji dla funkcji $\phi$.
+Druga część $\frac{\epsilon}{2}\phi_{X}(\mu(X))$ odpowiada za skalowalność rozwiązania zgodnie z wariancją dany.
+
+Głowną motywacją stojącą za konstrukcjami coresetów jest to, żeby rozwiązanie obliczone na tym zbiorze było konkurencyjne z rozwiazaniem optymalnym dla całego zbioru danych.
+Dlatego w konkeście \textit{lightweight} udowodnię następujące twierdzenie.
+
+\begin{thm}
+    Niech $\epsilon \in (0, 1]$. Niech $X$ będzie dowolnym zbiorem dany oraz niech $C$ będzie $(\epsilon, k)$ lightweight coresetem dla $X$.
+    Optymalne rozwiązanie problemu K-means dla $X$ oznaczamy $Q_{X}^{*}$.
+    Optymalne rozwiązanie problemu K-means dla $C$ oznaczamy $Q_{C}^{*}$.
+    Dla takich założeń zachodzi:
+    \begin{equation}
+        \phi_{X}(Q_{C}^{*}) \leq \phi_{X}(Q_{X}^{*}) + 4\epsilon\phi_{X}(\mu(X))
+    \end{equation}
+\end{thm}
+
+\begin{proof}
+    Zgodnie z własnością lightweight coresetu otrzymujemy:
+    \begin{equation}
+        \phi_{C}(Q_{X}^{*})  \leq (1+\frac{\epsilon}{2})\phi_{X}(Q_{X}^{*}) + \frac{\epsilon}{2}\phi_{X}(\mu(X))
+    \end{equation}
+    oraz
+    \begin{equation}
+        \phi_{C}(Q_{C}^{*})  \geq (1-\frac{\epsilon}{2})\phi_{X}(Q_{C}^{*}) - \frac{\epsilon}{2}\phi_{X}(\mu(X))
+    \end{equation}
+    Wiemy z definicji, że $\phi_{C}(Q_{C}^{*}) \leq  \phi_{C}(Q_{X}^{*})$ oraz $1 - \frac{\epsilon}{2} \geq \frac{1}{2}$.
+    A więc:
+    \begin{equation}
+        \phi_{X}(Q_{C}^{*}) \leq \frac{1+\frac{\epsilon}{2}}{1-\frac{\epsilon}{2}}\phi_{X}(Q_{X}^{*}) + \frac{\epsilon}{1-\frac{\epsilon}{2}}\phi_{X}(\mu(X))
+    \end{equation}
+    \begin{equation}
+        \leq (1+2\epsilon)\phi_{X}(Q_{X}^{*}) + 2\epsilon\phi_{X}(\mu(X))
+    \end{equation}
+    Zauważając, że:
+    \begin{equation}
+        \phi_{X}(Q_{X}^{*}) \leq \phi_{X}(\mu(X))
+    \end{equation}
+    dowodzimy tezę twierdzenia.
+\end{proof}
+
+\noindent
+Twierdzenie 1 dowodzi, że kiedy wartość $\epsilon$ maleje koszt optymalnego rozwiązania otrzymanego na zbiorze $C$ zbiega do kosztu rozwiązania otrzymanego na całym zbiorze danych.

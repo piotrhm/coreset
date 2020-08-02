@@ -7,9 +7,11 @@
 \bibitem{10.1145/1007352.1007400}
 {\sc Har-Peled, S., and Mazumdar, S.}
 \newblock On coresets for k-means and k-median clustering.
-\newblock In {\em Proceedings of the Thirty-Sixth Annual ACM Symposium on
-  Theory of Computing\/} (New York, NY, USA, 2004), STOC ’04, Association for
-  Computing Machinery, p.~291–300.
+\newblock 291–300.
+
+\bibitem{Matousek99onapproximate}
+{\sc Matousek, J.}
+\newblock On approximate geometric k-clustering.
 
 \bibitem{DBLP:journals/ki/MunteanuS18}
 {\sc Munteanu, A., and Schwiegelshohn, C.}

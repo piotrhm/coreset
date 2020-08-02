@@ -25,6 +25,7 @@ Uogólnioną wersję można zdefiniować analogicznie, zamieniając $d$ na odpow
 
 \noindent
 Ewaluację funkcji $\phi$ dla optymalnego rozwiązania oznaczamy $\phi_{OPT}^{k}(X)$. 
+Funkcję $\phi$ w literaturze nazywamy błędem kwantyzacji.
 
 \subsection{Coreset}
 
@@ -44,4 +45,10 @@ Zauważmy, że taka definicja daje nam bardzo moce gwarancje teoretyczne.
 Ewaluacji coresetu $\phi_{C}(Q)$ musi aproksymować $\phi_{X}(Q)$ z dokładnością $1+\epsilon$ jednocześnie dla dowolnego zbioru $k$ kandydatów na rozwiązanie $Q$ w kontekście całego zbioru $X$.
 Jest to na tyle istotne, że w literaturze odróżnia się tą wersję nazywając ją \textit{Strong Coreset}.
 
-\noindent
+\begin{definition}
+    \emph{Coreset - weak.} Niech $X$ to zbiór punktów z $\mathbb{R}^{d}$ oraz niech $Q$ będzie optymalnym rozwiązaniem.
+    Słabym coresetem nazywamy zbiór $C$ dla którego zachodzi:
+    \begin{equation}
+        |\phi_{X}(Q) - \phi_{C}(Q)| \leq \epsilon\phi_{X}(Q)
+    \end{equation}
+\end{definition}

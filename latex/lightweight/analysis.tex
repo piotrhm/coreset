@@ -1,2 +1,177 @@
 \section{Analiza}
-TBA
+
+W tej części chciałbym udowodnić, że zaproponowany w poprzdniej części algorytm oblicza lightweight coreset dla odpowiedniego $m$.
+
+\begin{thm}
+    Niech $\epsilon > 0$, $\delta > 0$ oraz $k \in \mathbb{N}$. 
+    Niech $X$ to zbiór punktów z $\mathbb{R}^{d}$ oraz $C$ zbiorem, który dostajemy z algorytmu dla
+    \begin{equation}
+        m \geq c\frac{dk \log{k} + \log{\frac{1}{\delta}}}{\epsilon^2} 
+    \end{equation}
+    gdzie $c$ to stała. 
+    Wtedy z prawdopodobieństwem co najmniej $1-\delta$ zbiór $C$ jest $(\epsilon, k)$ lightweight coresetem dla $X$.
+\end{thm}
+
+\begin{proof}
+
+Na początku wyprowadzę rozkład dla punktów $x \in X$ uwzględniający ich wagę.
+Następnie pokażę, że wybierając wystarczającą liczbę punktów z tego rozkładu uzyskuje się $(\epsilon, k)$ lightweight coreset. 
+\\~\\
+Zacznę od ograniczenia wagi dla każdego punktu $x \in X$. 
+W tym celu definiuje funkcję:
+
+\begin{equation}
+    f(Q) = \frac{1}{2|X|}\phi_{X}(Q) + \frac{1}{2|X|}\phi_{X}(\mu(X))
+\end{equation}
+
+\noindent
+gdzie $\mu(X)$ to średnia zbioru $X$ oraz dowodzę następujący lemat. 
+
+\begin{lemma}
+    Niech $X$ to zbiór punktów z $\mathbb{R}^{d}$ wraz ze średnią $\mu(X)$. 
+    Dla każdego $x \in X$ oraz $Q \subset \mathbb{R^d}$ zachodzi:
+    \begin{equation}
+        \frac{d(x, Q)^2}{f(Q)} \leq \frac{16d(x, \mu(X))^2}{\frac{1}{|X|}\sum_{x^{'} \in X}d(x^{'}, \mu(X))^2} + 16
+    \end{equation}
+\end{lemma}
+
+\begin{proof}
+    \noindent
+    Z nierówności trójkąta oraz z faktu, że $(|a| + |b|)^2 = 2a^2 + 2b^2$, otrzymujemy
+    \begin{equation}
+        d(\mu(X), Q)^2 \leq 2d(x, \mu(x))^2 + 2d(x, Q)
+    \end{equation}
+    
+    \noindent
+    Biorąc średnie wszystkich $x \in X$ otrzymujemy:
+
+    \begin{equation}
+        d(\mu(X), Q)^2 \leq \frac{2}{|X|} \sum_{x \in X} d(x, \mu(x))^2 + \frac{2}{|X|} \sum_{x \in X} d(x, Q)
+    \end{equation}
+    \begin{equation}
+       = \frac{2}{|X|} \phi_{X}(\mu(X))+ \frac{2}{|X|} \phi_{X}(Q)
+    \end{equation}
+
+    \noindent
+    To implikuje, że dla każdego $x \in X$ oraz $Q \subset \mathbb{R^d}$ zachodzi:
+
+    \begin{equation}
+        d(x, Q)^2 \leq 2d(x, \mu(x))^2 + 2d(\mu(X), Q)
+    \end{equation}
+
+    \begin{equation}
+       \leq 2d(x, \mu(x))^2 +  \frac{4}{|X|} \phi_{X}(\mu(X))+ \frac{4}{|X|} \phi_{X}(Q)
+    \end{equation}
+
+    \noindent
+    Dzieląc powyższą nierówność przez wyżej zdefiniowaną funkcję $f(Q)$ dostajemy:
+
+    \begin{equation}
+        \frac{d(x, Q)^2}{f(Q)} \leq \frac{2d(x, \mu(x))^2 +  \frac{4}{|X|} \phi_{X}(\mu(X))+ \frac{4}{|X|} \phi_{X}(Q)}{\frac{1}{2|X|}\phi_{X}(Q) + \frac{1}{2|X|}\phi_{X}(\mu(X))}
+    \end{equation}
+
+    \begin{equation}
+        \leq \frac{2d(x, \mu(x))^2 +  \frac{4}{|X|} \phi_{X}(\mu(X))}{\frac{1}{2|X|}\phi_{X}(\mu(X))} + \frac{\frac{4}{|X|} \phi_{X}(Q)}{\frac{1}{2|X|}\phi_{X}(Q)}
+    \end{equation}
+
+    \begin{equation}
+        \leq \frac{16d(x, \mu(X))^2}{\frac{1}{|X|}\sum_{x^{'} \in X}d(x^{'}, \mu(X))^2} + 16
+    \end{equation}
+
+    \noindent
+    co kończy dowód lematu.
+\end{proof}
+
+\noindent
+Powyższy lemat implikuje, że stosunek pomiędzy kosztem kontrybucji jednego punku $x \in X$ a $f(Q)$ jest ograniczona dla każdego $Q \subset X$ przez:
+
+\begin{equation}
+    s(x) = \frac{16d(x, \mu(X))^2}{\frac{1}{|X|}\sum_{x^{'} \in X}d(x^{'}, \mu(X))^2} + 16    
+\end{equation}
+
+\noindent
+Zdefinuje $S = \sum_{x^{'} \in X}s(x^{'})$ zauważając, że $S = 32$ dla każdego zbioru $X$.
+Dzięki temu mogę zapisać rozkład $q(x)$ jako:
+
+\begin{equation}
+    q(x) = \frac{1}{2}\frac{1}{|X|} + \frac{1}{2}\frac{d(x, \mu)^2}{\sum_{x^{'} \in X}d(x^{'}, \mu)^2} = \frac{s(x)}{S|X|}
+\end{equation}
+
+\noindent
+dla każdego $x \in X$. Rozpatruję funkcję:
+
+\begin{equation}
+    g_{Q}(x) = \frac{d(x, Q)^2}{f(Q)s(x)}
+\end{equation}
+
+\noindent
+dla każdego $x \in X$ oraz $Q \subset \mathbb{R^d}$.
+Zauważmy, że dla dowolnego zbioru  $Q \subset \mathbb{R}^{d}$ zachodzi:
+
+\begin{equation}
+    \phi_{X}(Q) = \sum_{x \in X} d(x, Q)^2 = S|X|f(Q) \sum_{x \in X} \frac{s(x)}{S|X|} \frac{d(x, Q)^2}{f(Q)s(x)}
+\end{equation}
+
+\begin{equation}
+    =  S|X|f(Q) \sum_{x \in X} q(x) g_{Q}(x)
+\end{equation}
+
+\noindent
+Wprowadżmy notację:
+
+\begin{equation}
+    \mathbb{E}_q[g_{Q}(x)] = \sum _{x \in X} q(x) g_{Q}(x)
+\end{equation}
+
+\noindent
+dzięki której przekształcamy ostatnie równanie:
+
+\begin{equation}
+    \phi_{X}(Q) = S|X|f(Q)\mathbb{E}_q[g_{Q}(x)]
+\end{equation}
+
+\noindent
+Następnym krokiem jest ograniczenie wartości $\mathbb{E}_q[g_{Q}(x)]$.
+Autorzy \cite{bachem2017scalable} nie dowodzą wprost tego ograniczenia, powołując się na inne prace.
+Dowód jest bardzo skompilowany i wykracza tematyką istotnie poza ramy tej pracy więc go pomijam.
+Korzystam z finalnego ograniczenia:
+
+\begin{equation}
+    |\mathbb{E}_q[g_{Q}(x)] - \frac{1}{|C|} \sum_{x \in X}g_{X}(x)| \leq \frac{\epsilon}{32}
+\end{equation}
+
+\noindent
+Powyższe ograniczenie jest prawdziwe z prawdopodobieństwem $1 - \delta$ dla dowolnego $Q \subset \mathbb{R}^{d}$ o rozmiarze nie większym niż $k$.
+Mnożąc obie strony nierówności przez $32|X|f(Q)$ otrzymujemy:
+
+\begin{equation}
+    |32|X|f(Q)\mathbb{E}_q[g_{Q}(x)] - \frac{32|X|f(Q)}{|C|} \sum_{x \in X}g_{X}(x)| \leq \epsilon|X|f(Q)
+\end{equation}
+
+\noindent
+Niech $(C, u)$ będzie ważonym zbiorem, gdzie dla każdego $x \in C$ definujemy funkcję $u(X) = \frac{1}{|C|q(x)}$.
+Wynika z tego, że:
+
+\begin{equation}
+    \frac{32|X|f(Q)}{|C|} \sum_{x \in X}g_{X}(x) = \sum \frac{1}{|C|q(x)} d(x, Q)^2
+\end{equation}
+
+\begin{equation}
+    = \sum u(x) d(x, Q)^2 = \phi_{C}(Q)
+\end{equation}
+
+\noindent
+A więc otrzymujemy:
+
+\begin{equation}
+    |32|X|f(Q)\mathbb{E}_q[g_{Q}(x)] - \phi_{C}(Q)| \leq \epsilon|X|f(Q)
+\end{equation}
+
+\begin{equation}
+    |\phi_{Q}(Q) - \phi_{C}(Q)| \leq \frac{\epsilon}{2}\phi_{X}(Q) + \frac{\epsilon}{2}\phi_{X}(\mu(X))
+\end{equation}
+
+\noindent
+co kończy dowód twierdzenia 3.2.
+
+\end{proof}

@@ -1,2 +1,43 @@
 \section{Konstrukcja}
-TBA
+
+Konstrukcja oparta jest na próbkowaniu z uwzględnieniem ważności danego punktu.
+Niech $q(x)$ będzie dowolnym rozkładem prawdopodobieństwa na zbiorze $X$ oraz niech $Q \subset R^{d}$ będzie dowolnym potencjalnym zbiorem rozwiązań mocy $k$. 
+Wtedy funkcję $\phi$ możemy zapisać jako:
+
+\begin{equation}
+    \phi_{X}(Q) = \sum_{x \in X} q(x) \frac{d(x, Q)^{2}}{q(x)}
+\end{equation}
+
+\noindent
+Wynika z tego, że funkcja $\phi$ może być aproksymowana poprzez wylosowanie $m$ punktów z $X$ korzystając z $q(x)$ i przypisując im wagi odwrotnie proporcjonalne do $q(x)$.
+Dla dowolnej liczby próbek $m$ oraz dla dowolnego rozkładu $q(x)$ możemy otrzymać sprawiedliwy (unbiased) estymator dla funkcji $\phi$.
+Niestety, nie jest to wystarczające aby spełnić definicję (3.1).
+W szczególności musimy zagwarantować, jednostajność wyboru dowolnego zbioru $k$ punktu $Q$ z odpowiednim prawdopodobieństwem $1 - \delta$.
+Funkcja $q(x)$ może mieć wiele form, autorzy rekomendują postać:
+\begin{equation}
+    q(x) = \frac{1}{2}\frac{1}{|X|} + \frac{1}{2}\frac{d(x, \mu)^2}{\sum_{x^{'} \in X}d(x^{'}, \mu)^2}
+\end{equation}
+
+\begin{algorithm}
+    \caption{}
+\begin{algorithmic}
+    \Procedure{Lightweight}{} \Comment{Require: Set of data points X, coreset size m}
+        \State $\mu \leftarrow$ mean of $X$
+        \For{$x \in X$}                    
+            \State $q(x) = \frac{1}{2}\frac{1}{|X|} + \frac{1}{2}\frac{d(x, \mu)^2}{\sum_{x^{'} \in X}d(x^{'}, \mu)^2}$
+        \EndFor
+        \State $C \leftarrow$ sample $m$ weighted points from $X$ where each point $x$ has weight $\frac{1}{mq(x)}$ and is sampled with probability $q(x)$
+    \EndProcedure
+    \Return lightweight coreset C
+\end{algorithmic}
+\end{algorithm}
+
+\noindent
+Pierwszy składnik rozkładu $q(x)$ to rozkład jednostajny, który zapewnia, że każdy punkt jest wylosowany z niezerowym prawdopodobieństwem.
+Drugi składnik uwzględnia kwadrat odległości punktu od średniej $\mu(X)$ dla całego zbioru.
+Intuicyjnie, punkty, które są daleko od średniej $\mu(X)$ mogą mieć istotny wpływ na wartość funkcji $\phi$.
+Musimy więc zapewnić, odpowiednią częstotliwość wyboru takich punktów. 
+Jak pokazuje pseudokod, implementacja takiej konstrukcji jest całkiem prosta.
+Zauważmy, że jest ona też bardzo praktyczna.
+Algorytm przechodzi przez zbiór danych jedynie dwukrotnie, a jego złożoność to $O(nd)$.
+Nie mamy zależności od $k$ co jest kluczowe w konkeście praktyczności takiego rozwiązania.

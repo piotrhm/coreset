@@ -19,6 +19,9 @@
 \usepackage[unicode]{hyperref}
 \usepackage{booktabs}
 
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
 \titleformat{\chapter}[hang]
     {\Large\fillast}
     {\oldstylenums{\thechapter} }
@@ -39,6 +42,12 @@
 
 \theoremstyle{definition}
 \newtheorem{definition}{Definicja}[chapter]    
+
+\theoremstyle{plain}
+\newtheorem{thm}{Twierdzenie}[chapter]
+
+\newtheorem{lemma}{Lemat}
+\newtheorem{sublemma}{Lemma}[lemma]
 
 \begin{document}
 \input{00titlepage}

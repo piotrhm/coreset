@@ -1,4 +1,23 @@
 \chapter{Lightweight Coreset}\label{lightweight}
+
+Budowa coresetów w kontekście problemu \textit{K-means} ma bardzo długo historię.
+Za przełomową pracę uznaje się \cite{Matousek99onapproximate}, która jako pierwsza pokazuje konstrukcje $(1+\epsilon)$ aproksymacji dla problemu \textit{K-means}.
+Bazuje ona na budowie zbioru centroidów, czyli geometrycznym wariancie coresetu.
+Wyróżnia się trzy techniki budowania coresetów.
+\begin{itemize}
+    \item Geometryczna dekompozycja problemu.
+    \item Losowe próbowanie zbioru.
+    \item Zawansowane metody algebraiczne.
+\end{itemize}
+Pierwsza z technik cechuje się mocnymi gwarancjami teoretycznimi.
+Niestety większość rozwiązań jest mało praktyczna i kosztowna czasowo.
+Losowe próbkowanie w praktyce daje bardzo przyzwoite wyniki jednak nie daje nam żadnej gwarancji odnośnie optymalności rozwiązania.
+Autorzy pracy \cite{bachem2017scalable} zaproponowali rozwiązanie o nazwie \textit{lightweight coreset}, które w swoich założeniach ma łączyć:
+\begin{itemize}
+    \item Prostą implementacje.
+    \item Gwarancje teoretyczne.
+    \item Szybkie działanie oparte na próbkowaniu zbioru danych.
+\end{itemize}
 \input{lightweight/lightweight_coreset.tex}
 \input{lightweight/construction.tex}
 \input{lightweight/analysis.tex}
