@@ -1,0 +1,37 @@
+\section{Algorytm Gonzalez'a}
+
+Pierwszy algorytm z którego opiszę to \textit{Farthest point algorithm} z pracy \cite{Gonzalez1985ClusteringTM}.
+Jest to pierwszy algorytm aproksymacyjny rozwiązująych problem k-centrów z błędem nie większem niż $2$\textit{OPT}, gdzie \textit{OPT} to optymalne rozwiązanie.
+Jego złożoność to $O(nk)$, gdzie $n$ to liczba punktów. 
+\\~\\
+Niech $S$ to bedzie zbiór który chcemy sklastrować oraz niech $T$ będzie podzbiorem $S$.
+Zakładamy, że $|S| > k$ ponieważ w przeciwnym przypadku problem jest trywialnie rozwiązywalny.
+Zbiór $T$ nazywamy $(k+1)$ kliką wysokości $h$ jeżeli moc zbioru $T$ jest równa $k+1$ oraz odległość pomiędzy parą dwóch rożnych punktów jest równa co najmniej $h$. 
+Niech $OPT(S)$ oznacza optymalne rozwiązanie problemu k-centrów dla zbioru $S$.
+Udowodnię teraz następujący lemat, którego dowód jest opisem \textit{Farthest point algorithm}.
+
+\begin{lemma}
+    Jeżeli w zbiorze $S$ istnieje $(k+1)$ klika wysokości $h$, to $OPT(S) \geq h$.
+\end{lemma}
+
+\begin{proof}
+    
+\end{proof}
+
+\begin{algorithm}
+    \caption{}
+\begin{algorithmic}
+    \State For each point not in $T$, the algorithm keeps $neighbor(p)$, the nearest point in $T$, and $dist(p)$, the distance from $p$ to $neighbor(p)$.
+    \Procedure{Farthest point algorithm}{}
+        \State $T \leftarrow \emptyset$
+        \State $dist(p) \leftarrow \inf$ for all $p \in S$
+        \While{$|T| \leq k$}                    
+            \State $D \leftarrow max\{dist(p) | p \in S-T\}$
+            \State choose $p^{'}$ from $S-T$ such $dist(p^{'}) = D$
+            \State add $p^{'}$ to T
+            \State update $neighbor(p)$ and $dist(p)$ for all $p \in S-T$
+        \EndWhile
+    \EndProcedure
+    \Return $T$
+\end{algorithmic}
+\end{algorithm}

@@ -8,5 +8,9 @@
 \contentsline {section}{\numberline {3.2}Konstrukcja}{5}{section.3.2}
 \contentsline {section}{\numberline {3.3}Analiza}{6}{section.3.3}
 \contentsline {chapter}{\numberline {4}Geometryczna Dekompozycja}{9}{chapter.4}
-\contentsline {chapter}{\numberline {5}Analiza Implementacji}{10}{chapter.5}
-\contentsline {chapter}{\numberline {6}Bibliografia}{11}{chapter.6}
+\contentsline {section}{\numberline {4.1}Algorytm Gonzalez'a}{9}{section.4.1}
+\contentsline {section}{\numberline {4.2}Konstrukcja kraty wyk\IeC {\l }adniczej}{9}{section.4.2}
+\contentsline {section}{\numberline {4.3}Heurystyka single swap}{9}{section.4.3}
+\contentsline {section}{\numberline {4.4}Podsumowanie}{9}{section.4.4}
+\contentsline {chapter}{\numberline {5}Analiza Implementacji}{11}{chapter.5}
+\contentsline {chapter}{\numberline {6}Bibliografia}{12}{chapter.6}

@@ -1,8 +1,26 @@
 \begin{thebibliography}{1}
 
+\bibitem{Arya2004LocalSH}
+{\sc Arya, V., Garg, N., Khandekar, R., Meyerson, A., Munagala, K., and Pandit,
+  V.}
+\newblock Local search heuristics for k-median and facility location problems.
+\newblock {\em SIAM J. Comput. 33\/} (2004), 544--562.
+
 \bibitem{bachem2017scalable}
 {\sc Bachem, O., Lucic, M., and Krause, A.}
 \newblock Scalable k-means clustering via lightweight coresets.
+
+\bibitem{10.1145/62212.62255}
+{\sc Feder, T., and Greene, D.}
+\newblock Optimal algorithms for approximate clustering.
+\newblock In {\em Proceedings of the Twentieth Annual ACM Symposium on Theory
+  of Computing\/} (New York, NY, USA, 1988), STOC ’88, Association for
+  Computing Machinery, p.~434–444.
+
+\bibitem{Gonzalez1985ClusteringTM}
+{\sc Gonzalez, T.~F.}
+\newblock Clustering to minimize the maximum intercluster distance.
+\newblock {\em Theor. Comput. Sci. 38\/} (1985), 293--306.
 
 \bibitem{10.1145/1007352.1007400}
 {\sc Har-Peled, S., and Mazumdar, S.}
