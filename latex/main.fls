@@ -319,6 +319,8 @@ INPUT /home/piotrhelm/Desktop/LIC/coreset/latex/05geo.tex
 INPUT /home/piotrhelm/Desktop/LIC/coreset/latex/05geo.tex
 INPUT /home/piotrhelm/Desktop/LIC/coreset/latex/geometric/gonzalez.tex
 INPUT /home/piotrhelm/Desktop/LIC/coreset/latex/geometric/gonzalez.tex
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecrm0700.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecrm0500.tfm
 INPUT /home/piotrhelm/Desktop/LIC/coreset/latex/geometric/harpeled.tex
 INPUT /home/piotrhelm/Desktop/LIC/coreset/latex/geometric/harpeled.tex
 INPUT /home/piotrhelm/Desktop/LIC/coreset/latex/geometric/swap.tex

@@ -1,23 +1,66 @@
 \section{Algorytm Gonzalez'a}
 
-Pierwszy algorytm z którego opiszę to \textit{Farthest point algorithm} z pracy \cite{Gonzalez1985ClusteringTM}.
+Pierwszy algorytm, który opiszę to \textit{Farthest point algorithm} z pracy \cite{Gonzalez1985ClusteringTM}.
 Jest to pierwszy algorytm aproksymacyjny rozwiązująych problem k-centrów z błędem nie większem niż $2$\textit{OPT}, gdzie \textit{OPT} to optymalne rozwiązanie.
 Jego złożoność to $O(nk)$, gdzie $n$ to liczba punktów. 
 \\~\\
+Na potrzeby tego rozdziału wprowadzę kilka definicji
+
+\begin{definition}
+    Niech \emph{G = (V, E, W)} będzie ważonym nieskierowanym grafem ze zbiorem wierzchołków $V$, krawędzi $E$ oraz funkcją $W: E \rightarrow \mathbb{R}^{+}$ przyporządkowującą wagi krawędziom. 
+    W tym rozdziale utożsamiam wagi z dystansem pomiędzy dwoma punktami. 
+\end{definition}
+
+\begin{definition}
+    Podział zbioru wierzchołków na k zbiorów $B_{1},\dots,B_{k}$, nazywamy \emph{k-split}.
+\end{definition}
+
+\begin{definition}
+    Zbiory $B_{i}$ podziału k-split nazywamy \emph{klastrami}.
+\end{definition}
+
+\noindent
+Dla każdego k-splitu defninujemy funkcję celu $f: B_{1},\dots,B_{k} \rightarrow \mathbb{R}^{+}$.
+W tym rozdziale zakładamy, że funkcją celu jest $max(M_{1},\dots,M_{k})$, gdzie $M_{i}$ to największa waga krawędzi pomiędzy dowolnymi dwoma punktami z $B_{i}$.
+
+\begin{definition}
+    \emph{Problem klastrowania.} Dla danego grafu $G$, funkcji celu $f$ oraz $k \in \mathbb{N}^{+}$ znaleźć k-split dla którego funkcja $f$ jest zminimalizowana.
+    Dla przykładu: znaleźć k-split $(B_{1}^{*},\dots,B_{k}^{*})$ taki, że 
+    \begin{equation}
+        f(B_{1}^{*},\dots,B_{k}^{*}) = min\{ f(B_{1},\dots,B_{k}) | (B_{1},\dots,B_{k}) \text{ to k-split dla G } \}
+    \end{equation}
+\end{definition}
+
+\noindent
 Niech $S$ to bedzie zbiór który chcemy sklastrować oraz niech $T$ będzie podzbiorem $S$.
 Zakładamy, że $|S| > k$ ponieważ w przeciwnym przypadku problem jest trywialnie rozwiązywalny.
+\begin{definition}
 Zbiór $T$ nazywamy $(k+1)$ kliką wysokości $h$ jeżeli moc zbioru $T$ jest równa $k+1$ oraz odległość pomiędzy parą dwóch rożnych punktów jest równa co najmniej $h$. 
+\end{definition}
+
+\noindent
 Niech $OPT(S)$ oznacza optymalne rozwiązanie problemu k-centrów dla zbioru $S$.
-Udowodnię teraz następujący lemat, którego dowód jest opisem \textit{Farthest point algorithm}.
+Udowodnię teraz następujący lemat, który jest potrzebny w dowodzie błędu aproksymacji algorytmu.
 
 \begin{lemma}
     Jeżeli w zbiorze $S$ istnieje $(k+1)$ klika wysokości $h$, to $OPT(S) \geq h$.
 \end{lemma}
 
 \begin{proof}
-    
+    Wartość funkcji celu dla kliki wysokości $h$ to conajmniej $h$ ponieważ kilka ma $k+1$ elementów to $2$ z nich wylądują w jednym klastrze.
+    W takim razie waga krawędzi pomiędzy tymi punktami to conajmniej $h$ co implikuje, że $OPT(S) > h$.
 \end{proof}
 
+\noindent
+Algorytm składa się z fazy inicjalizującej oraz $k-1$ faz powiększających.
+W fazie inicjalizującej wszystkie elementy są przypisana do zbioru $B_{1}$, który jest pierwszym klasterm.
+Jeden z elementów tego zbioru oznaczamy jako $(t_{1})$ - środek klastra $B_{1}$.
+Wybór tego elementu jest losowy.
+Podczas $j$ fazy powiększającej, niektóre elementy z istniejącego podziału na klastry $B_{1}, \dots, B_{j}$ trafiają do nowego zbioru $B_{j+1}$.
+Dodatkowo jeden z elemntów nowego zbioru będzie oznaczony jako $(t_{j+1})$ - środek klastra $B_{j+1}$.
+Budowę zbioru $B_{j+1}$ rozpoczynamy od wyboru punktu $v$, który należy do jednego ze zbiorów $B_{1}, \dots, B_{j}$ oraz odległość do centrum jego akutalnego klastra jest największa spośród wszystkich punktów. 
+Taki punkt będzie oznaczony jako $(t_{j+1})$, czyli jest centerm klastra $B_{j+1}$.
+Każdy punkt dla którego dystans do $v$ jest nie większy niż dystans do centra klastu w którym się znajduje zostaje przeniesiony do $B_{j+1}$.
 \begin{algorithm}
     \caption{}
 \begin{algorithmic}
@@ -27,11 +70,36 @@ Udowodnię teraz następujący lemat, którego dowód jest opisem \textit{Farthe
         \State $dist(p) \leftarrow \inf$ for all $p \in S$
         \While{$|T| \leq k$}                    
             \State $D \leftarrow max\{dist(p) | p \in S-T\}$
-            \State choose $p^{'}$ from $S-T$ such $dist(p^{'}) = D$
-            \State add $p^{'}$ to T
+            \State choose $v$ from $S-T$ such $dist(v) = D$
+            \State add $v$ to T
             \State update $neighbor(p)$ and $dist(p)$ for all $p \in S-T$
         \EndWhile
     \EndProcedure
     \Return $T$
 \end{algorithmic}
 \end{algorithm}
+\\
+Taki algorytmy buduje jakiś k-split.
+Teraz pokażę, że dla takiego k-splitu wartość funkcji celu jest ograniczona przez $2OPT(S)$.
+\\~\\
+Niech $v \in B_{j}$ oraz $1 \leq j \leq k$ będzie wierzchołkiem którego odległość do $(t_{j})$ jest maksymalna.
+Niech $h$ będzie tą odległością.
+Ponieważ dla zbioru wag krawędzi zachodzi nierówność trójkąta to:
+\begin{equation}
+    W(E(x, y)) \leq W(E(x, t_{i})) + W(E(y, t_{i})) \leq 2h
+\end{equation}
+gdzie $t_{i}$ to centrum klastra dla punktów $x, y \in B_{i}$.
+A więc możemy ograniczyć wartość naszej funkcji celu przez $\leq 2h$.
+Ponieważ $v$ nigdy nie zostało wybrane na centrum klasta to wiemy, że $W(t_{i}, t_{j}) \geq h$ dla $i \neq j$.
+Niech $T = \{ t_{1}, \dots, t_{k}, v \}$.
+Z definicji wiemy, że $T$ jest $(k+1)$ kliką wagi $h$ więc z lematu 2 $OPT(S) \geq h$.
+A więc ograniczenie wartości funkcji celu to $\leq 2h \leq 2OPT(S)$.
+      
+
+% to which it belonged to was at least h. Since this node never became a head of a
+% new cluster, we then have that every time a new cluster was defined the distance
+% from its head to the head of any previously defined cluster was at least h, i.e. 
+% W( head, head,) 2 h for p # q. Let T = {head,, . . . , headk, vi}. Clearly, T is a
+% (k + l)-clique of weight h for S and by Lemma 2.1 we have that OPT.(S) 2 h. Hence,
+% the solution generated by our algorithm has an objective function value < 2 * OPT(S).
+% The procedure just described is formally defined below. 
