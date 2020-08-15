@@ -1,16 +1,19 @@
 \select@language {polish}
 \contentsline {chapter}{\numberline {1}Wst\IeC {\k e}p}{1}{chapter.1}
 \contentsline {chapter}{\numberline {2}Notacja i niezb\IeC {\k e}dne definicje}{2}{chapter.2}
-\contentsline {subsection}{\numberline {2.0.1}K-means}{2}{subsection.2.0.1}
-\contentsline {subsection}{\numberline {2.0.2}Coreset}{2}{subsection.2.0.2}
+\contentsline {section}{\numberline {2.1}K-means}{2}{section.2.1}
+\contentsline {section}{\numberline {2.2}Coreset}{2}{section.2.2}
 \contentsline {chapter}{\numberline {3}Lightweight Coreset}{4}{chapter.3}
 \contentsline {section}{\numberline {3.1}Lightweight coreset}{4}{section.3.1}
 \contentsline {section}{\numberline {3.2}Konstrukcja}{5}{section.3.2}
 \contentsline {section}{\numberline {3.3}Analiza}{6}{section.3.3}
-\contentsline {chapter}{\numberline {4}Geometryczna Dekompozycja}{9}{chapter.4}
-\contentsline {section}{\numberline {4.1}Algorytm Gonzalez'a}{9}{section.4.1}
-\contentsline {section}{\numberline {4.2}Konstrukcja kraty wyk\IeC {\l }adniczej}{11}{section.4.2}
-\contentsline {section}{\numberline {4.3}Heurystyka single swap}{11}{section.4.3}
-\contentsline {section}{\numberline {4.4}Podsumowanie}{11}{section.4.4}
-\contentsline {chapter}{\numberline {5}Analiza Implementacji}{12}{chapter.5}
-\contentsline {chapter}{\numberline {6}Bibliografia}{13}{chapter.6}
+\contentsline {chapter}{\numberline {4}Geometryczna Dekompozycja}{10}{chapter.4}
+\contentsline {section}{\numberline {4.1}Algorytm Gonzalez'a}{10}{section.4.1}
+\contentsline {section}{\numberline {4.2}Konstrukcja kraty wyk\IeC {\l }adniczej}{12}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Szybka aproksymacja dla problemu K-means.}{12}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Konstrukcja zbioru dobrych punkt\IeC {\'o}w dla $X$.}{13}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}Krata wyk\IeC {\l }adnicza.}{15}{subsection.4.2.3}
+\contentsline {section}{\numberline {4.3}Heurystyka single swap}{16}{section.4.3}
+\contentsline {section}{\numberline {4.4}Podsumowanie}{16}{section.4.4}
+\contentsline {chapter}{\numberline {5}Analiza Implementacji}{17}{chapter.5}
+\contentsline {chapter}{\numberline {6}Bibliografia}{18}{chapter.6}

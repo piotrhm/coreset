@@ -19,26 +19,36 @@
 \usepackage[unicode]{hyperref}
 \usepackage{booktabs}
 
+
 \usepackage{algorithm}
 \usepackage[noend]{algpseudocode}
 
-\titleformat{\chapter}[hang]
-    {\Large\fillast}
-    {\oldstylenums{\thechapter} }
-    {0pt}
-    {\scshape\bfseries}
+% \titleformat{\chapter}[display]
+%     {\Large\fillast}
+%     {\oldstylenums{\thechapter} }
+%     {0pt}
+%     {\scshape\bfseries}
 
-\titleformat{\section}[hang]
-    {\large\fillast}
-    {\oldstylenums{\thesection} }
-    {0pt}
-    {\scshape}
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries}{}{10pt}{\Large\thechapter.\quad}
 
-\titleformat{\subsection}[hang]
-    {\large\fillast}
-    {\oldstylenums{\thesubsection} }
-    {0pt}
-    {\itshape\scshape}
+\titleformat{\section}[display]
+  {\normalfont\bfseries}{}{10pt}{\large\thesection.\quad}
+
+\titleformat{\subsection}[display]
+  {\normalfont\bfseries}{}{0pt}{\thesubsection.\quad}
+
+% \titleformat{\section}[hang]
+%     {\large\fillast}
+%     {\oldstylenums{\thesection} }
+%     {0pt}
+%     {\scshape}
+
+% \titleformat{\subsection}[hang]
+%     {\large\fillast}
+%     {\oldstylenums{\thesubsection} }
+%     {0pt}
+%     {\itshape\scshape}
 
 \theoremstyle{definition}
 \newtheorem{definition}{Definicja}[chapter]    

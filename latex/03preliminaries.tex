@@ -1,5 +1,5 @@
 \chapter{Notacja i niezbędne definicje}\label{preliminaries}
-\subsection{K-means}
+\section{K-means}
 
 Zacznijmy od zdefiniowania problemu dla którego będziemy analizować konstrukcje coresetów.
 
@@ -27,7 +27,7 @@ Uogólnioną wersję można zdefiniować analogicznie, zamieniając $d$ na odpow
 Ewaluację funkcji $\phi$ dla optymalnego rozwiązania oznaczamy $\phi_{OPT}^{k}(X)$. 
 Funkcję $\phi$ w literaturze nazywamy błędem kwantyzacji.
 
-\subsection{Coreset}
+\section{Coreset}
 
 To jak definujemy coreset ściśle zależy od problemu, który optymalizujemy.
 Zacznijmy od podstawowej definicji coresetu dla problemu \textit{K-means}.
@@ -52,3 +52,7 @@ Jest to na tyle istotne, że w literaturze odróżnia się tą wersję nazywają
         |\phi_{X}(Q) - \phi_{C}(Q)| \leq \epsilon\phi_{X}(Q)
     \end{equation}
 \end{definition}
+
+%Henceforth,
+% when we use the term “optimal,” we mean the k-element subset of
+% C having the lowest distortion.

@@ -1,3 +1,30 @@
 \section{Heurystyka single swap}
 
-TBA
+W tym podrozdziale opiszemy heurystykę single swap \cite{Arya2004LocalSH}, która jest przykładem techinki \textit{local search}.
+Algorytm przedstawi konstrukcję $(25 + \epsilon)$ aproksymacji dla problemu K-means.
+
+
+% In the statement of the k-means problem, the centers may be
+% placed anywhere in space. In order to apply our local improve-
+% ment search, we need to assume that we are given a discrete set
+% of candidate centers C from which k centers may be chosen. As
+% mentioned above, Matoušek [28] showed that C may be taken to
+% be an -approximate centroid set of size O(n −d log(1/)), which
+% can be computed in time O(n log n + n −d log(1/)). Henceforth,
+% when we use the term “optimal,” we mean the k-element subset of
+% C having the lowest distortion.
+% This single-swap heuristic operates by selecting an initial set of
+% k centers S from the candidate centers C, and then it repeatedly
+% attempts to improve the solution by removing one center s ∈ S
+% and replacing it with another center s 	 ∈ C − S. Let S 	 = S −
+% {s} ∪ {s 	 } be the new set of centers. If the modified solution has
+% lower distortion then S 	 replaces S, and otherwise S is unchanged.
+% In practice this process is repeated until some long consecutive run
+% of swaps have been performed with no significant decrease in the
+% distortion. It can be formally proved that by sacrificing a small
+% factor  > 0 in the approximation ratio, we can guarantee that this
+% procedure converges after a polynomial number of swaps. We refer
+% the reader to Arya et al. [4] for further details.
+% For simplicity, we will assume that the algorithm terminates when
+% no single swap results in a decrease in distortion. Such a set of cen-
+% ters is said to be 1-stable. Letting O denote an optimal set of k

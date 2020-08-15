@@ -1,5 +1,11 @@
 \begin{thebibliography}{1}
 
+\bibitem{10.1145/293347.293348}
+{\sc Arya, S., Mount, D.~M., Netanyahu, N.~S., Silverman, R., and Wu, A.~Y.}
+\newblock An optimal algorithm for approximate nearest neighbor searching fixed
+  dimensions.
+\newblock {\em J. ACM 45}, 6 (Nov. 1998), 891–923.
+
 \bibitem{Arya2004LocalSH}
 {\sc Arya, V., Garg, N., Khandekar, R., Meyerson, A., Munagala, K., and Pandit,
   V.}
