@@ -1,26 +1,26 @@
 \section{Lightweight coreset}
 
-Zacznijmy od wproadzenia definicji \textit{lightweight coresetu}.
+Zacznijmy od wprowadzenia definicji \textit{lightweight coresetu}.
 \begin{definition}
     \emph{Lightweight coreset dla problemu K-means.} Niech $\epsilon > 0$ oraz $k \in \mathbb{N}$.
-    Niech $X$ to zbiór punktów z $\mathbb{R}^{d}$ wraz ze średnią $\mu(X)$.
-    Zbiór $C$ jest $(\epsilon, k)$ lightweight coresetem dla $X$, jeżeli dla dowolnego zbioru $Q \subset X$ o mocy co najwyżej $k$ zachodzi:
+    Niech $X$ to zbiór punktów z $\mathbb{R}^{d}$ wraz ze średnią $\mu(X) = \frac{1}{n}\sum_{i=1}^{n} x_{i}$.
+    Zbiór $C \subseteq X$ jest $(\epsilon, k)$ lightweight coresetem dla $X$, jeżeli dla dowolnego zbioru $Q \subset X$ o mocy co najwyżej $k$ zachodzi:
     \begin{equation}
         |\phi_{X}(Q) - \phi_{C}(Q)| \leq \frac{\epsilon}{2}\phi_{X}(Q) + \frac{\epsilon}{2}\phi_{X}(\mu(X))
     \end{equation}
 \end{definition}
 
 \noindent
-Jak możemy zauważyć definicja (3.1) trochę się różni od (2.2).
-Notacje \textit{lightweight} coresetu możemy interpretować jako relaksację gwarancji teoretycznych zdefiniowanych w (2.2).
+Jak możemy zauważyć definicja (3.1) trochę się różni od (2.7).
+Notacje \textit{lightweight} coresetu możemy interpretować jako relaksację gwarancji teoretycznych zdefiniowanych w (2.7).
 Wprowadza ona oprócz błędu multiplikatywnego, błąd addytywny.
-Składnik $\frac{\epsilon}{2}\phi_{X}(Q)$ pozwala na odpowiednie skalowanie błędu aproksymacji dla funkcji $\phi$.
-Druga część $\frac{\epsilon}{2}\phi_{X}(\mu(X))$ odpowiada za skalowalność rozwiązania zgodnie z wariancją dany.
+Nieformalnie, składnik $\frac{\epsilon}{2}\phi_{X}(Q)$ pozwala na odpowiednie skalowanie błędu aproksymacji dla funkcji $\phi$, jest on tożsamy z błędem aproksymacji coresetu zdefiniowanego w 2.7.
+Druga część $\frac{\epsilon}{2}\phi_{X}(\mu(X))$ odpowiada za skalowalność rozwiązania zgodnie ze zmianą wariancji na danych.
 
 Głowną motywacją stojącą za konstrukcjami coresetów jest to, żeby rozwiązanie obliczone na tym zbiorze było konkurencyjne z rozwiazaniem optymalnym dla całego zbioru danych.
-Dlatego w konkeście \textit{lightweight} udowodnię następujące twierdzenie.
+Dlatego w konkeście \textit{lightweight} udowodnimy następujące twierdzenie.
 
-\begin{thm}
+\begin{thm}{\cite{bachem2017scalable}}
     Niech $\epsilon \in (0, 1]$. Niech $X$ będzie dowolnym zbiorem dany oraz niech $C$ będzie $(\epsilon, k)$ lightweight coresetem dla $X$.
     Optymalne rozwiązanie problemu K-means dla $X$ oznaczamy $Q_{X}^{*}$.
     Optymalne rozwiązanie problemu K-means dla $C$ oznaczamy $Q_{C}^{*}$.

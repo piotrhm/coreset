@@ -1,10 +1,23 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
+
+\bibitem{article}
+{\sc Aloise, D., Deshpande, A., Hansen, P., and Popat, P.}
+\newblock Np-hardness of euclidean sum-of-squares clustering.
+\newblock {\em Machine Learning 75\/} (05 2009), 245--248.
 
 \bibitem{10.1145/293347.293348}
 {\sc Arya, S., Mount, D.~M., Netanyahu, N.~S., Silverman, R., and Wu, A.~Y.}
 \newblock An optimal algorithm for approximate nearest neighbor searching fixed
   dimensions.
 \newblock {\em J. ACM 45}, 6 (Nov. 1998), 891–923.
+
+\bibitem{10.1145/380752.380755}
+{\sc Arya, V., Garg, N., Khandekar, R., Meyerson, A., Munagala, K., and Pandit,
+  V.}
+\newblock Local search heuristic for k-median and facility location problems.
+\newblock In {\em Proceedings of the Thirty-Third Annual ACM Symposium on
+  Theory of Computing\/} (New York, NY, USA, 2001), STOC ’01, Association for
+  Computing Machinery, p.~21–29.
 
 \bibitem{Arya2004LocalSH}
 {\sc Arya, V., Garg, N., Khandekar, R., Meyerson, A., Munagala, K., and Pandit,
@@ -15,6 +28,11 @@
 \bibitem{bachem2017scalable}
 {\sc Bachem, O., Lucic, M., and Krause, A.}
 \newblock Scalable k-means clustering via lightweight coresets.
+
+\bibitem{chazelle_2000}
+{\sc Chazelle, B.}
+\newblock {\em The Discrepancy Method: Randomness and Complexity}.
+\newblock Cambridge University Press, 2000.
 
 \bibitem{10.1145/62212.62255}
 {\sc Feder, T., and Greene, D.}
@@ -33,6 +51,11 @@
 \newblock On coresets for k-means and k-median clustering.
 \newblock 291–300.
 
+\bibitem{1056489}
+{\sc {Lloyd}, S.}
+\newblock Least squares quantization in pcm.
+\newblock {\em IEEE Transactions on Information Theory 28}, 2 (1982), 129--137.
+
 \bibitem{Matousek99onapproximate}
 {\sc Matousek, J.}
 \newblock On approximate geometric k-clustering.
@@ -42,5 +65,10 @@
 \newblock Coresets-methods and history: {A} theoreticians design pattern for
   approximation and streaming algorithms.
 \newblock {\em K{\"{u}}nstliche Intell. 32}, 1 (2018), 37--53.
+
+\bibitem{pisier_1989}
+{\sc Pisier, G.}
+\newblock {\em The Volume of Convex Bodies and Banach Space Geometry}.
+\newblock Cambridge Tracts in Mathematics. Cambridge University Press, 1989.
 
 \end{thebibliography}

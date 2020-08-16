@@ -1,11 +1,11 @@
 \chapter{Wstęp}
 \textit{More is more} to jedna z podstawowych doktryn związanych z szeroko rozumiałym Big Data.
 Więcej danych to więcej informacji, które analizujemy licząc na poznanie ukrytych zależności.
-W erze Big Data skalowalność rozwiązań jest szczególnie ważna dlatego celem wielu naukowców jest dostarczenie kompromisu pomiędzy szczegółowością informacji a wymaganiami pamięciowymi.
+W erze Big Data skalowalność rozwiązań jest szczególnie ważna, dlatego celem wielu naukowców jest dostarczenie kompromisu pomiędzy szczegółowością informacji a wymaganiami pamięciowymi.
 Tutaj warto zwrócić uwagę na dużą wartość takich rozwiązań w praktycznych zastosowaniach.
 
 \textit{Sketch-and-solve} to popularny paradygmat, który zakłada separacje algorytmu agregującego dane od właściwego algorytmu analizującego.
-Główną ideą jest redukcja danych tak aby ich rozmiar nie był zależny od wejściowych danych lub tylko \textit{trochę} od nich zależał.
+Główną ideą jest redukcja danych tak aby rozmiar zbudowanego zbioru nie były zależny od rozmiaru wejściowych danych lub tylko \textit{trochę} od nich zależał.
 Następnie aplikowany jest właściwy algorytm, który jest mniej zależy od początkowego rozmiaru danych.
 W rezultacie wykonuje swoją pracę szybciej, a niekiedy nawet lepiej.
 Dodatkową zaletą jest fakt, że w większości przypadków nie jest konieczna modyfikacja algorytmu analizującego.
@@ -14,10 +14,16 @@ Niestety w kontekście tego paradygmatu największym wyzwaniem jest znalezienie 
 To jak określamy charakterystykę ważnych informacji jest ściśle zależne od aplikacji danych.
 Coresety są strukturą algorytmiczną, która ma na celu indentyfikacje takich cech oraz określenie akceptowalnego kompromisu dla różnych funkcji celu.
 
-Mówiąc ogólniej, mamy na wejściu zbiór danych $A$, zbiór potencjalnych rozwiązań $C$ oraz funkcję celu $f$.
-Chcemy znaleźć istotnie mniejszy zbiór danych $S$, który dla każdego potenlego rozwiązania $c \in C$ daje $f(S, c)$ \textit{dobrze} aproksymujące $f(A,c)$.
+Mówiąc ogólniej, mamy na wejściu zbiór danych $A \subset U$, gdzie $U$ to jakieś uniwersum, zbiór potencjalnych rozwiązań $C$ oraz funkcję celu $f:U \times C \rightarrow \mathbb{R}_{\geq0}$.
+Chcemy znaleźć istotnie mniejszy zbiór danych $S \subset U$, który dla każdego potencjalnego rozwiązania $c \in C$ daje $f(S, c)$ \textit{dobrze} aproksymujące $f(A,c)$.
+A dokładniej:
+\begin{equation}
+    |f(A,c) - f(S,c)| < \epsilon f(A,c)
+\end{equation}
+\noindent
+gdzie $\epsilon > 0$.
 
 Algorytmy budujące coresety są aplikowalne do wielu problemów klasteryzacji.
-W tej pracy skupię się na konstrukcjach dla problemu K-means, który należy do klasy problemów \textit{NP-trudnych}.
-Najpopularniejszym algorytmem heurystycznym dla tego problemu jest algorytm Lloyd'a.
-Z uwagi na jego niską skalowalność jest on idealnym kandydatem do optymalizacji poprzez odpowiednią konstrukcję coresetu.
+W tej pracy skupimy się na konstrukcjach dla problemu K-means, który należy do klasy problemów \textit{NP-trudnych} \cite{article}.
+Najpopularniejszym algorytmem heurystycznym dla tego problemu jest algorytm Lloyd'a \cite{1056489}.
+Z uwagi na to, że złożoność algorytmu istotnie zależy od rozmiaru wejściowych danych, jest on idealnym kandydatem do optymalizacji poprzez odpowiednią konstrukcję coresetu.

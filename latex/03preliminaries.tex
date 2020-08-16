@@ -1,40 +1,83 @@
 \chapter{Notacja i niezbędne definicje}\label{preliminaries}
+
+W tej pracy przyjmujemy, że działamy w przestrzeni euklidesowej w skończonym wymiarze $d > 0$.
+
+\begin{definition}
+    \emph{Norma typu $l_{2}$} dla $x \in \mathbb{R}^d$ to:
+    \begin{equation}
+        ||x||_{2} = ||x|| = \sqrt{ \sum_{i = 1}^{d} x_{i}^{2} }
+    \end{equation}
+\end{definition}
+
+\noindent
+Załóżmy, że mamy dany konkretny problem optymalizacyjny. 
+Niech $F(x)$ oznacza zbiór dopuszczalnych rozwiązań tego problemu dla danych wejściowych $x$. 
+Niech $c(y) \leq 0$ gdzie $ y\in F(x)$ będzie funkcją kosztu rozwiązania dla tego problemu.
+Oznaczmy przez $c_{opt}(x)$ koszt rozwiązania optymalnego dla danych $x$.
+
+\begin{definition}
+    \emph{$\epsilon$-aproksymacja.} 
+    Algorytm A nazywamy $\epsilon$-aproksymacyjnym, jeżeli dla dowolnych poprawnych danych wejściowych $x$, $A(x) \in F(x)$ oraz:
+    \begin{equation}
+        \frac{|c(A(x)) - C_{opt}(x) |}{ \max\{c(A(x)),C_{opt}(x) \} } \leq \epsilon
+    \end{equation}
+    gdzie $\epsilon \in [0,1]$ nazywamy \textit{błędem aproksymacji}.
+\end{definition}
+
+\begin{definition}
+    \emph{Centroid} dla skończonego zbioru punktów $x_{1}, \dots, x_{k} \in \mathbb{R}^{d}$ to:
+    \begin{equation}
+        C = \frac{x_{1} + \dots + x_{k}}{k}
+    \end{equation}
+    gdzie punkt $C$ minimalizuje sumę kwardatów odległości pomiedzy nim samym a punktami $x_{1}, \dots, x_{k}$.
+\end{definition}
+
+\noindent
+Często utożamaiamy centroid z punktami dla których jest on centroidem.
+W takiej sytuacji użyjemy stwierdzenia \textit{środek centroidu} do nazwania zdefiniowanego w 2.3 faktycznego centroidu.
+
+\begin{definition}
+    \emph{Klaster} to skończony zbioru punktów $x_{1}, \dots, x_{k} \in \mathbb{R}^{d}$, które łaczy wspólna cech.
+    W naszym kontekście wspólną cechą bedzie przyporządkowanie do tego samego centroidu.
+\end{definition}
+
 \section{K-means}
 
 Zacznijmy od zdefiniowania problemu dla którego będziemy analizować konstrukcje coresetów.
 
 \begin{definition}
-    \emph{Problem K-means.} Niech $X$ to zbiór punktów z $\mathbb{R}^{d}$. 
-    Dla danego $X$ chcemy znalźć zbiór $k$ punktów $Q$, który minimalizuje funkcję $\phi_{X}(Q)$ zdefiniowaną następująco:
+    \emph{Problem K-means.} Niech $X$ to skończony zbiór punktów z $\mathbb{R}^{d}$. 
+    Dla danego $X$ chcemy znalźć zbiór $k \in \mathbb{N}$ punktów $Q \subset \mathbb{R}^{d}$, który minimalizuje funkcję $\phi_{X}(Q)$ zdefiniowaną następująco:
     \begin{equation}
-        \phi_{X}(Q) = \sum_{x \in X} d(x, Q)^{2} = \sum_{x \in X} \min_{q \in Q} || x - q ||_{2}^{2} 
+        \phi_{X}(Q) = \sum_{x \in X} d(x, Q)^{2} = \sum_{x \in X} \min_{q \in Q} || x - q ||^{2} 
     \end{equation}
 \end{definition}
 
 \noindent
-Powyższa definicja zakłada, że działamy w przestrzeni euklidesowej.
+Definicja 2.2 zakłada, że działamy w przestrzeni euklidesowej.
 Uogólnioną wersję można zdefiniować analogicznie, zamieniając $d$ na odpowiednią funkcję miary w danej przestrzeni.
 
 \begin{definition}
-    \emph{Problem K-means - wersja ważona.} Niech $C$ to zbiór punktów z $\mathbb{R}^{d}$ oraz niech $w$ będzie funkcją $C \rightarrow \mathbb{R}_{\ge0}$. 
-    Dla danego $X$ oraz funkcji $w$ chcemy znalźć zbiór $k$ punktów $Q$, który minimalizuje funkcję $\phi_{X}(Q)$ zdefiniowaną następująco:
+    \emph{Problem K-means - wersja ważona.} Niech $C$ to skończony zbiór punktów z $\mathbb{R}^{d}$ oraz niech $w$ będzie funkcją $C \rightarrow \mathbb{R}_{\ge0}$. 
+    Dla danego $C$ oraz funkcji $w$ chcemy znaleźć zbiór $k \in \mathbb{N}$ punktów $Q$, który minimalizuje funkcję $\phi_{C}(Q)$ zdefiniowaną następująco:
     \begin{equation}
-        \phi_{X}(Q) = \sum_{x \in X} w(x) d(x, Q)^{2}
+        \phi_{C}(Q) = \sum_{c \in C} w(c) d(c, Q)^{2}
     \end{equation}
 \end{definition}
 
 \noindent
-Ewaluację funkcji $\phi$ dla optymalnego rozwiązania oznaczamy $\phi_{OPT}^{k}(X)$. 
+Ewaluację funkcji $\phi$ dla optymalnego rozwiązania oznaczamy $\phi_{opt}^{k}(X)$ lub $OPT$.
+W pracy często będziemy korzystać ze stwierdzenia \textit{optymalne rozwiązanie}, które oznacza $k$ elementowy zbiór dla którego wartość funkcji $\phi$ jest zminimalizowana. 
 Funkcję $\phi$ w literaturze nazywamy błędem kwantyzacji.
 
 \section{Coreset}
 
 To jak definujemy coreset ściśle zależy od problemu, który optymalizujemy.
-Zacznijmy od podstawowej definicji coresetu dla problemu \textit{K-means}.
+Zacznijmy od podstawowej definicji coresetu dla problemu K-means.
 
 \begin{definition}
-    \emph{Coreset.} Niech $X$ to zbiór punktów z $\mathbb{R}^{d}$ oraz niech $Q$ to dowolny podzbiór $X$ rozmiaru co najwyżej $k$. 
-    Zbiór $C$ nazywamy $(\epsilon, k)$ coresetem jeżeli zachodzi:
+    \emph{Coreset.} Niech $X$ to skończony zbiór punktów z $\mathbb{R}^{d}$ oraz niech $Q$ to dowolny podzbiór $X$ rozmiaru co najwyżej $k$. 
+    Skończony zbiór $C \subset R^{d}$ nazywamy $(\epsilon, k)$ coresetem, gdzie $\epsilon \in (0, 1)$, jeżeli zachodzi:
     \begin{equation}
         |\phi_{X}(Q) - \phi_{C}(Q)| \leq \epsilon\phi_{X}(Q)
     \end{equation}
@@ -42,17 +85,15 @@ Zacznijmy od podstawowej definicji coresetu dla problemu \textit{K-means}.
 
 \noindent
 Zauważmy, że taka definicja daje nam bardzo moce gwarancje teoretyczne.
-Ewaluacji coresetu $\phi_{C}(Q)$ musi aproksymować $\phi_{X}(Q)$ z dokładnością $1+\epsilon$ jednocześnie dla dowolnego zbioru $k$ kandydatów na rozwiązanie $Q$ w kontekście całego zbioru $X$.
-Jest to na tyle istotne, że w literaturze odróżnia się tą wersję nazywając ją \textit{Strong Coreset}.
+Wartość funkcji $\phi_{C}(Q)$ aproksymuje $\phi_{X}(Q)$ z błędem $(1+\epsilon)$ dla dowolnego zbioru $k$ kandydatów na rozwiązanie $Q$.
+Jest to na tyle istotne, że w literaturze odróżnimy taką wersję nazywając ją \textit{strong coresetem}.
 
 \begin{definition}
-    \emph{Coreset - weak.} Niech $X$ to zbiór punktów z $\mathbb{R}^{d}$ oraz niech $Q$ będzie optymalnym rozwiązaniem.
-    Słabym coresetem nazywamy zbiór $C$ dla którego zachodzi:
+    \emph{Coreset - weak.} Niech $X$ to zbiór punktów z $\mathbb{R}^{d}$ oraz $\epsilon \in (0, 1)$.
+    Słabym coresetem nazywamy skończony zbiór $C \subset \mathbb{R}^d$ dla którego zachodzi:
     \begin{equation}
         |\phi_{X}(Q) - \phi_{C}(Q)| \leq \epsilon\phi_{X}(Q)
     \end{equation}
 \end{definition}
 
-%Henceforth,
-% when we use the term “optimal,” we mean the k-element subset of
-% C having the lowest distortion.
+%dyskretna/ciągła 

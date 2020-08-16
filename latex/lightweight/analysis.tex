@@ -1,10 +1,10 @@
 \section{Analiza}
 
-W tej części chciałbym udowodnić, że zaproponowany w poprzdniej części algorytm oblicza lightweight coreset dla odpowiedniego $m$.
+W tej części udowodnimy, że zaproponowany w poprzedniej części algorytm oblicza lightweight coreset dla odpowiedniego $m$.
 
-\begin{thm}
+\begin{thm}{\cite{bachem2017scalable}}
     Niech $\epsilon > 0$, $\delta > 0$ oraz $k \in \mathbb{N}$. 
-    Niech $X$ to zbiór punktów z $\mathbb{R}^{d}$ oraz $C$ zbiorem, który dostajemy z algorytmu dla
+    Niech $X$ to skończony zbiór punktów z $\mathbb{R}^{d}$ oraz $C \subset X$ to zbiór zwracany przez algorytm dla:
     \begin{equation}
         m \geq c\frac{dk \log{k} + \log{\frac{1}{\delta}}}{\epsilon^2} 
     \end{equation}
@@ -14,10 +14,8 @@ W tej części chciałbym udowodnić, że zaproponowany w poprzdniej części al
 
 \begin{proof}
 
-Na początku wyprowadzę rozkład dla punktów $x \in X$ uwzględniający ich wagę.
-Następnie pokażę, że wybierając wystarczającą liczbę punktów z tego rozkładu uzyskuje się $(\epsilon, k)$ lightweight coreset. 
-\\~\\
-Zacznę od ograniczenia wagi dla każdego punktu $x \in X$. 
+\noindent
+Zacznę od ograniczenia ważności dla każdego punktu $x \in X$. 
 W tym celu definiuje funkcję:
 
 \begin{equation}
@@ -27,9 +25,9 @@ W tym celu definiuje funkcję:
 \noindent
 gdzie $\mu(X)$ to średnia zbioru $X$ oraz dowodzę następujący lemat. 
 
-\begin{lemma}
-    Niech $X$ to zbiór punktów z $\mathbb{R}^{d}$ wraz ze średnią $\mu(X)$. 
-    Dla każdego $x \in X$ oraz $Q \subset \mathbb{R^d}$ zachodzi:
+\begin{lemma}{\cite{bachem2017scalable}}
+    Niech $X$ to skończony zbiór punktów z $\mathbb{R}^{d}$ wraz ze średnią $\mu(X)$. 
+    Dla każdego $x \in X$ oraz $Q \subset \mathbb{R}^{d}$ zachodzi:
     \begin{equation}
         \frac{d(x, Q)^2}{f(Q)} \leq \frac{16d(x, \mu(X))^2}{\frac{1}{|X|}\sum_{x^{'} \in X}d(x^{'}, \mu(X))^2} + 16
     \end{equation}
@@ -39,14 +37,14 @@ gdzie $\mu(X)$ to średnia zbioru $X$ oraz dowodzę następujący lemat.
     \noindent
     Z nierówności trójkąta oraz z faktu, że $(|a| + |b|)^2 = 2a^2 + 2b^2$, otrzymujemy
     \begin{equation}
-        d(\mu(X), Q)^2 \leq 2d(x, \mu(x))^2 + 2d(x, Q)
+        d(\mu(X), Q)^2 \leq 2d(x, \mu(X))^2 + 2d(x, Q)
     \end{equation}
     
     \noindent
-    Biorąc średnie wszystkich $x \in X$ otrzymujemy:
+    Uśrednienie dla wszystkich $x \in X$, implikuje:
 
     \begin{equation}
-        d(\mu(X), Q)^2 \leq \frac{2}{|X|} \sum_{x \in X} d(x, \mu(x))^2 + \frac{2}{|X|} \sum_{x \in X} d(x, Q)
+        d(\mu(X), Q)^2 \leq \frac{2}{|X|} \sum_{x \in X} d(x, \mu(X))^2 + \frac{2}{|X|} \sum_{x \in X} d(x, Q)
     \end{equation}
     \begin{equation}
        = \frac{2}{|X|} \phi_{X}(\mu(X))+ \frac{2}{|X|} \phi_{X}(Q)
@@ -56,7 +54,7 @@ gdzie $\mu(X)$ to średnia zbioru $X$ oraz dowodzę następujący lemat.
     To implikuje, że dla każdego $x \in X$ oraz $Q \subset \mathbb{R^d}$ zachodzi:
 
     \begin{equation}
-        d(x, Q)^2 \leq 2d(x, \mu(x))^2 + 2d(\mu(X), Q)
+        d(x, Q)^2 \leq 2d(x, \mu(X))^2 + 2d(\mu(X), Q)
     \end{equation}
 
     \begin{equation}
@@ -83,18 +81,28 @@ gdzie $\mu(X)$ to średnia zbioru $X$ oraz dowodzę następujący lemat.
 \end{proof}
 
 \noindent
-Powyższy lemat implikuje, że stosunek pomiędzy kosztem kontrybucji jednego punku $x \in X$ a $f(Q)$ jest ograniczona dla każdego $Q \subset X$ przez:
+Powyższy lemat implikuje, że stosunek pomiędzy kosztem kontrybucji $d(x, Q)^2$ jednego punku $x \in X$ a $f(Q)$ jest ograniczony dla każdego $Q \subset X$ przez:
 
 \begin{equation}
     s(x) = \frac{16d(x, \mu(X))^2}{\frac{1}{|X|}\sum_{x^{'} \in X}d(x^{'}, \mu(X))^2} + 16    
 \end{equation}
 
 \noindent
-Zdefinuje $S = \sum_{x^{'} \in X}s(x^{'})$ zauważając, że $S = 32$ dla każdego zbioru $X$.
-Dzięki temu mogę zapisać rozkład $q(x)$ jako:
+Zdefinuje $S = \frac{1}{|X|} \sum_{x \in X}s(x)$ zauważając, że 
+\begin{equation}
+    S =  \frac{1}{|X|}  \sum_{x \in X}s(x)  =  \frac{1}{|X|} \sum_{x \in X} \Big( \frac{16d(x, \mu(X))^2}{\frac{1}{|X|}\sum_{x^{'} \in X}d(x^{'}, \mu(X))^2} + 16 \Big)
+\end{equation}
+\begin{equation}
+    =  \frac{1}{|X|} \sum_{x \in X} \Big( \frac{16d(x, \mu(X))^2}{\frac{1}{|X|}\sum_{x^{'} \in X}d(x^{'}, \mu(X))^2} \Big) + \frac{1}{|X|} \sum_{x \in X} 16 
+\end{equation}
+\begin{equation}
+    = \frac{16  \sum_{x \in X}  d(x, \mu(X))^2}{\sum_{x^{'} \in X}d(x^{'}, \mu(X))^2} + 16 = 32
+\end{equation}
+dla każdego zbioru $X$.
+Dzięki temu mogę zapisać rozkład $q$ jako:
 
 \begin{equation}
-    q(x) = \frac{1}{2}\frac{1}{|X|} + \frac{1}{2}\frac{d(x, \mu)^2}{\sum_{x^{'} \in X}d(x^{'}, \mu)^2} = \frac{s(x)}{S|X|}
+    q(x) = \frac{1}{2}\frac{1}{|X|} + \frac{1}{2}\frac{d(x, \mu(X))^2}{\sum_{x^{'} \in X}d(x^{'}, \mu(X))^2} = \frac{s(x)}{S|X|}
 \end{equation}
 
 \noindent
@@ -117,14 +125,14 @@ Zauważmy, że dla dowolnego zbioru  $Q \subset \mathbb{R}^{d}$ zachodzi:
 \end{equation}
 
 \noindent
-Wprowadżmy notację:
+Następnie podstawiamy z definicji wartości oczekiwanej:
 
 \begin{equation}
     \mathbb{E}_q[g_{Q}(x)] = \sum _{x \in X} q(x) g_{Q}(x)
 \end{equation}
 
 \noindent
-dzięki której przekształcamy ostatnie równanie:
+dzięki temu przekształcamy ostatnie równanie:
 
 \begin{equation}
     \phi_{X}(Q) = S|X|f(Q)\mathbb{E}_q[g_{Q}(x)]
@@ -133,7 +141,7 @@ dzięki której przekształcamy ostatnie równanie:
 \noindent
 Następnym krokiem jest ograniczenie wartości $\mathbb{E}_q[g_{Q}(x)]$.
 Autorzy \cite{bachem2017scalable} nie dowodzą wprost tego ograniczenia, powołując się na inne prace.
-Dowód jest bardzo skompilowany i wykracza tematyką istotnie poza ramy tej pracy więc go pomijam.
+Dowód jest bardzo skompilowany i wykracza tematyką istotnie poza ramy tej pracy więc go pomijamy.
 Korzystam z finalnego ograniczenia:
 
 \begin{equation}
@@ -149,7 +157,7 @@ Mnożąc obie strony nierówności przez $32|X|f(Q)$ otrzymujemy:
 \end{equation}
 
 \noindent
-Niech $(C, u)$ będzie ważonym zbiorem, gdzie dla każdego $x \in C$ definujemy funkcję $u(X) = \frac{1}{|C|q(x)}$.
+Niech $(C, u)$ będzie ważonym zbiorem, gdzie dla każdego $x \in C$ definujemy funkcję $u(x) = \frac{1}{|C|q(x)}$.
 Wynika z tego, że:
 
 \begin{equation}

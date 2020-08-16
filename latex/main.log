@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2019.3.16)  15 AUG 2020 19:24
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2019.3.16)  17 AUG 2020 01:30
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1141,20 +1141,14 @@ Rozdzia\l  2.
 Rozdzia\l  3.
 (/home/piotrhelm/Desktop/LIC/coreset/latex/lightweight/lightweight_coreset.tex [4
 
-]) (/home/piotrhelm/Desktop/LIC/coreset/latex/lightweight/construction.tex [5]
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 22.
-) (/home/piotrhelm/Desktop/LIC/coreset/latex/lightweight/analysis.tex
-Overfull \hbox (1.12845pt too wide) in paragraph at lines 35--1
-\T1/cmr/m/n/10 ka»dy punkt jest wy-lo-so-wany z nie-ze-ro-wym praw-do-po-do-bie«-stwem. Drugi skªad-
+]) (/home/piotrhelm/Desktop/LIC/coreset/latex/lightweight/construction.tex
+Overfull \hbox (9.91699pt too wide) in paragraph at lines 3--6
+[]\T1/cmr/m/n/10 Opisana w tym pod-roz-dziale kon-struk-cja oparta jest na prób-ko-wa-niu z uwzgl¦d-
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 17--22
-
- []
-
-[6]
-Missing character: There is no d in font msbm7!
+[5]
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 20.
+) (/home/piotrhelm/Desktop/LIC/coreset/latex/lightweight/analysis.tex [6]
 Missing character: There is no d in font msbm7!
  [7]
 Missing character: There is no d in font msbm7!
@@ -1210,7 +1204,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 158--172
 
  []
 
-[14] <grid.png, id=219, 819.06pt x 507.8975pt>
+[14] <grid.png, id=231, 819.06pt x 507.8975pt>
 File: grid.png Graphic file (type png)
  <use grid.png>
 Package pdftex.def Info: grid.png used on input line 184.
@@ -1220,19 +1214,64 @@ Underfull \hbox (badness 10000) in paragraph at lines 175--186
 
  []
 
-[15 </home/piotrhelm/Desktop/LIC/coreset/latex/grid.png>]) (/home/piotrhelm/Desktop/LIC/coreset/latex/geometric/swap.tex) (/home/piotrhelm/Desktop/LIC/coreset/latex/geometric/decomposition.tex)) (/home/piotrhelm/Desktop/LIC/coreset/latex/06analysis.tex [16]
+[15 </home/piotrhelm/Desktop/LIC/coreset/latex/grid.png>]) (/home/piotrhelm/Desktop/LIC/coreset/latex/geometric/swap.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--18
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3--18
+
+ []
+
+[16] <swap.png, id=256, 813.0375pt x 621.32124pt>
+File: swap.png Graphic file (type png)
+ <use swap.png>
+Package pdftex.def Info: swap.png used on input line 71.
+(pdftex.def)             Requested size: 297.85414pt x 227.62204pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 74--89
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 74--89
+
+ []
+
+[17 </home/piotrhelm/Desktop/LIC/coreset/latex/swap.png>] [18] [19]) (/home/piotrhelm/Desktop/LIC/coreset/latex/geometric/decomposition.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--16
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3--16
+
+ []
+
+[20]
+Overfull \hbox (14.1589pt too wide) in paragraph at lines 50--54
+\T1/cmr/m/n/10 Dla punk-tów ze zbioru $\OML/cmm/m/it/10 A[]$\T1/cmr/m/n/10 , roz-pa-trzmy punkt $\OML/cmm/m/it/10 x \OMS/cmsy/m/n/10 2 \OML/cmm/m/it/10 B[] \OMS/cmsy/m/n/10 n \OML/cmm/m/it/10 B[]$ \T1/cmr/m/n/10 dla $\OML/cmm/m/it/10 i \OMS/cmsy/m/n/10 2 f\OT1/cmr/m/n/10 1\OML/cmm/m/it/10 ; :::; [] \OT1/cmr/m/n/10 10\OML/cmm/m/it/10 n\OMS/cmsy/m/n/10 g$\T1/cmr/m/n/10 .
+ []
+
+[21]
+Underfull \hbox (badness 10000) in paragraph at lines 90--95
+
+ []
+
+)) (/home/piotrhelm/Desktop/LIC/coreset/latex/06analysis.tex [22]
 Rozdzia\l  5.
-) (/home/piotrhelm/Desktop/LIC/coreset/latex/main.bbl [17
+) (/home/piotrhelm/Desktop/LIC/coreset/latex/main.bbl [23
 
 ]
 Rozdzia\l  6.
-) [18
+[24
 
-] (/home/piotrhelm/Desktop/LIC/coreset/latex/main.toc)
+]) [25] (/home/piotrhelm/Desktop/LIC/coreset/latex/main.toc)
 \tf@toc=\write6
 \openout6 = `main.toc'.
 
- [19
+ [26
 
 ]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 74.
@@ -1245,18 +1284,18 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 74.
  ) 
 Here is how much of TeX's memory you used:
- 23935 strings out of 493029
- 419180 string characters out of 6136234
- 465097 words of memory out of 5000000
- 26948 multiletter control sequences out of 15000+600000
+ 23970 strings out of 493029
+ 419579 string characters out of 6136234
+ 465269 words of memory out of 5000000
+ 26957 multiletter control sequences out of 15000+600000
  23829 words of font info for 63 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,7n,65p,464b,428s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx0900.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0900.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfxc1440.pfb>
-Output written on /home/piotrhelm/Desktop/LIC/coreset/latex/main.pdf (21 pages, 463701 bytes).
+ 55i,8n,65p,464b,504s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx0900.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0700.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0900.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfxc1440.pfb>
+Output written on /home/piotrhelm/Desktop/LIC/coreset/latex/main.pdf (28 pages, 558319 bytes).
 PDF statistics:
- 379 PDF objects out of 1000 (max. 8388607)
- 322 compressed objects within 4 object streams
- 66 named destinations out of 1000 (max. 500000)
- 162 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 455 PDF objects out of 1000 (max. 8388607)
+ 389 compressed objects within 4 object streams
+ 92 named destinations out of 1000 (max. 500000)
+ 167 words of extra memory for PDF output out of 10000 (max. 10000000)
 
