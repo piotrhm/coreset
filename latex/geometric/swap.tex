@@ -3,7 +3,7 @@
 W tym podrozdziale opiszemy heurystykę single swap \cite{Arya2004LocalSH}, która jest przykładem techinki \textit{local search}.
 Algorytm przedstawi konstrukcję $(25 + \epsilon)$ aproksymacji dla problemu K-means, która zakłada, że na wejścu dostajemy zbiór kandydatów na centra $C$ oraz zbiór $n$ punktów $P \subset \mathbb{R}^d$.
 Autorzy powołują się na pracę \cite{Matousek99onapproximate}, którą zastąpimy pracą \cite{10.1145/1007352.1007400} z uwagi na lepsze gwarancje teoretyczne.
-Korzystając z podrozdziału 4.2 w którym przedstawiam \cite{10.1145/1007352.1007400}, obliczamy zbiór $C$.
+Korzystając z podrozdziału 4.2 w którym przedstawiliśmy \cite{10.1145/1007352.1007400}, obliczamy zbiór $C$.
 \\~\\
 Heurystyka \textit{single swap} działa poprzez wybranie początkowego zestawu $k$ centrów $S$ z ze zbioru kandydatów na centra $C$, a następnie wielokrotnej
 próbie ulepszenia rozwiązania poprzez usunięcie jednego środka $s \in S$ i zastąpienie go innym centerm $s^{'} \in C - S$.
@@ -24,6 +24,16 @@ Taki zbiór centrów nazwiemy \textit{1-stable}.
 \end{definition}
 
 \noindent
+Dodatkowo wprowadźmy notację:
+\begin{equation}
+    \Delta(S) = \Delta_{P}(S) = \sum_{q \in P} \Delta(q,s_{q}) = \sum_{q \in P} d(q, s_{q})^{2}
+\end{equation}
+gdzie $s_{q}$ to najbliższy punkt dla $q$ w $S$ oraz $P \subset \mathbb{R}^{d}$.
+
+\begin{definition}
+    Niech $N_{S}(s)$ oznacza sąsiedzctwo punktu $s$, czyli zbiór punktów z $P$ dla których punkt $s$ jest najbliżej spośród punktów z $S$.
+\end{definition}
+
 W ramach tego podrozdziału udowodnimy następujące twierdzenie.
 
 \begin{thm}
@@ -66,11 +76,7 @@ Heurystyczne centrum nazwiemy \textit{samotnym} jeżeli nie jest schwytane przez
 
 \begin{proof}
     Dowód twierdzenia zaczniemy od zdefniowania podziału $S$ oraz $C_{opt}$ na zbiory $S_{1}, \dots, S_{r}$ oraz $O_{1}, \dots, O_{r}$ dla pewnego $r$, gdzie $|S_{i}| = |O_{i}|$ dla $i = 1, \dots, r$.
-    \begin{figure}[H]
-        \centering
-        \includegraphics[totalheight=8cm]{swap.png}
-        \caption{}
-    \end{figure}
+    \\~\\
     Dla każdego heurystycznego centrum $s_{i}$, które schywało jakąś liczbę $m \geq 1$ optymalnych centr, tworzymy zbior $S_{i}$, który będzie zawierał $s_{i}$ oraz dowolne $m-1$ osamotnionych heurystycznych centr.
     Analogicznie, zbior $O_{i}$ będzie zawierał wszystkie optymalne centra schwytane przez $s_{i}$.
     Rysunek 4.2 obrazuje tak zdefiniowany podział.
@@ -82,16 +88,20 @@ Heurystyczne centrum nazwiemy \textit{samotnym} jeżeli nie jest schwytane przez
     Każde optymalne centrum jest związane z jednym heurystycznym oraz każde osamotnione centrum jest przyporządkowane co najwyżej dwóm optymalnym centrom.
     Centra łaczymy dowolnie. 
     Rysunek 4.2 przedstawia przykładowe swap pary.
-    \\~\\
-    Teraz chcielibyśmy znaleźć ograniczenie górne na zmianię funkcji $\Delta$ po skorzystaniu ze swap pary $(s_{i}, o_{i})$.
-    Zaczniemy od obliczenia najbliższych centr z $S - \{s_{i}\} \cup \{o_{i}\}$ dla punktów z $P$.
-    Dla punktów $p \in P$, które należą do $N_{O}(o_{i})$ zmiana $\Delta$ będzie następująca:
+    \begin{figure}[H]
+        \centering
+        \includegraphics[totalheight=8cm]{swap.png}
+        \caption{}
+    \end{figure}
+    Teraz chcielibyśmy znaleźć ograniczenie górne na zmianię funkcji $\Delta$ po skorzystaniu ze swap pary $(s, o)$.
+    Zaczniemy od obliczenia najbliższych centr z $S - \{s\} \cup \{o\}$ dla punktów z $P$.
+    Dla punktów $p \in P$, które należą do $N_{O}(o)$ zmiana $\Delta$ będzie następująca:
     \begin{equation}
-        \sum_{q \in N_{O}(o_{i})} (\Delta(q, o_{i}) - \Delta(q, s_{q}))
+        \sum_{q \in N_{O}(o)} (\Delta(q, o) - \Delta(q, s_{q}))
     \end{equation}
-    Każde $q \in N_{S}(s_{i}) \setminus N_{O}(o_{i})$ straciło przypisane mu centrum $s_{i}$ zatem punkt $q$ musi otrzymać nowe centrum.
+    Każde $q \in N_{S}(s) \setminus N_{O}(o)$ straciło przypisane mu centrum $s$ zatem punkt $q$ musi otrzymać nowe centrum.
     Niech $o_{q}$ będzie oznaczało najbliższe centrum dla punktu $q$.
-    Skoro $q \notin N_{O}(o_{i})$ to $o_{q} \neq o_{i}$, zatem $s_{i}$ nie schwytało $o_{q}$.
+    Skoro $q \notin N_{O}(o)$ to $o_{q} \neq o$, zatem $s$ nie schwytało $o_{q}$.
     A więc po skorzystaniu ze swap pary, $s_{o_{q}}$, najbliższe heurystyczne centrum dla $o_{q}$ nadal istnieje.
     Zmiana $\Delta$ po wyborze nowych centr jest co najwyżej równa:
     \begin{equation}
@@ -110,10 +120,10 @@ Heurystyczne centrum nazwiemy \textit{samotnym} jeżeli nie jest schwytane przez
     \begin{proof}
         Ponieważ $S$ jest 1-stable to:
         \begin{equation}
-           0 \leq \Delta(S) -  \Delta(S - \{s_{i}\} \cup \{o_{i}\})
+           0 \leq \Delta(S) -  \Delta(S - \{s\} \cup \{o\})
         \end{equation}
         \begin{equation}
-            = \sum_{q \in N_{O}(o_{i})} (\Delta(q, o_{i}) - \Delta(q, s_{q})) + \sum_{q \in N_{S}(s_{i}) \setminus N_{O}(o_{i})} (\Delta(q, s_{o_{q}}) - \Delta(q, s))
+            = \sum_{q \in N_{O}(o)} (\Delta(q, o) - \Delta(q, s_{q})) + \sum_{q \in N_{S}(s) \setminus N_{O}(o)} (\Delta(q, s_{o_{q}}) - \Delta(q, s))
         \end{equation}
         Aby rozszerzyć sumę na wszystkie możliwe swap pary zauważamy, że dla każdego optymalnego centrum, jest ono swapnięte tylko raz.
         Zatem każdy punkt $q$ kontrybuuje w pierwszej sumie tylko raz.

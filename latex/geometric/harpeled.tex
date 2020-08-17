@@ -1,6 +1,6 @@
 \section{Konstrukcja kraty wykładniczej}
 
-W tym podrozdziale omówię część pracy \cite{10.1145/1007352.1007400}.
+W tym podrozdziale omówimy część pracy \cite{10.1145/1007352.1007400}.
 Tematem pracy są konstrukcje algorytmów dla problemów K-means oraz K-median.
 W kontekście problemu K-means autorzy zaproponowali algorytm bazujący na budowaniu coresetu, który uzyskuje lepszą złożoność od \cite{Matousek99onapproximate}.
 Schemat konstrukcji jest następujący:
@@ -13,9 +13,9 @@ Schemat konstrukcji jest następujący:
 \subsection{Szybka aproksymacja dla problemu K-means.}
 \noindent
 Zacznijmy od pierwszej części.
-Dokładniej udowodnię następujące twierdzenie dla konstrukcji którą opiszę.
+Dokładniej udowodnimy następujące twierdzenie.
 
-\begin{thm}
+\begin{thm}{\cite{10.1145/1007352.1007400}}
     Dla danego zbioru $n$ punktów $X \subset \mathbb{R}^d$ oraz parametru $k \in \mathbb{N}^{+}$ możemy 
     obliczyć zbiór $P$ o mocy $O(k \log^{3}n)$ dla którego 
     \begin{equation}
@@ -40,7 +40,7 @@ Będziemy chcieli szybko obliczyć aproksymację dla problemu K-means na tym zbi
 \end{definition}
 
 \noindent
-Na początku opiszę procedurę która dla danego $P$, wyznacza zbiór centrów $X$ oraz zbiór $P^{'} \subset P$.
+Na początku opiszemy procedurę która dla danego $P$, wyznacza zbiór centrów $X$ oraz zbiór $P^{'} \subset P$.
 Zbiór $P^{'}$ będzie zwierać \textit{dobre} punkty dla zbioru $X$.
 \\~\\
 Konstrukcję zbioru $X$ zaczynamy od obliczenia 2-aproksymacji problemu k-centrów dla zbioru $P$.
@@ -54,7 +54,7 @@ To implikuje następujące ograniczenia:
 \end{equation} 
 \\~\\
 Następnym krokiem będzie wylosowanie $\rho = \gamma k \log^{2} n$ punktów ze zbioru $P$.
-Niech wylosowane punkty to $Y$ oraz $\gamma$ to stała, która wynika z analizy, którą zaraz przeprowadzimy.
+Niech wylosowane punkty to $Y$, gdzie $\gamma$ to stała, która wynika z analizy, którą zaraz przeprowadzimy.
 Finalnie, $X = Y \cup V$ będzie zbiorem centrów klastów.
 Dla $\rho > n$ przyjmujemy $X = P$.
 \\~\\
@@ -65,7 +65,7 @@ Dużo cięższym zadaniem jest zbudowanie zbioru $P^{'}$, który jest zbiorem \t
 
 Rozpatrzmy zbiór $C_{opt}$, który jest optymalnym zbiorem centrów dla problemu K-means w kontekście $P$.
 Dla każdego $c_{i} \in C_{opt}$ tworzymy kulę $b_{i}$ o środku w $c_{i}$.
-Każda taka kula będzie zawierać $\eta = \frac{n}{20kk \log n}$ punktów z $P$.
+Każda taka kula będzie zawierać $\eta = \frac{n}{20k \log n}$ punktów z $P$.
 Jeżeli $\gamma$ jest odpowiednio duże to z wysokim prawdopodobieństwem w każdym $b_{i}$ jest przynajmniej jeden punkt z $X$.
 Dokładniej:
 \begin{equation}
