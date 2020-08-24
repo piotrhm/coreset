@@ -1,22 +1,22 @@
 \section{Heurystyka single swap}
 
 W tym podrozdziale opiszemy heurystykę single swap \cite{Arya2004LocalSH}, która jest przykładem techinki \textit{local search}.
-Algorytm przedstawi konstrukcję $(25 + \epsilon)$ aproksymacji dla problemu K-means, która zakłada, że na wejścu dostajemy zbiór kandydatów na centra $C$ oraz zbiór $n$ punktów $P \subset \mathbb{R}^d$.
+Algorytm przedstawi konstrukcję $(25 + \epsilon)$ aproksymacji dla problemu K-means, która zakłada, że na wejściu dostajemy zbiór kandydatów na centra $C$ oraz zbiór $n$ punktów $P \subset \mathbb{R}^d$.
 Autorzy powołują się na pracę \cite{Matousek99onapproximate}, którą zastąpimy pracą \cite{10.1145/1007352.1007400} z uwagi na lepsze gwarancje teoretyczne.
-Korzystając z podrozdziału 4.2 w którym przedstawiliśmy \cite{10.1145/1007352.1007400}, obliczamy zbiór $C$.
+Korzystając z podrozdziału 4.2, w którym przedstawiliśmy \cite{10.1145/1007352.1007400}, obliczamy zbiór $C$.
 \\~\\
-Heurystyka \textit{single swap} działa poprzez wybranie początkowego zestawu $k$ centrów $S$ z ze zbioru kandydatów na centra $C$, a następnie wielokrotnej
+Heurystyka \textit{single swap} działa poprzez wybranie początkowego zestawu $k$ centrów $S$ ze zbioru kandydatów na centra $C$, a następnie wielokrotnej
 próbie ulepszenia rozwiązania poprzez usunięcie jednego środka $s \in S$ i zastąpienie go innym centerm $s^{'} \in C - S$.
 Niech $S^{'} = S - \{s\} \cup \{s^{'}\}$ będzie nowym zbiorem centrów.
 Jeżeli $\phi_{S^{'}}(C_{opt}) \leq \phi_{S}(C_{opt})$ to zastępujemy zbiór $S$ zbiorem $S^{'}$, w przeciwnym przypadku $S$ pozostaje bez zmian.
 W praktyce taki proces powtarzamy do momentu, kiedy $|\phi_{S^{'}}(C_{opt}) - \phi_{S}(C_{opt})| < \epsilon$.
 Formalnie możemy udowodnić, że dla $\epsilon > 0$, po wielomianiwej liczbie wykonań takiej procedury algorytm zakończy swoje działanie.
-Autorzy nie dowodzą tego wprosta ale powołują się na pracę \cite{10.1145/380752.380755}.
+Autorzy nie dowodzą tego wprost ale powołują się na pracę \cite{10.1145/380752.380755}.
 \\~\\
 Dla uproszczenia zakładamy, że algorytm kończy się kiedy pojedyńcza wymiana elementów $s$, $s^{'}$ nie poprawia wyniku.
 Taki zbiór centrów nazwiemy \textit{1-stable}.
 \begin{definition}
-    Zbiór nazywamy \emph{1-stable} jeżeli:
+    Zbiór nazywamy \emph{1-stable}, jeżeli:
     \begin{equation}
         \Delta(S - \{s\} \cup \{c\}) \leq \Delta(S)
     \end{equation}
@@ -31,12 +31,12 @@ Dodatkowo wprowadźmy notację:
 gdzie $s_{q}$ to najbliższy punkt dla $q$ w $S$ oraz $P \subset \mathbb{R}^{d}$.
 
 \begin{definition}
-    Niech $N_{S}(s)$ oznacza sąsiedzctwo punktu $s$, czyli zbiór punktów z $P$ dla których punkt $s$ jest najbliżej spośród punktów z $S$.
+    Niech $N_{S}(s)$ oznacza sąsiedzctwo punktu $s$, czyli zbiór punktów z $P$, dla których punkt $s$ jest najbliżej spośród punktów z $S$.
 \end{definition}
 
 W ramach tego podrozdziału udowodnimy następujące twierdzenie.
 
-\begin{thm}
+\begin{thm}{\cite{10.1145/1007352.1007400}}
     Niech $S$ będzie zbiorem $k$ centrów spełniającym własność 1-stable oraz niech $C_{opt}$ będzie optymalnym zbiorem $k$ centrów.
     Wtedy zachodzi następującą nierówność:
     \begin{equation}
@@ -44,7 +44,7 @@ W ramach tego podrozdziału udowodnimy następujące twierdzenie.
     \end{equation} 
 \end{thm}
 
-\begin{lemma}
+\begin{lemma}{\cite{10.1145/1007352.1007400}}
     Dla danego skończonego podzbioru $S$ punktów z $\mathbb{R}^d$, niech $c$ będzie centroidem dla $S$. Wtedy dla dowolnego $c^{'} \in \mathbb{R}^d$, $\Delta(S, c^{'}) = \Delta(S, c) + |S|\Delta(c, c^{'})$.
 \end{lemma}
 \begin{proof}
@@ -64,7 +64,7 @@ W ramach tego podrozdziału udowodnimy następujące twierdzenie.
     \begin{equation}
         = \Delta(S, c) + |S|\Delta(c,c^{'})
     \end{equation}
-    Ostanie przejście korzysta z faktu, że jeżeli $c$ jest centroidem $S$ to zachodzi $\sum_{u \in S} (u - c) = 0$
+    Ostanie przejście korzysta z faktu, że jeżeli $c$ jest centroidem $S$ to z definicji zachodzi $\sum_{u \in S} (u - c) = 0$.
 \end{proof}
 
 %\epsilon
@@ -77,14 +77,14 @@ Heurystyczne centrum nazwiemy \textit{samotnym} jeżeli nie jest schwytane przez
 \begin{proof}
     Dowód twierdzenia zaczniemy od zdefniowania podziału $S$ oraz $C_{opt}$ na zbiory $S_{1}, \dots, S_{r}$ oraz $O_{1}, \dots, O_{r}$ dla pewnego $r$, gdzie $|S_{i}| = |O_{i}|$ dla $i = 1, \dots, r$.
     \\~\\
-    Dla każdego heurystycznego centrum $s_{i}$, które schywało jakąś liczbę $m \geq 1$ optymalnych centr, tworzymy zbior $S_{i}$, który będzie zawierał $s_{i}$ oraz dowolne $m-1$ osamotnionych heurystycznych centr.
+    Dla każdego heurystycznego centrum $s_{i}$, które schywało jakąś liczbę $m \geq 1$ optymalnych centrów, tworzymy zbior $S_{i}$, który będzie zawierał $s_{i}$ oraz dowolne $m-1$ osamotnionych heurystycznych centrów.
     Analogicznie, zbior $O_{i}$ będzie zawierał wszystkie optymalne centra schwytane przez $s_{i}$.
     Rysunek 4.2 obrazuje tak zdefiniowany podział.
     \\~\\
     \noindent
     Następnie będziemy chcieli zdefiniować \textit{swap pary}.
     Dla każdego podziału $|S_{i}| = |O_{i}| = 1$, tworzymy z nich parę.
-    Dla każdego podziału, który zawiera więcej schwytanych centr, czyli $|S_{i}|, |O_{i}| \geq 1$, tworzymy pary między osamotnionymi heurystycznymi centrami a optymalnymi centrami.
+    Dla każdego podziału, który zawiera więcej schwytanych centrów, czyli $|S_{i}|, |O_{i}| \geq 1$, tworzymy pary między osamotnionymi heurystycznymi centrami a optymalnymi centrami.
     Każde optymalne centrum jest związane z jednym heurystycznym oraz każde osamotnione centrum jest przyporządkowane co najwyżej dwóm optymalnym centrom.
     Centra łaczymy dowolnie. 
     Rysunek 4.2 przedstawia przykładowe swap pary.
@@ -94,7 +94,7 @@ Heurystyczne centrum nazwiemy \textit{samotnym} jeżeli nie jest schwytane przez
         \caption{}
     \end{figure}
     Teraz chcielibyśmy znaleźć ograniczenie górne na zmianię funkcji $\Delta$ po skorzystaniu ze swap pary $(s, o)$.
-    Zaczniemy od obliczenia najbliższych centr z $S - \{s\} \cup \{o\}$ dla punktów z $P$.
+    Zaczniemy od obliczenia najbliższych centrów z $S - \{s\} \cup \{o\}$ dla punktów z $P$.
     Dla punktów $p \in P$, które należą do $N_{O}(o)$ zmiana $\Delta$ będzie następująca:
     \begin{equation}
         \sum_{q \in N_{O}(o)} (\Delta(q, o) - \Delta(q, s_{q}))
@@ -103,13 +103,13 @@ Heurystyczne centrum nazwiemy \textit{samotnym} jeżeli nie jest schwytane przez
     Niech $o_{q}$ będzie oznaczało najbliższe centrum dla punktu $q$.
     Skoro $q \notin N_{O}(o)$ to $o_{q} \neq o$, zatem $s$ nie schwytało $o_{q}$.
     A więc po skorzystaniu ze swap pary, $s_{o_{q}}$, najbliższe heurystyczne centrum dla $o_{q}$ nadal istnieje.
-    Zmiana $\Delta$ po wyborze nowych centr jest co najwyżej równa:
+    Zmiana $\Delta$ po wyborze nowych centrów jest co najwyżej równa:
     \begin{equation}
         \sum_{q \in N_{S}(s_{i}) \setminus N_{O}(o_{i})} (\Delta(q, s_{o_{q}}) - \Delta(q, s))
     \end{equation}
     Na tym etapie dowodu koniecznie będzie wprowadzenie dwóch lematów.
     
-    \begin{lemma}
+    \begin{lemma}{\cite{10.1145/1007352.1007400}}
         Niech $S$ będzie zbiorem $k$ centrów spełniającym własność 1-stable oraz niech $C_{opt}$ będzie optymalnym zbiorem $k$ centrów.
         Wtedy zachodzi następującą nierówność:
         \begin{equation}
@@ -170,8 +170,8 @@ Heurystyczne centrum nazwiemy \textit{samotnym} jeżeli nie jest schwytane przez
     \begin{equation}
         = 2\Delta(O) + \Delta(S) + 2\sum_{q \in P} d(o_{q}, q)d(q, s_{q})
     \end{equation}
-    \begin{lemma}
-        Niech $\langle o_{i} \rangle$ oraz $\langle s_{i} \rangle$ będą ciągami liczb rzeczywistych dla których zachodzi:
+    \begin{lemma}{\cite{10.1145/1007352.1007400}}
+        Niech $\langle o_{i} \rangle$ oraz $\langle s_{i} \rangle$ będą ciągami liczb rzeczywistych, dla których zachodzi:
         \begin{equation}
             \alpha^2 = \frac{\sum_{i} s_{i}^{2}}{\sum_{i} o_{i}^{2}}
         \end{equation}
@@ -231,5 +231,5 @@ Heurystyczne centrum nazwiemy \textit{samotnym} jeżeli nie jest schwytane przez
     \begin{equation}
         0 \geq (\alpha - 5)(\alpha + 1)
     \end{equation}
-    To implikuje, że $\alpha \leq 5$, więc wcześniej zdefiniowany bład aproksymacji możemy ograniczyć $\alpha^{2} \leq 25$, co kończy dowód twierdzenia 4.2.
+    To implikuje, że $\alpha \leq 5$, więc wcześniej zdefiniowany błąd aproksymacji możemy ograniczyć przez $\alpha^{2} \leq 25$, co kończy dowód twierdzenia 4.2.
 \end{proof}

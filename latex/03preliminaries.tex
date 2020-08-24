@@ -3,72 +3,79 @@
 W tej pracy przyjmujemy, że działamy w przestrzeni euklidesowej w skończonym wymiarze $d > 0$.
 
 \begin{definition}
-    \emph{Norma typu $l_{2}$} dla $x \in \mathbb{R}^d$ to:
+    Niech $x = (x_{1}, \dots, x_{d}) \in \mathbb{R}^{d}$.
+    \emph{Normą typu $l_{2}$} nazywamy odwzorowanie $\| \cdot \|: \mathbb{R}^{d} \rightarrow \mathbb{R}$ określone wzorem:
     \begin{equation}
-        ||x||_{2} = ||x|| = \sqrt{ \sum_{i = 1}^{d} x_{i}^{2} }
+        \|x\|_{2} = \|x\| = \sqrt{ \sum_{i = 1}^{d} x_{i}^{2} }
     \end{equation}
 \end{definition}
 
 \noindent
 Załóżmy, że mamy dany konkretny problem optymalizacyjny. 
-Niech $F(x)$ oznacza zbiór dopuszczalnych rozwiązań tego problemu dla danych wejściowych $x$. 
-Niech $c(y) \leq 0$ gdzie $ y\in F(x)$ będzie funkcją kosztu rozwiązania dla tego problemu.
-Oznaczmy przez $c_{opt}(x)$ koszt rozwiązania optymalnego dla danych $x$.
 
 \begin{definition}
-    \emph{$\epsilon$-aproksymacja.} 
-    Algorytm A nazywamy $\epsilon$-aproksymacyjnym, jeżeli dla dowolnych poprawnych danych wejściowych $x$, $A(x) \in F(x)$ oraz:
+    \emph{$\alpha$-aproksymacją} dla problemu optymalizującego nazwiemy wielomianowy algorytm, który dla każdej instancji problemu minimalizacyjnego oblicza rozwiązanie, którego wartość spełnia: 
     \begin{equation}
-        \frac{|c(A(x)) - C_{opt}(x) |}{ \max\{c(A(x)),C_{opt}(x) \} } \leq \epsilon
+        A \leq \alpha \cdot OPT
     \end{equation}
-    gdzie $\epsilon \in [0,1]$ nazywamy \textit{błędem aproksymacji}.
+    gdzie $A$ jest wartością obliczonego rozwiązania, a $OPT$ jest wartością optymalnego rozwiązania.
+    Zmienną $\alpha$ nazywamy \textit{współczynnikiem aproksymacji}.
+    Analogicznie możemy zdefiniować  \emph{$\alpha$-aproksymacja} dla instancji problemu maksymalizacyjnego, gdzie wartość $A$ obliczonego rozwiązania spełnia:
+    \begin{equation}
+        A \geq \frac{1}{\alpha} \cdot OPT
+    \end{equation}
 \end{definition}
 
 \begin{definition}
-    \emph{Centroid} dla skończonego zbioru punktów $x_{1}, \dots, x_{k} \in \mathbb{R}^{d}$ to:
+    \emph{Centroidem} dla skończonego zbioru punktów $x_{1}, \dots, x_{k} \in \mathbb{R}^{d}$ nazywamy:
     \begin{equation}
         C = \frac{x_{1} + \dots + x_{k}}{k}
     \end{equation}
-    gdzie punkt $C$ minimalizuje sumę kwardatów odległości pomiedzy nim samym a punktami $x_{1}, \dots, x_{k}$.
-\end{definition}
-
-\noindent
-Często utożamaiamy centroid z punktami dla których jest on centroidem.
-W takiej sytuacji użyjemy stwierdzenia \textit{środek centroidu} do nazwania zdefiniowanego w 2.3 faktycznego centroidu.
-
-\begin{definition}
-    \emph{Klaster} to skończony zbioru punktów $x_{1}, \dots, x_{k} \in \mathbb{R}^{d}$, które łaczy wspólna cech.
-    W naszym kontekście wspólną cechą bedzie przyporządkowanie do tego samego centroidu.
 \end{definition}
 
 \section{K-means}
 
-Zacznijmy od zdefiniowania problemu dla którego będziemy analizować konstrukcje coresetów.
+Zacznijmy od zdefiniowania problemu, dla którego będziemy analizować konstrukcje coresetów.
 
 \begin{definition}
-    \emph{Problem K-means.} Niech $X$ to skończony zbiór punktów z $\mathbb{R}^{d}$. 
-    Dla danego $X$ chcemy znalźć zbiór $k \in \mathbb{N}$ punktów $Q \subset \mathbb{R}^{d}$, który minimalizuje funkcję $\phi_{X}(Q)$ zdefiniowaną następująco:
+    \emph{Problem k-means.} Niech $X$ będzie skończonym zbiórem punktów z $\mathbb{R}^{d}$. 
+    Dla danego $X$ chcemy znaleźć zbiór $k \in \mathbb{N}$ punktów $Q \subset \mathbb{R}^{d}$, który minimalizuje funkcję $\phi_{X}(Q)$ zdefiniowaną następująco:
     \begin{equation}
         \phi_{X}(Q) = \sum_{x \in X} d(x, Q)^{2} = \sum_{x \in X} \min_{q \in Q} || x - q ||^{2} 
     \end{equation}
 \end{definition}
 
 \noindent
-Definicja 2.2 zakłada, że działamy w przestrzeni euklidesowej.
+Definicja 2.4 zakłada, że działamy w przestrzeni euklidesowej.
 Uogólnioną wersję można zdefiniować analogicznie, zamieniając $d$ na odpowiednią funkcję miary w danej przestrzeni.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[totalheight=5cm]{cluster.png}
+    \caption{Przykład interpretacji problemu $k$-means. Czarne punkty to centroidy, które stanowią zbiór $Q$ optymalizujący funkcję $\phi$.}
+\end{figure}
+
+\noindent
+Problem $k$-means jest jednym w elementarnych problemów machine learningu.
+Używamy go m.in w data miningu, segmentacji obrazu czy klasyfikcji danych. 
+
 \begin{definition}
-    \emph{Problem K-means - wersja ważona.} Niech $C$ to skończony zbiór punktów z $\mathbb{R}^{d}$ oraz niech $w$ będzie funkcją $C \rightarrow \mathbb{R}_{\ge0}$. 
-    Dla danego $C$ oraz funkcji $w$ chcemy znaleźć zbiór $k \in \mathbb{N}$ punktów $Q$, który minimalizuje funkcję $\phi_{C}(Q)$ zdefiniowaną następująco:
+    \emph{Problem k-means - wersja ważona.} Niech $X_{w}$ będzie skończonym zbiórem punktów z $\mathbb{R}^{d}$ oraz niech $w$ będzie funkcją $w: X_{w} \rightarrow \mathbb{R}_{\ge0}$. 
+    Dla danego $X_{w}$ oraz funkcji $w$ chcemy znaleźć zbiór $k \in \mathbb{N}$ punktów $Q \subset \mathbb{R}^{d}$, który minimalizuje funkcję $\phi_{X_{w}}(Q)$ zdefiniowaną następująco:
     \begin{equation}
-        \phi_{C}(Q) = \sum_{c \in C} w(c) d(c, Q)^{2}
+        \phi_{X_{w}}(Q) = \sum_{x \in X_{w}} w(x) d(x, Q)^{2}
     \end{equation}
 \end{definition}
 
 \noindent
-Ewaluację funkcji $\phi$ dla optymalnego rozwiązania oznaczamy $\phi_{opt}^{k}(X)$ lub $OPT$.
-W pracy często będziemy korzystać ze stwierdzenia \textit{optymalne rozwiązanie}, które oznacza $k$ elementowy zbiór dla którego wartość funkcji $\phi$ jest zminimalizowana. 
+Wartość funkcji $\phi$ dla optymalnego rozwiązania oznaczamy $\phi_{opt}^{k}(X)$ lub $OPT$.
+W pracy często będziemy korzystać ze stwierdzenia \textit{optymalne rozwiązanie}, które oznacza $k$ elementowy zbiór $C_{opt}$, dla którego wartość funkcji $\phi$ jest zminimalizowana. 
 Funkcję $\phi$ w literaturze nazywamy błędem kwantyzacji.
+
+\begin{definition}
+    \emph{Klasterem} nazywamy skończony zbioru punktów $x_{1}, \dots, x_{k} \in \mathbb{R}^{d}$, które łączy pewna wspólna cecha.
+    W naszym kontekście wspólną cechą bedzie przyporządkowanie do tego samego centroidu.
+\end{definition}
 
 \section{Coreset}
 
@@ -76,8 +83,18 @@ To jak definujemy coreset ściśle zależy od problemu, który optymalizujemy.
 Zacznijmy od podstawowej definicji coresetu dla problemu K-means.
 
 \begin{definition}
-    \emph{Coreset.} Niech $X$ to skończony zbiór punktów z $\mathbb{R}^{d}$ oraz niech $Q$ to dowolny podzbiór $X$ rozmiaru co najwyżej $k$. 
-    Skończony zbiór $C \subset R^{d}$ nazywamy $(\epsilon, k)$ coresetem, gdzie $\epsilon \in (0, 1)$, jeżeli zachodzi:
+    \emph{$(\epsilon, k)$-aproksymacja zbioru centroidów.} 
+    Niech $X$ będzie skończonym zbiórem punktów z $\mathbb{R}^{d}$.
+    Skończony zbiór $A \subset \mathbb{R}^{d}$ nazywamy $(\epsilon, k)$-aproksymacją zbioru centroidów, gdzie $\epsilon \in (0, 1)$ oraz $k \in \mathbb{N}$, jeżeli istnieje $k$ elementowy podzbiór $C \subseteq A$, dla którego zachodzi:
+    \begin{equation}
+        |\phi_{X}(C_{opt}) - \phi_{X}(C)| \leq \epsilon\phi_{X}(C_{opt})
+    \end{equation}
+    gdzie $C_{opt}$ optymalizuje wartość funkcji $\phi$.
+\end{definition}
+
+\begin{definition}
+    \emph{Coreset.} Niech $X$ będzie skończonym zbiórem punktów z $\mathbb{R}^{d}$ oraz niech $Q \subset \mathbb{R}^{d}$ będzie dowolnym zbiorem rozmiaru co najwyżej $k \in \mathbb{N}$. 
+    Skończony zbiór $C \subset \mathbb{R}^{d}$ nazywamy $(\epsilon, k)$ coresetem, gdzie $\epsilon \in (0, 1)$, jeżeli zachodzi:
     \begin{equation}
         |\phi_{X}(Q) - \phi_{C}(Q)| \leq \epsilon\phi_{X}(Q)
     \end{equation}
@@ -85,15 +102,24 @@ Zacznijmy od podstawowej definicji coresetu dla problemu K-means.
 
 \noindent
 Zauważmy, że taka definicja daje nam bardzo moce gwarancje teoretyczne.
-Wartość funkcji $\phi_{C}(Q)$ aproksymuje $\phi_{X}(Q)$ z błędem $(1+\epsilon)$ dla dowolnego zbioru $k$ kandydatów na rozwiązanie $Q$.
+Wartość funkcji $\phi_{C}(Q)$ aproksymuje $\phi_{X}(Q)$ ze współczynnikiem aproksymacji równym $(1+\epsilon)$ dla dowolnego zbioru $k$ kandydatów $Q$ na rozwiązanie problemu $k$-means.
 Jest to na tyle istotne, że w literaturze odróżnimy taką wersję nazywając ją \textit{strong coresetem}.
+Definicja 2.8 jest wariantem ciągłym, czyli punkty należące do coresetu są dowolnymi punktami przestrzeni, w szczególności nie muszą należeć do zbioru $X$.
+W praktyce stosuje się wariant dyskretny, który zakłada, że $C \subseteq X$.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[totalheight=7cm]{coreset.png}
+    \caption{Pomarańczowe punkty tworzą coreset dla zbioru niebieskich punktów. 
+    Parametry: $k=15$, $\epsilon = 0.1$, $n = 15000$.}
+\end{figure}
 
 \begin{definition}
-    \emph{Coreset - weak.} Niech $X$ to zbiór punktów z $\mathbb{R}^{d}$ oraz $\epsilon \in (0, 1)$.
-    Słabym coresetem nazywamy skończony zbiór $C \subset \mathbb{R}^d$ dla którego zachodzi:
+    \emph{Coreset - weak (w wariancie dyskretnym).} Niech $X$ będzie skończonym zbiorem punktów z $\mathbb{R}^{d}$.
+    Niech $C \subseteq X$ oraz $A$ jest $(\epsilon, k)$-aproksymacją zbioru centroidów dla zbioru $X$, gdzie $\epsilon \in (0, 1)$.
+    Jeżeli, dla każdego $k \in \mathbb{N}$ elementowego podzbióru $Q \subseteq A$ zachodzi:
     \begin{equation}
         |\phi_{X}(Q) - \phi_{C}(Q)| \leq \epsilon\phi_{X}(Q)
     \end{equation}
+    to parę $(C, A)$ nazwiemy słabym coresetem.
 \end{definition}
-
-%dyskretna/ciągła 

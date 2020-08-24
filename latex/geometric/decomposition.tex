@@ -4,14 +4,14 @@ W tej części przedstawimy algorytm budowania coresetu z \cite{DBLP:journals/ki
 Na początku obliczmy $10$-aproksymację dla problemu K-means korzystając z pracy \cite{Arya2004LocalSH}.
 W części 4.3 opisaliśmy konstrukcję, której użyjemy w implementacji.
 Ma ona trochę większy błąd aproksymacji ale jak sami autorzy \cite{DBLP:journals/ki/MunteanuS18} stwierdzają w swojej pracy, nie ma to dużego znaczenia w kontekście całości.
-Dowolna aproksymacja o stałym błedzie może zostać użyta w tej metodzie.
+Dowolna aproksymacja o stałym błędzie może zostać użyta w tej metodzie.
 Na potrzeby analizy zakładamy, że obliczamy $10$-aproksymację $C^{'}$ oraz dany na wejściu zbiór punktów $A \subset \mathbb{R}^d$ należy do przestrzeni Euklidesowej.
 \\~\\
 Geometryczna dekompozycja bazuje na dyskretyzacji punktów z $A$, czyli na zgrupowaniu ze sobą najbliższych punktów, a następnie zbudowaniu ważonego zbioru punktów $S$ o zredukowanym rozmaiarze.
 Taką techinkę mogliśmy już zobaczyć w części 4.2, gdzie odpowiednio grupowaliśmy punkty w komórki kraty wykładniczej.
 \\~\\
 Praca \cite{DBLP:journals/ki/MunteanuS18} przedstawia inną technikę, która bazuje na budowaniu kul o wykładniczo rosnącym promieniu wokół każdego punktu z $C^{'}$.
-Będziemy znaczynać od promieni równych $\frac{1}{n}OPT$ a kończyć na $10 OPT$, gdzie $OPT = \phi_{opt}^{k}(A)$.
+Będziemy znaczynać od promieni równych $\frac{1}{n}OPT$ a kończyć na $10 OPT$, gdzie $OPT = \phi_{opt}^{k}(A)$ oraz $n$ to moc zbioru $A$.
 Dla takich kul będziemy budować $\epsilon$-pokrycie kuli.
 
 \begin{lemma}{\cite{pisier_1989}}
@@ -27,6 +27,7 @@ Niestety ale nie istnieją efektywne metody budowania takich $\epsilon$-pokryć.
 My w analizie przyjmujemy, że  $|B| = \epsilon^{-O(d)}$.
 Jako referenrencję jak zbudować taką konstrukcję autorzy sugureują analizę pracy \cite{chazelle_2000}.
 Jest to problematyczne w kontekście implementacji jednak tą kwestię poruszymy w następnym rodziale.
+W pracy pod pojęciem \textit{kula} rozmumiemy sferę w przestrzeni o wymiarze $d$.
 \begin{lemma}{\cite{DBLP:journals/ki/MunteanuS18}}
     Niech $a$, $b$, $c$ będą punktami z przestrzeni euklidesowej.
     Wtedy dla dowolnego $\epsilon \in (0,1)$ zachodzi:

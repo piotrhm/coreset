@@ -30,11 +30,14 @@ def test_coreset():
     return cost
 
 
-cost = test_no_coreset()
-cost_cs = test_coreset()
+# cost = test_no_coreset()
+# cost_cs = test_coreset()
 
-print("cost no coreset ", cost)
-print("cost coreset ", cost_cs)
-print("coreset improvment: {:.1%} ".format(np.abs(cost-cost_cs)/cost))
+plt.scatter(data[:, 0], data[:, 1])
+plt.scatter(coreset[:, 0], coreset[:, 1])
 
-#plt.show()
+# print("cost no coreset ", cost)
+# print("cost coreset ", cost_cs)
+# print("coreset improvment: {:.1%} ".format(np.abs(cost-cost_cs)/cost))
+
+plt.show()

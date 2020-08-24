@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2019.3.16)  17 AUG 2020 02:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2019.3.16)  24 AUG 2020 22:28
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1045,28 +1045,28 @@ Document Style - pseudocode environments for use with the `algorithmicx' style
  (/home/piotrhelm/Desktop/LIC/coreset/latex/main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 62.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 62.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 71.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 71.
  (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 62.
-LaTeX Font Info:    ... okay on input line 62.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
@@ -1096,7 +1096,7 @@ Package grfext Info: Graphics extension search list:
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
 \AtBeginShipoutBox=\box44
-Package hyperref Info: Link coloring OFF on input line 62.
+Package hyperref Info: Link coloring OFF on input line 71.
  (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
  (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
@@ -1104,9 +1104,9 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count162
 )
-LaTeX Info: Redefining \ref on input line 62.
-LaTeX Info: Redefining \pageref on input line 62.
-LaTeX Info: Redefining \nameref on input line 62.
+LaTeX Info: Redefining \ref on input line 71.
+LaTeX Info: Redefining \pageref on input line 71.
+LaTeX Info: Redefining \nameref on input line 71.
  (/home/piotrhelm/Desktop/LIC/coreset/latex/main.out) (/home/piotrhelm/Desktop/LIC/coreset/latex/main.out)
 \@outlinefile=\write5
 \openout5 = `main.out'.
@@ -1125,96 +1125,115 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 <to be read again> 
                    \relax 
 l.8 \end{abstract}
-                   [1]) (/home/piotrhelm/Desktop/LIC/coreset/latex/02intro.tex
-Rozdzia\l  1.
-) (/home/piotrhelm/Desktop/LIC/coreset/latex/03preliminaries.texpdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
+                   [1]) (/home/piotrhelm/Desktop/LIC/coreset/latex/main.toc)
+\tf@toc=\write6
+\openout6 = `main.toc'.
+
+ (/home/piotrhelm/Desktop/LIC/coreset/latex/02intro.texpdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1 \chapter
-            {Notacja i niezbÄ™dne definicje}\label{preliminaries} [1
+l.1 ligh\chapter
+                {WstÄ™p} [1
 
 ]
+Rozdzia\l  1.
+) (/home/piotrhelm/Desktop/LIC/coreset/latex/03preliminaries.tex [2
+
+] [3]
 Rozdzia\l  2.
-[2
+[4
 
-]) (/home/piotrhelm/Desktop/LIC/coreset/latex/04lightweight.tex [3]
-Rozdzia\l  3.
-(/home/piotrhelm/Desktop/LIC/coreset/latex/lightweight/lightweight_coreset.tex [4
+] <cluster.png, id=155, 1028.84375pt x 907.39pt>
+File: cluster.png Graphic file (type png)
+ <use cluster.png>
+Package pdftex.def Info: cluster.png used on input line 54.
+(pdftex.def)             Requested size: 161.3059pt x 142.26378pt.
+ [5 </home/piotrhelm/Desktop/LIC/coreset/latex/cluster.png>] <coreset.png, id=169, 1350.7263pt x 738.5994pt>
+File: coreset.png Graphic file (type png)
+ <use coreset.png>
+Package pdftex.def Info: coreset.png used on input line 112.
+(pdftex.def)             Requested size: 364.22694pt x 199.16928pt.
 
-]) (/home/piotrhelm/Desktop/LIC/coreset/latex/lightweight/construction.tex
-Overfull \hbox (9.91699pt too wide) in paragraph at lines 3--6
-[]\T1/cmr/m/n/10 Opisana w tym pod-roz-dziale kon-struk-cja oparta jest na prób-ko-wa-niu z uwzgl¦d-
+Overfull \hbox (19.22694pt too wide) in paragraph at lines 112--114
+ [][] 
  []
 
-[5]
+) (/home/piotrhelm/Desktop/LIC/coreset/latex/04lightweight.tex [6 </home/piotrhelm/Desktop/LIC/coreset/latex/coreset.png>]
+Rozdzia\l  3.
+
+Underfull \hbox (badness 10000) in paragraph at lines 3--7
+
+ []
+
+(/home/piotrhelm/Desktop/LIC/coreset/latex/lightweight/lightweight_coreset.tex [7
+
+]) (/home/piotrhelm/Desktop/LIC/coreset/latex/lightweight/construction.tex [8]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 20.
-) (/home/piotrhelm/Desktop/LIC/coreset/latex/lightweight/analysis.tex [6]
+) (/home/piotrhelm/Desktop/LIC/coreset/latex/lightweight/analysis.tex [9]
 Missing character: There is no d in font msbm7!
- [7]
-Missing character: There is no d in font msbm7!
- [8])) (/home/piotrhelm/Desktop/LIC/coreset/latex/05geo.tex [9]
+ [10] [11])) (/home/piotrhelm/Desktop/LIC/coreset/latex/05geo.tex [12]
 Rozdzia\l  4.
 (/home/piotrhelm/Desktop/LIC/coreset/latex/geometric/gonzalez.tex
 Underfull \hbox (badness 10000) in paragraph at lines 3--8
 
  []
 
-[10
+[13
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 54--88
+Underfull \hbox (badness 10000) in paragraph at lines 54--89
 
  []
 
-) (/home/piotrhelm/Desktop/LIC/coreset/latex/geometric/harpeled.tex [11]
-Underfull \hbox (badness 10000) in paragraph at lines 42--52
+[14]) (/home/piotrhelm/Desktop/LIC/coreset/latex/geometric/harpeled.tex
+Underfull \hbox (badness 10000) in paragraph at lines 40--50
 
  []
 
-[12]
-Underfull \hbox (badness 10000) in paragraph at lines 54--63
+[15]
+Underfull \hbox (badness 10000) in paragraph at lines 52--61
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 54--63
+Underfull \hbox (badness 10000) in paragraph at lines 52--61
 
  []
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 64.
+(hyperref)                removing `math shift' on input line 62.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 64.
+(hyperref)                removing `math shift' on input line 62.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 75--90
+Underfull \hbox (badness 10000) in paragraph at lines 73--88
+
+ []
+
+[16]
+Underfull \hbox (badness 10000) in paragraph at lines 100--106
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 102--108
+Underfull \hbox (badness 10000) in paragraph at lines 156--170
 
  []
 
-[13]
-Underfull \hbox (badness 10000) in paragraph at lines 158--172
-
- []
-
-[14] <grid.png, id=232, 819.06pt x 507.8975pt>
+[17] <grid.png, id=279, 819.06pt x 507.8975pt>
 File: grid.png Graphic file (type png)
  <use grid.png>
-Package pdftex.def Info: grid.png used on input line 184.
+Package pdftex.def Info: grid.png used on input line 182.
 (pdftex.def)             Requested size: 183.53067pt x 113.81102pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 175--186
+Underfull \hbox (badness 10000) in paragraph at lines 173--184
 
  []
 
-[15 </home/piotrhelm/Desktop/LIC/coreset/latex/grid.png>]) (/home/piotrhelm/Desktop/LIC/coreset/latex/geometric/swap.tex
+[18 </home/piotrhelm/Desktop/LIC/coreset/latex/grid.png>]) (/home/piotrhelm/Desktop/LIC/coreset/latex/geometric/swap.tex
 Underfull \hbox (badness 10000) in paragraph at lines 3--18
 
  []
@@ -1224,7 +1243,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 3--18
 
  []
 
-[16] <swap.png, id=256, 813.0375pt x 621.32124pt>
+[19] <swap.png, id=302, 813.0375pt x 621.32124pt>
 File: swap.png Graphic file (type png)
  <use swap.png>
 Package pdftex.def Info: swap.png used on input line 93.
@@ -1239,7 +1258,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 78--95
 
  []
 
-[17] [18 </home/piotrhelm/Desktop/LIC/coreset/latex/swap.png>] [19] [20]) (/home/piotrhelm/Desktop/LIC/coreset/latex/geometric/decomposition.tex
+[20] [21 </home/piotrhelm/Desktop/LIC/coreset/latex/swap.png>] [22] [23]) (/home/piotrhelm/Desktop/LIC/coreset/latex/geometric/decomposition.tex
 Underfull \hbox (badness 10000) in paragraph at lines 3--16
 
  []
@@ -1249,53 +1268,47 @@ Underfull \hbox (badness 10000) in paragraph at lines 3--16
 
  []
 
-[21]
-Overfull \hbox (14.1589pt too wide) in paragraph at lines 50--54
+[24]
+Overfull \hbox (14.1589pt too wide) in paragraph at lines 51--55
 \T1/cmr/m/n/10 Dla punk-tów ze zbioru $\OML/cmm/m/it/10 A[]$\T1/cmr/m/n/10 , roz-pa-trzmy punkt $\OML/cmm/m/it/10 x \OMS/cmsy/m/n/10 2 \OML/cmm/m/it/10 B[] \OMS/cmsy/m/n/10 n \OML/cmm/m/it/10 B[]$ \T1/cmr/m/n/10 dla $\OML/cmm/m/it/10 i \OMS/cmsy/m/n/10 2 f\OT1/cmr/m/n/10 1\OML/cmm/m/it/10 ; :::; [] \OT1/cmr/m/n/10 10\OML/cmm/m/it/10 n\OMS/cmsy/m/n/10 g$\T1/cmr/m/n/10 .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 90--95
+Underfull \hbox (badness 10000) in paragraph at lines 91--96
 
  []
 
-)) (/home/piotrhelm/Desktop/LIC/coreset/latex/06analysis.tex [22]
+[25])) (/home/piotrhelm/Desktop/LIC/coreset/latex/06analysis.tex [26]
 Rozdzia\l  5.
-) (/home/piotrhelm/Desktop/LIC/coreset/latex/main.bbl [23
+) (/home/piotrhelm/Desktop/LIC/coreset/latex/main.bbl [27
 
 ]
 Rozdzia\l  6.
-[24
+[28
 
-]) [25] (/home/piotrhelm/Desktop/LIC/coreset/latex/main.toc)
-\tf@toc=\write6
-\openout6 = `main.toc'.
-
- [26
-
-]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 74.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 74.
+]) [29]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 82.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 82.
  (/home/piotrhelm/Desktop/LIC/coreset/latex/main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 74.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 74.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 82.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 82.
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 0BD49AB894ABF392DED293A78A8B0E23;2742.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 74.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 82.
  ) 
 Here is how much of TeX's memory you used:
- 23971 strings out of 493029
- 419593 string characters out of 6136234
- 465269 words of memory out of 5000000
- 26957 multiletter control sequences out of 15000+600000
- 23829 words of font info for 63 fonts, out of 8000000 for 9000
+ 23993 strings out of 493029
+ 419875 string characters out of 6136234
+ 466302 words of memory out of 5000000
+ 26968 multiletter control sequences out of 15000+600000
+ 25203 words of font info for 65 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,11n,65p,464b,504s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx0900.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0700.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0900.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfxc1440.pfb>
-Output written on /home/piotrhelm/Desktop/LIC/coreset/latex/main.pdf (28 pages, 559023 bytes).
+Output written on /home/piotrhelm/Desktop/LIC/coreset/latex/main.pdf (31 pages, 802141 bytes).
 PDF statistics:
- 457 PDF objects out of 1000 (max. 8388607)
- 391 compressed objects within 4 object streams
- 93 named destinations out of 1000 (max. 500000)
- 167 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 487 PDF objects out of 1000 (max. 8388607)
+ 414 compressed objects within 5 object streams
+ 100 named destinations out of 1000 (max. 500000)
+ 177 words of extra memory for PDF output out of 10000 (max. 10000000)
 

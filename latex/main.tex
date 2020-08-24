@@ -24,31 +24,40 @@
 \usepackage[noend]{algpseudocode}
 
 % \titleformat{\chapter}[display]
-%     {\Large\fillast}
-%     {\oldstylenums{\thechapter} }
-%     {0pt}
-%     {\scshape\bfseries}
+%     {\Large\bfseries}
+%     {}
+%     {10pt}
+%     {\thechapter\scshape\bfseries}
 
 \titleformat{\chapter}[display]
-  {\normalfont\bfseries}{}{10pt}{\Large\thechapter.\quad}
+  {\normalfont\bfseries}
+  {}
+  {10pt}
+  {\Large\thechapter.\quad}
 
 \titleformat{\section}[display]
-  {\normalfont\bfseries}{}{10pt}{\large\thesection.\quad}
+  {\normalfont\bfseries}
+  {}
+  {10pt}
+  {\large\thesection.\quad}
 
 \titleformat{\subsection}[display]
-  {\normalfont\bfseries}{}{0pt}{\thesubsection.\quad}
+  {\normalfont\bfseries}
+  {}
+  {0pt}
+  {\thesubsection.\quad}
 
-% \titleformat{\section}[hang]
-%     {\large\fillast}
-%     {\oldstylenums{\thesection} }
+% \titleformat{\section}[display]
+%     {\normalfont\bfseries}
+%     {\thesection }
 %     {0pt}
-%     {\scshape}
+%     {\large\thesection.\quad}
 
-% \titleformat{\subsection}[hang]
-%     {\large\fillast}
-%     {\oldstylenums{\thesubsection} }
+% \titleformat{\subsection}[display]
+%     {\normalfont\bfseries}
+%     {\thesubsection}
 %     {0pt}
-%     {\itshape\scshape}
+%     {\thesubsection.\quad}
 
 \theoremstyle{definition}
 \newtheorem{definition}{Definicja}[chapter]    
@@ -62,13 +71,12 @@
 \begin{document}
 \input{00titlepage}
 \input{01abstract}
+\tableofcontents
 \input{02intro}
 \input{03preliminaries.tex}
 \input{04lightweight.tex}
 \input{05geo.tex}
 \input{06analysis.tex}
-\nocite{*}
 \bibliographystyle{acm}
 \bibliography{bibliography}
-\tableofcontents
 \end{document}

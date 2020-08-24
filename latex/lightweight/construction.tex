@@ -1,7 +1,7 @@
 \section{Konstrukcja}\label{construction}
 
-Opisana w tym podrozdziale konstrukcja oparta jest na próbkowaniu z uwzględnieniem ważności danego punktu.
-Niech $q(x)$ będzie dowolnym rozkładem prawdopodobieństwa na zbiorze $X$ oraz niech $Q \subset R^{d}$ będzie dowolnym potencjalnym zbiorem rozwiązań mocy $k$. 
+Opisana w tym podrozdziale konstrukcja lightweight coresetu oparta jest na próbkowaniu z uwzględnieniem ważności danego punktu.
+Niech $q$ będzie dowolnym rozkładem prawdopodobieństwa na zbiorze $X$ oraz niech $Q \subset R^{d}$ będzie dowolnym potencjalnym zbiorem rozwiązań mocy $k$. 
 Wtedy funkcję $\phi$ możemy zapisać jako:
 
 \begin{equation}
@@ -9,7 +9,7 @@ Wtedy funkcję $\phi$ możemy zapisać jako:
 \end{equation}
 
 \noindent
-Wynika z tego, że funkcja $\phi$ może być aproksymowana poprzez wylosowanie $m$ punktów z $X$ korzystając z $q(x)$ i przypisując im wagi odwrotnie proporcjonalne do $q(x)$.
+Wynika z tego, że funkcja $\phi$ może być aproksymowana poprzez wylosowanie $m$ punktów z $X$ korzystając z $q$ i przypisując im wagi odwrotnie proporcjonalne do $q$.
 W szczególności musimy zagwarantować, jednostajność wyboru dowolnego zbioru $k$ punktów $Q$ z odpowiednim prawdopodobieństwem $1 - \delta$, gdzie $\delta \in (0, \frac{1}{2}]$.
 Funkcja $q$ może mieć wiele form, autorzy \cite{bachem2017scalable} rekomendują postać:
 \begin{equation}

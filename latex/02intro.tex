@@ -1,4 +1,4 @@
-\chapter{Wstęp}
+ligh\chapter{Wstęp}
 \textit{More is more} to jedna z podstawowych doktryn związanych z szeroko rozumiałym Big Data.
 Więcej danych to więcej informacji, które analizujemy licząc na poznanie ukrytych zależności.
 W erze Big Data skalowalność rozwiązań jest szczególnie ważna, dlatego celem wielu naukowców jest dostarczenie kompromisu pomiędzy szczegółowością informacji a wymaganiami pamięciowymi.
@@ -14,8 +14,8 @@ Niestety w kontekście tego paradygmatu największym wyzwaniem jest znalezienie 
 To jak określamy charakterystykę ważnych informacji jest ściśle zależne od aplikacji danych.
 Coresety są strukturą algorytmiczną, która ma na celu indentyfikacje takich cech oraz określenie akceptowalnego kompromisu dla różnych funkcji celu.
 
-Mówiąc ogólniej, mamy na wejściu zbiór danych $A \subset U$, gdzie $U$ to jakieś uniwersum, zbiór potencjalnych rozwiązań $C$ oraz funkcję celu $f:U \times C \rightarrow \mathbb{R}_{\geq0}$.
-Chcemy znaleźć istotnie mniejszy zbiór danych $S \subset U$, który dla każdego potencjalnego rozwiązania $c \in C$ daje $f(S, c)$ \textit{dobrze} aproksymujące $f(A,c)$.
+Mówiąc ogólniej, mamy na wejściu zbiór danych $A \subset U$, gdzie $U$ oznacza jakieś uniwersum, zbiór potencjalnych rozwiązań $C$ pewnego problemu oraz funkcję celu $f:P(U) \times C \rightarrow \mathbb{R}_{\geq0}$, gdzie $P(U)$ oznacza zbiór potęgowy dla uniwersum.
+Chcemy znaleźć istotnie mniejszy zbiór danych $S \subset U$, dla którego dla każdego potencjalnego rozwiązania $c \in C$ daje wartość $f(S, c)$ \textit{dobrze} aproksymujące $f(A,c)$.
 A dokładniej:
 \begin{equation}
     |f(A,c) - f(S,c)| < \epsilon f(A,c)
@@ -24,6 +24,10 @@ A dokładniej:
 gdzie $\epsilon > 0$.
 
 Algorytmy budujące coresety są aplikowalne do wielu problemów klasteryzacji.
-W tej pracy skupimy się na konstrukcjach dla problemu K-means, który należy do klasy problemów \textit{NP-trudnych} \cite{article}.
+W tej pracy skupimy się na konstrukcjach dla problemu $k$-means, który należy do klasy problemów \textit{NP-trudnych} \cite{article}.
 Najpopularniejszym algorytmem heurystycznym dla tego problemu jest algorytm Lloyd'a \cite{1056489}.
 Z uwagi na to, że złożoność algorytmu istotnie zależy od rozmiaru wejściowych danych, jest on idealnym kandydatem do optymalizacji poprzez odpowiednią konstrukcję coresetu.
+
+W rozdziale 3 opiszemy budowę \textit{lightweight coresetu} z pracy \cite{bachem2017scalable}.
+Następnie, w rozdziale 4 przedstawimy konstrukcję \textit{coresetu} bazującą na geomtrycznej dekompozycji problemu korzystając z badań \cite{DBLP:journals/ki/MunteanuS18}
+W ostatnim, 5 rozdziale omówimy przeprowadzone eksperymenty dla zaimplementowanych konstrukcji coresetów oraz porównamy ich wyniki. 

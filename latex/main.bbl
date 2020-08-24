@@ -51,6 +51,12 @@
 \newblock On coresets for k-means and k-median clustering.
 \newblock 291–300.
 
+\bibitem{LI2001516}
+{\sc Li, Y., Long, P.~M., and Srinivasan, A.}
+\newblock Improved bounds on the sample complexity of learning.
+\newblock {\em Journal of Computer and System Sciences 62}, 3 (2001), 516 --
+  527.
+
 \bibitem{1056489}
 {\sc {Lloyd}, S.}
 \newblock Least squares quantization in pcm.

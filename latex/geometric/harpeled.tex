@@ -1,11 +1,11 @@
 \section{Konstrukcja kraty wykładniczej}
 
 W tym podrozdziale omówimy część pracy \cite{10.1145/1007352.1007400}.
-Tematem pracy są konstrukcje algorytmów dla problemów K-means oraz K-median.
-W kontekście problemu K-means autorzy zaproponowali algorytm bazujący na budowaniu coresetu, który uzyskuje lepszą złożoność od \cite{Matousek99onapproximate}.
+Tematem pracy są konstrukcje algorytmów dla problemów $k$-means oraz $k$-median.
+W kontekście problemu $k$-means autorzy zaproponowali algorytm rozwiązujący problem $k$-means bazujący na budowaniu coresetu, który uzyskuje lepszą złożoność od \cite{Matousek99onapproximate}.
 Schemat konstrukcji jest następujący:
 \begin{itemize}
-    \item Obliczmy szybką ale niedokładną aproksymację dla problemu K-means z dużym $k$.
+    \item Obliczmy szybką ale niedokładną aproksymację dla problemu $k$-means z pewną dużą wartością $k$.
     \item Obliczoną aproksymację przekształcamy w $(\epsilon, k)$ coreset używając kraty wykładniczej.
 \end{itemize}
 
@@ -13,35 +13,33 @@ Schemat konstrukcji jest następujący:
 \subsection{Szybka aproksymacja dla problemu K-means.}
 \noindent
 Zacznijmy od pierwszej części.
-Dokładniej udowodnimy następujące twierdzenie.
+Dokładniej, udowodnimy następujące twierdzenie.
 
 \begin{thm}{\cite{10.1145/1007352.1007400}}
-    Dla danego zbioru $n$ punktów $X \subset \mathbb{R}^d$ oraz parametru $k \in \mathbb{N}^{+}$ możemy 
-    obliczyć zbiór $P$ o mocy $O(k \log^{3}n)$ dla którego 
+    Dla danego zbioru $n$ punktów $P \subset \mathbb{R}^d$ oraz parametru $k \in \mathbb{N}$ możemy 
+    obliczyć zbiór $X$ o mocy $O(k \log^{3}n)$, dla którego 
     \begin{equation}
-        \phi_{X}(P) \leq 32 \phi_{opt}^{k}(X)
+        \phi_{P}(X) \leq 32 \phi_{opt}^{k}(P)
     \end{equation}
     Czas działania algorytmu to $O(n)$ dla $k = O(n^{\frac{1}{4}})$ oraz $O(n \log (k \log n))$ w przeciwnym przypadku.
 \end{thm}
 
-% TODO -> rename var
-
 \noindent
-Niech $P \in \mathbb{R}^{d}$ to dany na wejściu zbiór $k$ punktów.
-Będziemy chcieli szybko obliczyć aproksymację dla problemu K-means na tym zbiorze, gdzie $k$ będzie rzędu $O(k \log^{3}n)$.
+Niech $P \subset \mathbb{R}^{d}$ będzie danym na wejściu zbiórem $k$ punktów.
+Chcemy szybko obliczyć aproksymację dla problemu K-means na tym zbiorze, gdzie $k$ będzie rzędu $O(k \log^{3}n)$.
 
 \begin{definition}
     \emph{Złe/dobre punkty.} Dla zbioru punktów $X$, punkt $p \in P$ nazywamy \textit{złym} jeżeli
     \begin{equation}
         d(p, X) \geq 2d(p, C_{opt})
     \end{equation}
-    gdzie $C_{opt}$ to zbiór punktór realizujący $\phi_{opt}^{k}(P)$.
+    gdzie $C_{opt}$ jest zbiórem punktów realizującym $\phi_{opt}^{k}(P)$.
     Punkt jest \textit{dobry} jeżeli nie jest zły.
 \end{definition}
 
 \noindent
-Na początku opiszemy procedurę która dla danego $P$, wyznacza zbiór centrów $X$ oraz zbiór $P^{'} \subset P$.
-Zbiór $P^{'}$ będzie zwierać \textit{dobre} punkty dla zbioru $X$.
+Na początku opiszemy procedurę, która dla danego $P$, wyznacza zbiór punktów $X$ oraz zbiór $P^{'} \subset P$.
+Zbiór $P^{'}$ będzie zawierać \textit{dobre} punkty dla zbioru $X$.
 \\~\\
 Konstrukcję zbioru $X$ zaczynamy od obliczenia 2-aproksymacji problemu k-centrów dla zbioru $P$.
 Niech obliczony zbiór centrów to $V$.
@@ -53,8 +51,8 @@ To implikuje następujące ograniczenia:
     \Big( \frac{L}{2 } \Big)^2 \leq \phi_{opt}^{k}(V) \leq \phi_{opt}^{k}(P) \leq nL^{2}
 \end{equation} 
 \\~\\
-Następnym krokiem będzie wylosowanie $\rho = \gamma k \log^{2} n$ punktów ze zbioru $P$.
-Niech wylosowane punkty to $Y$, gdzie $\gamma$ to stała, która wynika z analizy, którą zaraz przeprowadzimy.
+Następnym krokiem konstrukcji jest wylosowanie $\rho = \gamma k \log^{2} n$ punktów ze zbioru $P$.
+Niech wylosowane punkty to $Y$, gdzie $\gamma$ jest stałą, która wynika z analizy, którą zaraz przeprowadzimy.
 Finalnie, $X = Y \cup V$ będzie zbiorem centrów klastów.
 Dla $\rho > n$ przyjmujemy $X = P$.
 \\~\\
@@ -75,7 +73,7 @@ Dokładniej:
 \noindent
 Niech $P_{bad}$ będzie zbiorem złych punktów $P$ w kontekście zbioru $X$.
 Załóżmy, że dla każdego $b_{i}$ istnieje punkt $x_{j} \in X$, który $x_{j} \in b_{i}$.
-Zauważmy, że dla każdego punktu $p \in P \setminus b_{i}$ dla którego $x_{j}$ jest centerm mamy $||px_{j}|| \leq ||pc_{i}||$.
+Zauważmy, że dla każdego punktu $p \in P \setminus b_{i}$, dla którego $x_{j}$ jest centerm mamy $||px_{j}|| \leq ||pc_{i}||$.
 W szczególności takie punkty są \textit{dobre}, dla $c_{i}$ będącymi optymalnymi centrami dla tych punktów.
 Zatem z wysokim prawdopodobieństwem jedyne \textit{złe} punkty będą w kulach $b_{i}$ dla $ i = 1, \dots, k$.
 To implikuje, że z wysokim prawdopodobieństwem liczba złych punktów w $P$ dla zbioru $X$ to co najwyżej $\beta = k\eta = \frac{n}{20 \log n}$.
@@ -90,7 +88,7 @@ Teraz podzielimy P na zbiory według następującej formuły:
 \begin{equation}
     P[a,b] = \{ p \in P \text{ | } a \leq r(p) \leq b \}
 \end{equation}
-A dokładniej
+A dokładniej:
 \begin{equation}
     P_{0} = P\Big[0, \frac{L}{4n}\Big]
 \end{equation}
@@ -127,7 +125,7 @@ Teraz udowodnimy, że faktycznie tak zdefiniowane $P^{'}$ spełnia powyższe za�
     \begin{equation}
         \geq \frac{n}{2}
     \end{equation}
-    Jeżeli $\alpha > 0$ to $|P_{\alpha}| \geq 2\beta = \frac{n}{10 \log n}$.
+    Jeżeli $\alpha > 0$, to $|P_{\alpha}| \geq 2\beta = \frac{n}{10 \log n}$.
     Teraz chcemy oszacować jaką kontrybucję w $P^{'}$ mają złe punkty.
     Z uwagi na to jak budujemy $P^{'}$ w najgorszym przypadku wszystkie złe punkty będą w $P_{\alpha}$.
     Wtedy takie punkty będą miały największy wpływ na funkcję $\phi$.
@@ -144,7 +142,7 @@ Teraz udowodnimy, że faktycznie tak zdefiniowane $P^{'}$ spełnia powyższe za�
     \begin{equation}
         \leq 16\phi_{P^{'}}(C_{opt}) + 4\phi_{P^{'}}(C_{opt}) = 20\phi_{P^{'}}(C_{opt})
     \end{equation}
-    Jeżeli $\alpha = 0$ to dla dowolnego punktu $p \in P^{'}$ mamy:
+    Jeżeli $\alpha = 0$, to dla dowolnego punktu $p \in P^{'}$ mamy:
     \begin{equation}
         (d(p,X))^2 \leq n\Big(\frac{L}{4n}\Big)^2 \leq \frac{L^{2}}{4n}
     \end{equation}
@@ -157,7 +155,7 @@ Teraz udowodnimy, że faktycznie tak zdefiniowane $P^{'}$ spełnia powyższe za�
 
 \noindent
 Powyższa analiza dowodzi poprawności konstrukcji dla zbiorów $X$ i $P^{'}$.
-Podsumowując otrzymujemy zbiór $X$ o mocy $O(k \log^{2} n)$ oraz zbiór $P^{'}$ dla którego mamy $\phi_{P^{'}}(X) \leq 32\phi_{P^{'}}(C_{opt})$.
+Podsumowując otrzymujemy zbiór $X$ o mocy $O(k \log^{2} n)$ oraz zbiór $P^{'}$, dla którego mamy $\phi_{P^{'}}(X) \leq 32\phi_{P^{'}}(C_{opt})$.
 Czas działania tego algorytmu to $O(n)$ dla $k = O(n^{\frac{1}{4}})$ oraz $O(n \log (k \log n))$ w przeciwnym przypadku.
 Aby otrzymać taką złożoność kluczowe jest szybkie oblicznie najbliższych sąsiadów.
 Autorzy proponują \cite{10.1145/293347.293348}.
@@ -167,34 +165,32 @@ Powyżej zdefiniowaną procedurę powtarzamy dla zbioru $P_{1} = P \setminus P^{
 Analogicznie otrzymamy zbiór $P_{1}^{'}$ oraz $X_{1}$.
 Kolejny raz aplikujemy procedurę na zbiorze $P_{2} = P \setminus (P^{'} \cup P_{1}^{'})$.
 Ponieważ za każdym razem zbiór $P_{i}$ zmieniejsza się o połowę to taki proces zakończy się po $O(\log n)$ powtórzeniach.
-Finalnie otrzymamy zbiór $X \cup X_{1} \dots X_{i}$ o mocy $O(k \log^{3} n)$ dla którego $\phi_{P}(X) \leq 32\phi_{P}(C_{opt})$.
+Finalnie otrzymamy zbiór $X \cup X_{1} \dots X_{i}$ o mocy $O(k \log^{3} n)$, dla którego $\phi_{P}(X) \leq 32\phi_{P}(C_{opt})$.
 Złożoność pozostanie taka sama, czyli $O(n)$ dla $k = O(n^{\frac{1}{4}})$ oraz $O(n \log (k \log n))$ w przeciwnym przypadku.
 
 \subsection{Krata wykładnicza.}
 
 Przejdzmy teraz do kluczowej części tego podrozdziału, czyli konstrukcji kraty wykładniczej.
-Niech $P \subset \mathbb{R}^d$, $|P| = n$ oraz niech $A = \{x_{1}, \dots, x_{m}\}$ będzie zbiorem punktów dla którego zachodzi $\phi_{P}(A) \leq c\phi_{opt}^{k}(P)$, gdzie $c$ to stała.
-Nasze $A$ otrzymamy z konstrukcji opisanej w 4.2.1 dla $k = O(k polylog)$.
+Niech $P \subset \mathbb{R}^d$, $|P| = n$ oraz niech $A = \{x_{1}, \dots, x_{m}\}$ będzie zbiorem punktów, dla którego zachodzi $\phi_{P}(A) \leq c\phi_{opt}^{k}(P)$, gdzie $c$ jest stałą.
+Nasze $A$ otrzymamy z konstrukcji opisanej w 4.2.1 dla $k = O(k poly \log n)$, gdzie $poly \log n = \bigcup_{c \geq 1} O(\log^{c}n)$.
 \\~\\
 Niech $R = \sqrt{\frac{\phi_{P}(A)}{cn}}$ będzie dolnym ograniczeniem dla $R_{opt}^{\phi}(P, k) = \sqrt{\frac{\phi_{opt}(P, k)}{n}}$
-Niech $P_{i}$ będzie podzbiorem punktów z $P$ dla których punkt $x_{i} \in A$ jest dla niech najbliższym sąsiadem. 
+Niech $P_{i}$ będzie podzbiorem punktów z $P$, dla których punkt $x_{i} \in A$ jest dla niech najbliższym sąsiadem. 
 Dla dowolnego $p \in P_{i}$, mamy $||px_{i}|| \leq \sqrt{xn}R$, ponieważ $||px_{i}||^{2} \leq \phi_{P}(A)$ dla $i = 1, \dots, m$.
 \begin{figure}[H]
     \centering
     \includegraphics[totalheight=4cm]{grid.png}
-    \caption{Intuicyjnie kratę wykładniczą możemy przedstawić obrazowo, gdzie $c = x_{i}$.}
+    \caption{Krata wykładnicza, gdzie $c = x_{i}$.}
 \end{figure}
 \noindent
 Kolejnym krokiem będzie budowa kraty wykładniczej wokół każdego punktu $x_{i}$ oraz nałożenie jej na zbiór $P$.
 Niech $Q_{i,j}$ będzie kwatratem o boku długości $R2^{j}$ o środku w punkcie $x_{i}$ dla $j = 0, \dots, M$, gdzie $M = \lceil 2 \lg(cn) \rceil$, który jest równoległy do osi układu współrzednych dla danej przestrzeni.
 Następnie, niech $V_{i, 0} = Q_{i, 0}$ oraz niech $V_{i,j} = Q_{i,j} \setminus Q_{i,j}$ dla $j = 0, \dots, M$.
 Kolejnym krokiem będzie przekształcenie $V_{i,j}$ w kratę, której komórki będą długości $r_{j} = \frac{\epsilon R2^{j}}{10cd}$ oraz niech $G_{i}$ oznacza wynikową kratę wykładniczą dla $V_{i,0}, \dots, V_{i,M}$.
-Mając $G_{i}$ obliczamy dla każdego punktu z $P_{i}$, komórkę do której należy.
+Mając $G_{i}$ obliczamy dla każdego punktu z $P_{i}$ komórkę, do której należy.
 Dla każdej niepustej komórki z kraty wybieramy losowy punkt z $P_{i}$, który będzie jej reprezentantem.
-Do takiego punktu przypisujemy wagę, która bedzie równa liczbie punktów z komórki dla której jest reprezentantem.
+Do takiego punktu przypisujemy wagę, która bedzie równa liczbie punktów z komórki, dla której jest reprezentantem.
 Po przejściu całej kraty otrzymamy zbiór $S_{i}$ takich punktów.
 Definujemy $S = \bigcup_{i} S_{i}$, który jest  $(\epsilon, k)$ coresetem.
 Zauważmy, że $|S| = O\Big( \frac{|A| \log n }{ (c\epsilon)^{d} } \Big)$, ponieważ każda krata ma $\log n$ poziomów, a każdy poziom stałą liczbę komórek.
-\begin{proof}
-    TBA
-\end{proof}
+
