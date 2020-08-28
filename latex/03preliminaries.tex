@@ -14,7 +14,7 @@ W tej pracy przyjmujemy, że działamy w przestrzeni euklidesowej w skończonym 
 Załóżmy, że mamy dany konkretny problem optymalizacyjny. 
 
 \begin{definition}
-    \emph{$\alpha$-aproksymacją} dla problemu optymalizującego nazwiemy wielomianowy algorytm, który dla każdej instancji problemu minimalizacyjnego oblicza rozwiązanie, którego wartość spełnia: 
+    \emph{$\alpha$-aproksymacją} dla problemu optymalizującego nazywamy wielomianowy algorytm, który dla każdej instancji problemu minimalizacyjnego oblicza rozwiązanie, którego wartość spełnia: 
     \begin{equation}
         A \leq \alpha \cdot OPT
     \end{equation}
@@ -24,6 +24,11 @@ Załóżmy, że mamy dany konkretny problem optymalizacyjny.
     \begin{equation}
         A \geq \frac{1}{\alpha} \cdot OPT
     \end{equation}
+\end{definition}
+
+\begin{definition}
+    \emph{Wielomianowym schematem aproksymacji} dla problemu optymalizującego nazywamy zbiór algorytmów, który dla danego $\epsilon > 0$ zawiera algorytm aproksymacyjny $A$ o wspołczynniku aproksymacji równym $(1+\epsilon)$.
+    Złożoność algorytmu $A$ jest wielomianowa ze względu na rozmiar instancji problemu podanej na wejściu A dla danego $\epsilon$.
 \end{definition}
 
 \begin{definition}
@@ -80,7 +85,7 @@ Funkcję $\phi$ w literaturze nazywamy błędem kwantyzacji.
 \section{Coreset}
 
 To jak definujemy coreset ściśle zależy od problemu, który optymalizujemy.
-Zacznijmy od podstawowej definicji coresetu dla problemu K-means.
+Zacznijmy od podstawowej definicji coresetu dla problemu $k$-means.
 
 \begin{definition}
     \emph{$(\epsilon, k)$-aproksymacja zbioru centroidów.} 
@@ -92,9 +97,14 @@ Zacznijmy od podstawowej definicji coresetu dla problemu K-means.
     gdzie $C_{opt}$ optymalizuje wartość funkcji $\phi$.
 \end{definition}
 
+\noindent
+Intuicyjnie $(\epsilon, k)$-aproksymacje zbioru centroidów możemy rozumieć jako zbiór $A \subset \mathbb{R}^{d}$, który zawiera $k$ elementowy podzbiór $C \subseteq A$ \textit{dobrze} aproksymujący $C_{opt}$.
+Definicja 2.8 pojawia się tutaj z dwóch powodów.
+Po pierwsze jest ona pewngo rodzaju prekursorem coresetów, a po drugie jest ona konieczna w definicji 2.10.
+
 \begin{definition}
-    \emph{Coreset.} Niech $X$ będzie skończonym zbiórem punktów z $\mathbb{R}^{d}$ oraz niech $Q \subset \mathbb{R}^{d}$ będzie dowolnym zbiorem rozmiaru co najwyżej $k \in \mathbb{N}$. 
-    Skończony zbiór $C \subset \mathbb{R}^{d}$ nazywamy $(\epsilon, k)$ coresetem, gdzie $\epsilon \in (0, 1)$, jeżeli zachodzi:
+    \emph{Coreset.} Niech $X$ będzie skończonym zbiórem punktów z $\mathbb{R}^{d}$.
+    Skończony zbiór $C \subset \mathbb{R}^{d}$ nazywamy $(\epsilon, k)$ coresetem, gdzie $\epsilon \in (0, 1)$, jeżeli dla dowolnego $k \in \mathbb{N}$ elementowego zbioru $Q \subset \mathbb{R}^{d}$ zachodzi:
     \begin{equation}
         |\phi_{X}(Q) - \phi_{C}(Q)| \leq \epsilon\phi_{X}(Q)
     \end{equation}
@@ -104,9 +114,11 @@ Zacznijmy od podstawowej definicji coresetu dla problemu K-means.
 Zauważmy, że taka definicja daje nam bardzo moce gwarancje teoretyczne.
 Wartość funkcji $\phi_{C}(Q)$ aproksymuje $\phi_{X}(Q)$ ze współczynnikiem aproksymacji równym $(1+\epsilon)$ dla dowolnego zbioru $k$ kandydatów $Q$ na rozwiązanie problemu $k$-means.
 Jest to na tyle istotne, że w literaturze odróżnimy taką wersję nazywając ją \textit{strong coresetem}.
-Definicja 2.8 jest wariantem ciągłym, czyli punkty należące do coresetu są dowolnymi punktami przestrzeni, w szczególności nie muszą należeć do zbioru $X$.
+Definicja 2.9 jest wariantem ciągłym, czyli punkty należące do coresetu są dowolnymi punktami przestrzeni, w szczególności nie muszą należeć do zbioru $X$.
 W praktyce stosuje się wariant dyskretny, który zakłada, że $C \subseteq X$.
-
+Tak samo jak w problemie $k$-means, coreset może być zdefiniowany w wariancie ważonym.
+Oznacza to, że dla zbióru $C$ z definicji 2.9 definujemy funkcję wag $w: C \rightarrow \mathbb{R}_{\ge0}$. 
+Reszta pozostaje bez zmian, ponieważ funkcja $\phi$ uwzględnia $C$ będące zbiorem ważonym.
 \begin{figure}[H]
     \centering
     \includegraphics[totalheight=7cm]{coreset.png}
@@ -117,9 +129,15 @@ W praktyce stosuje się wariant dyskretny, który zakłada, że $C \subseteq X$.
 \begin{definition}
     \emph{Coreset - weak (w wariancie dyskretnym).} Niech $X$ będzie skończonym zbiorem punktów z $\mathbb{R}^{d}$.
     Niech $C \subseteq X$ oraz $A$ jest $(\epsilon, k)$-aproksymacją zbioru centroidów dla zbioru $X$, gdzie $\epsilon \in (0, 1)$.
-    Jeżeli, dla każdego $k \in \mathbb{N}$ elementowego podzbióru $Q \subseteq A$ zachodzi:
+    Jeżeli, dla dowolnego $k \in \mathbb{N}$ elementowego podzbióru $Q \subseteq A$ zachodzi:
     \begin{equation}
         |\phi_{X}(Q) - \phi_{C}(Q)| \leq \epsilon\phi_{X}(Q)
     \end{equation}
     to parę $(C, A)$ nazwiemy słabym coresetem.
 \end{definition}
+
+\noindent
+\textit{Słabość} definicji 2.10 wynika z konieczności budowy zbioru $A$.
+Intuicyjnie zbiór $A$ pomaga coresetowi w zachowaniu odpowiedniego współczynnika aproksymacji, ponieważ w zbiorze $A$ istnieje \textit{dobry} kandydat na rozwiązanie.
+W pracy korzystamy wyłącznie z definicji 2.9.
+Z uwagi na to, że nasza praca ma charakter przeglądowy zdefiniowaliśmy wszystkie możliwe warianty coresetów.

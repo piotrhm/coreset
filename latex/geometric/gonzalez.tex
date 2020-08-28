@@ -2,9 +2,17 @@
 
 Pierwszy algorytm, który opiszemy to \textit{Farthest point algorithm} z pracy \cite{Gonzalez1985ClusteringTM}.
 Jest to pierwszy algorytm aproksymacyjny rozwiązująych problem k-centrów ze współczynnikiem aproksymacji równym 2.
-Jego złożoność to $O(nk)$, gdzie $n$ jest liczbą punktów danych na wejściu. 
+Jego złożoność to $O(nk)$, gdzie $n$ jest liczbą punktów danych na wejściu.
+Algorytm Gonzaleza jest nam potrzebny, ponieważ w rozdziale 4.2, w którym budujemy kratę wykładniczą istotnie korzystamy z rozwiązania problemu $k$-centrów.
 \\~\\
 Na potrzeby tego rozdziału wprowadzimy kilka definicji.
+\begin{definition}
+    \emph{Problem k-centrów.} Niech $X$ będzie skończonym zbiórem punktów z $\mathbb{R}^{d}$. 
+    Dla danego $X$ chcemy znaleźć zbiór $k \in \mathbb{N}$ punktów $Q \subset \mathbb{R}^{d}$, który minimalizuje funkcję $\rho_{X}(Q)$ zdefiniowaną następująco:
+    \begin{equation}
+        \rho_{X}(Q) = \max_{x \in X} \min_{q \in Q} | x - q |
+    \end{equation}
+\end{definition}
 
 \begin{definition}
     Niech \emph{G = (V, E, W)} będzie ważonym nieskierowanym grafem ze zbiorem wierzchołków $V$, krawędzi $E$ oraz funkcją $W: E \rightarrow \mathbb{R}^{+}$ przyporządkowującą wagi krawędziom. 
@@ -22,17 +30,17 @@ Na potrzeby tego rozdziału wprowadzimy kilka definicji.
 \noindent
 Dla każdego k-splitu defninujemy funkcję celu $f: B_{1},\dots,B_{k} \rightarrow \mathbb{R}_{\geq0}$.
 W tym rozdziale zakładamy, że funkcją celu jest $max(M_{1},\dots,M_{k})$, gdzie $M_{i}$ to największa waga krawędzi pomiędzy dowolnymi dwoma punktami z $B_{i}$.
-
+Tak zdefiniowana funkcja celu jest odpowiednikiem funkcji $\rho$ zdefiniowanej dla problemu $k$-centerów.
 \begin{definition}
-    \emph{Problem klastrowania.} Dla danego grafu $G$, funkcji celu $f$ oraz $k \in \mathbb{N}$ znaleźć k-split, dla którego funkcja $f$ jest zminimalizowana.
+    \emph{Problem klastrowania.} Dla danego grafu $G$, funkcji celu $f$ oraz $k \in \mathbb{N}$ znaleźć $k$-split, dla którego funkcja $f$ jest zminimalizowana.
     Dla przykładu: znaleźć k-split $(B_{1}^{*},\dots,B_{k}^{*})$ taki, że 
     \begin{equation}
-        f(B_{1}^{*},\dots,B_{k}^{*}) = min\{ f(B_{1},\dots,B_{k}) | (B_{1},\dots,B_{k}) \text{ to \textit{k-split} dla \textit{G} } \}
+        f(B_{1}^{*},\dots,B_{k}^{*}) = min\{ f(B_{1},\dots,B_{k}) | (B_{1},\dots,B_{k}) \text{ to \textit{k}-split dla \textit{G} } \}
     \end{equation}
 \end{definition}
 
 \noindent
-Niech $S \subset \mathbb{R}^{d}$ będzie zbiorem, który chcemy podzielić na $k$ klastrów oraz niech $T$ będzie podzbiorem $S$.
+Niech $S \subset \mathbb{R}^{d}$ będzie zbiorem, na którym chcemy rozwiązać problem $k$-centrów oraz niech $T$ będzie podzbiorem $S$.
 Zakładamy, że $|S| > k$ ponieważ w przeciwnym przypadku problem podziału jest trywialnie rozwiązywalny.
 \begin{definition}
 Zbiór $T$ nazywamy $(k+1)$ kliką wysokości $h$ jeżeli moc zbioru $T$ jest równa $k+1$ oraz odległość pomiędzy parą dwóch rożnych punktów jest równa co najmniej $h$. 
@@ -47,13 +55,13 @@ Udowodnimy teraz następujący lemat, który jest potrzebny w dowodzie ogranicza
 \end{lemma}
 
 \begin{proof}
-    Kilka ma $k+1$ elementów, zatem co najmniej $2$ z nich wylądują w jednym klastrze.
-    W takim razie waga krawędzi pomiędzy tymi punktami to co najmniej $h$ co implikuje, że $OPT(S) \geq h$.
+    Kilka ma $k+1$ elementów, zatem co najmniej $2$ z nich znajdą się w jednym klastrze.
+    Waga krawędzi pomiędzy tymi punktami to co najmniej $h$ co implikuje, że $OPT(S) \geq h$.
 \end{proof}
 
 \noindent
-Algorytm Gonzaleza podziału na $k$ klastrów składa się z fazy inicjalizującej oraz $k-1$ faz powiększających.
-W fazie inicjalizującej wszystkie elementy są przypisana do zbioru $B_{1}$, który jest pierwszym klasterm.
+Algorytm Gonzaleza składa się z fazy inicjalizującej oraz $k-1$ faz powiększających.
+W fazie inicjalizującej wszystkie elementy są przypisana do zbioru $B_{1}$, który jest pierwszym klastrem.
 Jeden z elementów tego zbioru oznaczamy jako $(t_{1})$ - środek klastra $B_{1}$.
 Wybór tego elementu jest losowy.
 Podczas $j$ fazy powiększającej, niektóre elementy z istniejącego podziału na klastry $B_{1}, \dots, B_{j}$ trafiają do nowego zbioru $B_{j+1}$.
@@ -61,9 +69,13 @@ Dodatkowo jeden z elemntów nowego zbioru będzie oznaczony jako $(t_{j+1})$ - �
 Budowę zbioru $B_{j+1}$ rozpoczynamy od wyboru punktu $v$, który należy do jednego ze zbiorów $B_{1}, \dots, B_{j}$ oraz jego odległość do środka klastra, do którego należy jest największa spośród wszystkich punktów z $B_{1}, \dots, B_{j}$. 
 Taki punkt będzie oznaczony jako $(t_{j+1})$, czyli jest środkiem klastra $B_{j+1}$.
 Każdy punkt, dla którego dystans do $v$ jest nie większy niż dystans do środka klastru, w którym się znajduje zostaje przeniesiony do $B_{j+1}$.
+Algorytm 2 buduje jakiś $k$-split.
+Teraz pokażemy, że dla takiego k-splitu wartość funkcji celu $f(S)$ jest ograniczona przez $2 \cdot OPT(S)$.
 \begin{algorithm}
+    \floatname{algorithm}{Algorytm}
     \caption{}
 \begin{algorithmic}
+    \State Algorytm na wejściu otrzymuje zbiór $S \in \mathbb{R}^{d}$.
     \State Niech $T$ będzie szukanym zbiorem $k$-centrów.
     \State Dla każdego punktu $p \notin T$, algorytm trzyma $neighbor(p)$, czyli najbliższy punkt w $T$ dla $p$ oraz $dist(p)$, czyli odległość od punktu $p$ do $neighbor(p)$.
     \Procedure{Farthest point algorithm}{}
@@ -79,9 +91,6 @@ Każdy punkt, dla którego dystans do $v$ jest nie większy niż dystans do śro
     \Return $T$
 \end{algorithmic}
 \end{algorithm}
-\\
-Powyższy algorytmy buduje jakiś $k$-split.
-Teraz pokażemy, że dla takiego k-splitu wartość funkcji celu $f(S)$ jest ograniczona przez $2 \cdot OPT(S)$.
 \\~\\
 Niech $v \in B_{j}$ oraz $1 \leq j \leq k$ będzie wierzchołkiem, którego odległość do $(t_{j})$ jest maksymalna.
 Niech $h$ będzie tą odległością.
@@ -89,9 +98,9 @@ Ponieważ dla zbioru wag krawędzi zachodzi nierówność trójkąta to:
 \begin{equation}
     W(E(x, y)) \leq W(E(x, t_{i})) + W(E(y, t_{i})) \leq 2h
 \end{equation}
-gdzie $t_{i}$ to centrum klastra dla punktów $x, y \in B_{i}$.
+gdzie $t_{i}$ to środek klastra dla punktów $x, y \in B_{i}$.
 A więc możemy ograniczyć wartość naszej funkcji celu przez $f(S) \leq 2h$.
-Ponieważ $v$ nigdy nie zostało wybrane na centrum klastra to wiemy, że $W(t_{i}, t_{j}) \geq h$ dla $i \neq j$.
+Ponieważ $v$ nigdy nie zostało wybrane na środek klastra to wiemy, że $W(t_{i}, t_{j}) \geq h$ dla $i \neq j$.
 Niech $T = \{ t_{1}, \dots, t_{k}, v \}$.
 Z definicji wiemy, że $T$ jest $(k+1)$ kliką wagi $h$, więc z lematu 2, $OPT(S) \geq h$.
 A więc ograniczenie wartości funkcji celu to $ f(S) \leq 2h \leq 2 \cdot OPT(S)$.

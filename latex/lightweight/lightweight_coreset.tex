@@ -4,19 +4,16 @@ Zacznijmy od wprowadzenia definicji \textit{lightweight coresetu}.
 \begin{definition}
     \emph{Lightweight coreset dla problemu K-means.} Niech $\epsilon > 0$ oraz $k \in \mathbb{N}$.
     Niech $X$ bedzie $n$ elementowym zbiórem punktów z $\mathbb{R}^{d}$ wraz ze średnią $\mu(X) = \frac{1}{n}\sum_{i=1}^{n} x_{i}$.
-    Zbiór $C \subset \mathbb{R}^d$ jest $(\epsilon, k)$ lightweight coresetem jeżeli dla dowolnego zbioru $Q \subset \mathbb{R}^{d}$ o mocy co najwyżej $k$ zachodzi:
+    Zbiór $C \subset \mathbb{R}^d$ jest $(\epsilon, k)$ lightweight coresetem jeżeli dla dowolnego $k \in \mathbb{N}$ elementowego zbioru $Q \subset \mathbb{R}^{d}$ zachodzi:
     \begin{equation}
         |\phi_{X}(Q) - \phi_{C}(Q)| \leq \frac{\epsilon}{2}\phi_{X}(Q) + \frac{\epsilon}{2}\phi_{X}(\mu(X))
     \end{equation}
 \end{definition}
 
 \noindent
-Jak możemy zauważyć definicja (3.1) trochę się różni od (2.8).
-Notacje \textit{lightweight} coresetu możemy interpretować jako relaksację gwarancji teoretycznych zdefiniowanych w (2.8).
+Jak możemy zauważyć definicja (3.1) trochę się różni od (2.9).
+Notacje \textit{lightweight} coresetu możemy interpretować jako relaksację gwarancji teoretycznych zdefiniowanych w (2.9).
 Wprowadza ona oprócz błędu multiplikatywnego, błąd addytywny.
-Nieformalnie, składnik $\frac{\epsilon}{2}\phi_{X}(Q)$ pozwala na odpowiednie skalowanie błędu aproksymacji dla funkcji $\phi$, jest on tożsamy z błędem aproksymacji coresetu zdefiniowanego w 2.8.
-Druga część $\frac{\epsilon}{2}\phi_{X}(\mu(X))$ odpowiada za skalowalność rozwiązania zgodnie ze zmianą wariancji na danych.
-Przez skalowalność rozumiemy zmianę rozmiaru danych, mocy zbiorów.
 
 Głowną motywacją stojącą za konstrukcjami coresetów jest to, żeby rozwiązanie obliczone na tym zbiorze było konkurencyjne z rozwiazaniem optymalnym dla całego zbioru danych.
 Dlatego w konkeście \textit{lightweight} udowodnimy następujące twierdzenie.

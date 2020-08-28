@@ -1,56 +1,58 @@
 \section{Podsumowanie}
 
 W tej części przedstawimy algorytm budowania coresetu z \cite{DBLP:journals/ki/MunteanuS18}.
-Na początku obliczmy $10$-aproksymację dla problemu K-means korzystając z pracy \cite{Arya2004LocalSH}.
+Algorytm ten rozpoczynamy od wykonania 10-aproksymacji dla problemu $k$-means korzystając z pracy \cite{Arya2004LocalSH}.
 W części 4.3 opisaliśmy konstrukcję, której użyjemy w implementacji.
-Ma ona trochę większy błąd aproksymacji ale jak sami autorzy \cite{DBLP:journals/ki/MunteanuS18} stwierdzają w swojej pracy, nie ma to dużego znaczenia w kontekście całości.
+Ma ona trochę większy współczynnik aproksymacji ale jak sami autorzy \cite{DBLP:journals/ki/MunteanuS18} stwierdzają w swojej pracy, nie ma to dużego znaczenia w kontekście całości.
 Dowolna aproksymacja o stałym błędzie może zostać użyta w tej metodzie.
-Na potrzeby analizy zakładamy, że obliczamy $10$-aproksymację $C^{'}$ oraz dany na wejściu zbiór punktów $A \subset \mathbb{R}^d$ należy do przestrzeni Euklidesowej.
+Na potrzeby analizy zakładamy, że wykonujemy algorytm 10-aproksymacyjny dla problemu $k$-means i uzyskaliśmy zbiór $C^{'}$ oraz, że mamy dany na wejściu zbiór punktów $A \subset \mathbb{R}^d$.
 \\~\\
 Geometryczna dekompozycja bazuje na dyskretyzacji punktów z $A$, czyli na zgrupowaniu ze sobą najbliższych punktów, a następnie zbudowaniu ważonego zbioru punktów $S$ o zredukowanym rozmaiarze.
 Taką techinkę mogliśmy już zobaczyć w części 4.2, gdzie odpowiednio grupowaliśmy punkty w komórki kraty wykładniczej.
 \\~\\
 Praca \cite{DBLP:journals/ki/MunteanuS18} przedstawia inną technikę, która bazuje na budowaniu kul o wykładniczo rosnącym promieniu wokół każdego punktu z $C^{'}$.
-Będziemy znaczynać od promieni równych $\frac{1}{n}OPT$ a kończyć na $10 OPT$, gdzie $OPT = \phi_{opt}^{k}(A)$ oraz $n$ to moc zbioru $A$.
-Dla takich kul będziemy budować $\epsilon$-pokrycie kuli.
+Dla przybliżenia idei konstrukcji załóżmy, że znamy $OPT = \phi_{opt}^{k}(A)$.
+Algorytm zaczyna od budowy kul o promieniach równych $\frac{1}{n}OPT$ a kończy na promieniach równych $10 OPT$, gdzie $n$ to moc zbioru $A$.
+Dla takich kul budujemy $\epsilon$-pokrycie kuli.
+W pracy pod pojęciem \textit{kula} rozmumiemy sferę w przestrzeni o wymiarze $d$.
 
 \begin{lemma}{\cite{pisier_1989}}
-    Niech $U$ będzie sferą jednostkową w $d$-wymiarowej przestrzeni euklidesowej.
-    Wtedy dla $0 < \epsilon < 1$, istnieje \textit{$\epsilon$-pokrycie} $B$ o rozmiarze $\Big(1 +\frac{2}{\epsilon}\Big)^{d}$, czyli dla każdego punktu $p \in U$ zachodzi:
+    Niech $U$ będzie sferą jednostkową w $\mathbb{R}^{d}$.
+    Wtedy dla dowolnego $\epsilon \in (0,1)$, istnieje \textit{$\epsilon$-pokrycie} $B$ o rozmiarze $\Big(1 +\frac{2}{\epsilon}\Big)^{d}$, czyli dla każdego punktu $p \in U$ zachodzi:
     \begin{equation}
         \min_{b \in B} ||p-b|| \leq \epsilon
     \end{equation}
 \end{lemma}
 
 \noindent
-Niestety ale nie istnieją efektywne metody budowania takich $\epsilon$-pokryć.
+Niestety nie istnieją efektywne metody budowania takich $\epsilon$-pokryć.
 My w analizie przyjmujemy, że  $|B| = \epsilon^{-O(d)}$.
-Jako referenrencję jak zbudować taką konstrukcję autorzy sugureują analizę pracy \cite{chazelle_2000}.
-Jest to problematyczne w kontekście implementacji jednak tą kwestię poruszymy w następnym rodziale.
-W pracy pod pojęciem \textit{kula} rozmumiemy sferę w przestrzeni o wymiarze $d$.
+Jako referenrencję jak zbudować taką konstrukcję autorzy \cite{DBLP:journals/ki/MunteanuS18} sugureują analizę pracy \cite{chazelle_2000}.
+Jest to problematyczne w kontekście implementacji jednak tę kwestię poruszymy w następnym rodziale.
 \begin{lemma}{\cite{DBLP:journals/ki/MunteanuS18}}
-    Niech $a$, $b$, $c$ będą punktami z przestrzeni euklidesowej.
+    Niech $a$, $b$, $c$ będą punktami z $\mathbb{R}^{d}$.
     Wtedy dla dowolnego $\epsilon \in (0,1)$ zachodzi:
     \begin{equation}
         \Big| ||a-c||^{2} - ||b-c||^{2} \Big| \leq \frac{12}{\epsilon} ||a-b||^2 + 2\epsilon||a-c||^2
     \end{equation}
 \end{lemma}
 \begin{lemma}
-    Niech $A$ będzie zbiorem $n$ punktów z $\mathbb{R}^d$, $B^{i}$ będzie kulą o promieniu $r_{i} = \frac{2^{i}}{n}\sum_{x \in A} ||x||^{2}$ oraz niech $S^{i}$ będzie $\frac{\epsilon}{3}$-pokryciem kuli $B^{i}$.
+    Niech $A$ będzie zbiorem $n$ punktów z $\mathbb{R}^d$, $B^{i}$ będzie kulą o promieniu $r_{i} = \frac{2^{i}}{n}\sum_{x \in A} ||x||^{2}$ o środku w punkcie o współrzędnych zerowych $(0, \dots, 0)$ oraz niech $S^{i}$ będzie $\frac{\epsilon}{3}$-pokryciem kuli $B^{i}$ dla $i = 1, \dots, \log10n$.
     Zdefinujemy $S = \bigcup_{i=0}^{\log 10n} S^{i}$. 
     Wtedy:
     \begin{equation}
         \sum_{x\in A} \min_{s \in S} ||x - s||^{2} \leq \epsilon^{2} \sum_{x \in A} ||x||^{2}
     \end{equation}
 \end{lemma}
+
 \begin{proof}
-    Niech $A_{close}$ będzie zbiorem punktów z kwadrtem normy euklidesowej równej co najwyżej $\frac{1}{n}\sum_{x \in A}||x||^{2}$ oraz niech $A_{far}$ będzie zbiorem pozostałych punktów.
-    Ponieważ $|A_{close}| \leq n$, to:
+    Niech $A_{close}$ będzie podzbiorem punktów z $A$, dla których kwadrat normy euklidesowej jest równy co najwyżej $\frac{1}{n}\sum_{x \in A}||x||^{2}$ oraz niech $A_{far}$ będzie zbiorem pozostałych punktów zbioru $A$.
+    Ponieważ $|A_{close}| \leq n$ oraz z definicji $\epsilon$-pokrycia wynika, że:
     \begin{equation}
         \sum_{x\in A_{close}} \min_{s \in S^{0}} ||x - s||^{2} \leq |A_{close}|\frac{1}{n}\frac{\epsilon^{2}}{9}\sum_{x \in A_{close}}||x||^{2} \leq \frac{\epsilon^{2}}{9}\sum_{x \in A_{close}}||x||^{2}
     \end{equation}
     \noindent
-    Dla punktów ze zbioru $A_{far}$, rozpatrzmy punkt $x \in B^{i} \setminus B^{i-1}$ dla $i \in \{1, ..., \log10n \}$.
+    Dla każdego punktu $x$ ze zbioru $A_{far}$ istnieje takie $i$, że $x \in B^{i} \setminus B^{i-1}$ dla $i \in \{1, ..., \log10n \}$.
     Zatem:
     \begin{equation}
        \min_{s \in S^{i}} ||x - s||^{2} \leq \frac{\epsilon^{2}}{9} r_{i}^{2} \leq \frac{4\epsilon^{2}}{9} r_{i-1}^{2} \leq \frac{4\epsilon^{2}}{9} ||x||^2
@@ -61,21 +63,30 @@ W pracy pod pojęciem \textit{kula} rozmumiemy sferę w przestrzeni o wymiarze $
     \end{equation}
 \end{proof}
 \noindent
-Taką analizę możemy zaaplikować do każdego punktu z $C^{'}$.
-
+Powyżej zdefiniowana procedura zaczyna konstruckję w punkcie o współrzędnych zerowych $(0, \dots, 0)$.
+W dowodzie twierdzenia 4.3 wykorzystamy lemacie 8, aplikując go do każdego punktu z $C^{'}$.
 \begin{thm}
-    Dla dowolnego zbioru $n$ punktów $A \subset \mathbb{R}^d$ z przestrzeni euklidesowej, istnieje coreset dla problemu k-means zawierający $O(k\epsilon^{-d} \log n)$ punktów, gdzie $d$ to wymiar (skończny) przestrzeni.
+    Dla dowolnego zbioru $n$ punktów $A \subset \mathbb{R}^d$ istnieje coreset dla problemu k-means zawierający $O(k\epsilon^{-d} \log n)$ punktów, gdzie $d$ to wymiar (skończony) przestrzeni.
 \end{thm}
 \begin{proof}
-    Dla każdego z $k$ center ze zbioru $C^{'}$ mamy $\log 10n$ kul o rożnych promieniach.
-    Dla każdej takiej kuli o promieniu $r$ obliczamy $\frac{\epsilon}{16}r$-pokrycie oraz dla każdego punktu $x \in A$, niech $B(x)$ będzie najbliższym punktem w sumie wszystkich pokryć kul.
+    Dla każdego z $k$ centrów ze zbioru $C^{'}$, który obliczyliśmy korzystając z algorytmu 10-aproksymacyjnego \cite{Arya2004LocalSH}, tworzymy $\log 10n$ kul o rożnych promieniach.
+    Dla każdej takiej kuli o promieniu $r$ obliczamy $\frac{\epsilon}{16}r$-pokrycie oraz dla każdego punktu $x \in A$, niech $B(x)$ będzie najbliższym punktem w sumie wszystkich pokryć kul $S$.
     Z lematu 8 wynika, że:
+    \begin{equation}
+        \sum_{x\in A} ||x - B(x)||^{2} \leq \Big( \frac{\epsilon}{16} \Big)^{2} \sum_{x\in A} ||x||^{2}
+    \end{equation}
+    Zauważmy, że koszt punktów $A_{c} \subseteq A$, dla których $c \in C^{'}$ jest centrem wynosi $\sum_{x\in A_{c}} ||x - c||^{2}$.
+    Jeżeli założmy, że punkt $c$ jest początkiem przestrzeni to $\sum_{x\in A_{c}} ||x - c||^{2} = \sum_{x\in A_{c}} ||x||^{2}$.
+    Zatem:
     \begin{equation}
         \sum_{x\in A} ||x - B(x)||^{2} \leq \Big( \frac{\epsilon}{16} \Big)^{2} \cdot 10 \cdot OPT
     \end{equation}
-    Teraz, rozpatrzmy dowolny zbiór $k$ center $C$:
+    Teraz, rozpatrzmy dowolny zbiór $k$ centrów $C$:
     \begin{equation}
-        \sum_{x\in A} \min_{c \in C} ||x - c||^{2} - \sum_{x\in A} \min_{c \in C} ||B(x) - c||^{2}
+        \Big|\sum_{x\in A} \min_{c \in C} ||x - c||^{2} - \sum_{s\in S} \min_{c \in C} ||s - c||^{2}\Big|
+    \end{equation}
+    \begin{equation}
+        \leq\Big|\sum_{x\in A} \min_{c \in C} ||x - c||^{2} - \sum_{x\in A} \min_{c \in C} ||B(x) - c||^{2}\Big|
     \end{equation}
     \begin{equation}
         \leq_{\text{lemat 7}} \frac{12}{\epsilon} \sum_{x\in A} ||x - B(x)||^{2} + 2\epsilon \sum_{x\in A} \min_{c \in C} ||x - c||^{2}
@@ -91,6 +102,6 @@ Taką analizę możemy zaaplikować do każdego punktu z $C^{'}$.
     \end{equation}
     gdzie ostatnia nierówność zachodzi ponieważ $OPT \leq \sum_{x\in A} \min_{c \in C} ||x - c||^{2}$ dla dowolnego zbioru center $C$.
     \\~\\
-    Skalując $\epsilon$ przez $\frac{1}{4}$ kończymy dowód.
-    Rozmiar coresetu to $O(k\epsilon^{-d} \log n)$, ponieważ obliczamy $k \log 10n$ razy $(\frac{\epsilon}{64})$- pokrycie o rozmiarze $\epsilon^{-O(d)}$.
+    Skalując $\epsilon$ przez $\frac{1}{4}$ kończymy dowód, a szukany zbiór to $S$.
+    Rozmiar coresetu $S$ to $O(k\epsilon^{-d} \log n)$, ponieważ obliczamy $k \log 10n$ razy $(\frac{\epsilon}{64})$- pokrycie o rozmiarze $\epsilon^{-O(d)}$.
 \end{proof}
