@@ -324,7 +324,7 @@ class GeometricDecomposition:
         c = 1.5
         log_const = 0.5
         power_const = 0.1
-        coverage = 200
+        coverage = 20
 
         d = self.X.shape[1]
         log = np.log(1/self.eps) if np.log(1/self.eps) > 0 else log_const
@@ -371,18 +371,12 @@ class GeometricDecomposition:
 
                 sample_size_current = sample.shape[0] if sample_size_current > sample.shape[0] else sample_size_current
                 index_coreset = np.random.choice(sample.shape[0], int(sample_size_current), replace=False)
-                
                 coreset = np.append(coreset, points[index_coreset], axis=0)
 
-                #print("rad:", current_radius)
-                #print("size:", len(sample))
                 last_radius = current_radius
                 current_radius += radius/np.power(2,i+2)
                 sample_size_current /= 2
 
-            #print(sample_size, radius, levels, len(points))
-
-        #print(coreset.shape[0])
         return coreset[1:]
 
     def compute(self):
@@ -391,18 +385,5 @@ class GeometricDecomposition:
 
         # Comupte eps ball cover for each center in centers
         coreset = self._compute_eps_cover(centers)
-
-        plt.scatter(self.X[:, 0], self.X[:, 1])
-
-        # kmeans = KMeans(n_clusters=15, random_state = 0).fit(X=Approx)
-        # plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1])
-
-        plt.scatter(coreset[:, 0], coreset[:, 1])
-
-        kmeans = KMeans(n_clusters=15, random_state = 0).fit(X=self.X)
-        plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1])
-        plt.scatter(centers[:, 0], centers[:, 1])
-
-        plt.show()
 
         return coreset

@@ -1,3 +1,67 @@
-\chapter{Analiza Implementacji}\label{analysis}
+\chapter{Podsumowanie}\label{analysis}
 
-TBA
+W ramach naszej pracy przygotowaliśmy implementację opisanych konstrukcji budowania coresetów dla problemu $k$-means.
+Całość dostępna jest w repozytorium \url{https://github.com/piotrhm/coreset}, które jest podzielone następująco:
+\dirtree{%
+.1 algorithm.
+.2 geometric.
+.3 coreset.py.
+.2 lightweight.
+.3 coreset.py.
+.1 dataset.
+.2 s-set.
+}
+\noindent
+Zacznijmy od opisu implementcji konstrukcji przedstawionej w rozdziale 4, czyli geometrycznej dekompozycji.
+Wprowadzona w tym rozdziale konstrukcja jest wynikiem czysto teoretycznym, co implikuje kilka problemów implementacyjnych.
+\begin{enumerate}
+    \item Nie umiemy w szybki sposób obliczać najbliższego sąsiada z danego zbioru dla zbioru punktu.
+    Używanie naiwnego podejścia o złożoności $O(n^2d)$ w praktyce, nawet dla niewielkich zbiorów o $n=15000$ skutkuje zauważalnym czasem obliczeń.
+    Problem jest szczególnie widoczny w implementacji heurystyki \textit{single swap}, gdzie przy każdej iteracji algorytmu musimy obliczyć funkcję $\phi$ dla nowego zbioru kandydatów na rozwiązanie.
+    Częściowym rozwiązaniem tego problemu było użycie biblioteki \textit{sklearn.neighbors} \url{https://scikit-learn.org/stable/modules/neighbors.html}.
+    \item Nie umiemy obliczać $\epsilon$-pokryć kul.
+    Jest to bardzo bolesne ponieważ nie istnieje rozsądny zamiennik tego rozwiązania.
+    W związku tym jedyną alternatywą jest użycie jakieś heurystyki, która w praktyce daje akceptowalne wyniki.
+\end{enumerate}
+
+\noindent
+Implementacja geometrycznej dekompozycji problemu $k$-means ma następujący schemat:
+\begin{enumerate}
+    \item Oblicz wielomianową aproksymację problemu $k$-means:
+    \begin{enumerate}
+        \item Oblicz 2-aproksymację dla problemu $k^{*}$-center korzystając z algorytmu Gonzaleza opisanego w 4.1, gdzie $k^{*} = O(k \log^2 n)$.
+        \item Obliczoną 2-aproksymację dla problemu $k^{*}$-center zamień na 20 - aproksymację dla problemu $k^{**}$-means, korzystając z konstrukcji opisanej w 4.2.1, gdzie $k^{**} = O(k \log^3 n)$.
+        \item Korzystajac z konstrukcji kraty wykładniczej opisanej w 4.2.3 zamień 20-aproksymację dla problemu $k^{**}$-means na $(\epsilon, k^{**})$-coreset.
+        \item Oblicz 25-aproksymację dla problemu $k$-means korzystając z heurystyki single swap, gdzie obliczony $(\epsilon, k^{**})$-coreset jest zbiorem kandydatów na centra.
+        \end{enumerate}
+    \item Oblicz $\epsilon$-pokrycie dla kul o środkach należących do zbioru $C$, gdzie $C$ to obliczona 25-aproksymacja dla problemu $k$-means.
+\end{enumerate}
+
+\noindent
+W ogólności, większość algorytmów budowy coresetów bazujach na geometrycznym podejściu cechuje skomplikowana konstrukcja oraz mało atrakcyjna złożoność.
+Nasza konstrukcja nie jest w tej kwestii wyjątkiem, jednak tym co ją wyrożnia to kroki 1.(a)-1.(c) wyżej opisanego schematu.
+Autorzy pracy \cite{10.1145/1007352.1007400} zauważyli, że dla odpowiednio dużego $k$ jesteśmy w stanie szybko obliczać najbliższego sąsiada z danego zbioru dla punktu \cite{Arya2004LocalSH}.
+Jest to kluczowe w kontekście analizy gwarancji teoretycznych jednak w praktyce zaproponowne rozwiązania są zupełnie nieużyteczne.
+Kolejną optymalizacją jest zainicjalizowanie początkowego rozwiązania $S$ w heurystyce single swap korzystając z algorytmu Gonzaleza.
+Pomysłodawcami są autorzy \cite{10.1145/1007352.1007400}, którzy nie dowodzą w żaden sposób faktycznej poprawy jakości wyników czy czasu działania.
+\\~\\
+Zaimplementowana przez nas konstrukcja geometrycznej dekompozycji problemu $k$-means miała być próbą zaproponowania konkurencyjnego rozwiązania dla lightweight coresetu.
+Niestety ale z uwagi na wyżej opisane problemy nie udało się dostarczyć rozwiązania, które byłoby zgodne z udowodnionymi gwarancjami teoretycznymi.
+Aktualny stan implementacji przedstawia mocną bazę do dalszych optymalizacji.   
+\\~\\
+Naturalnym pytaniem jest to czy istnieje \textit{praktyczny} i \textit{łatwy} w implementacji algorytm budujący coreset dla problemu $k$-means.
+Podobne pytanie zadali sobie autorzy pracy \cite{bachem2017scalable}, którzy zaproponowali konstrukcję o nazwie lightweight coreset.
+Zauważyli, że większość dostępnych algorytmów jest bardzo skomlikowana w implementacji albo nie daje żadnych gwarancji teoretycznych.
+Całą konstrukcję można streścić w kilku linijach kodu widocznego poniżej.
+\\
+\lstset{language=Python}
+\begin{lstlisting}
+    def _compute_coreset(self):
+        #Algorithm 1 Lightweight coreset construction
+        dist = np.power(self.X-self.X.mean(axis=0), 2).sum(axis=1)
+        q = 0.5/self.X.shape[0] + 0.5*dist/dist.sum()
+        indices = np.random.choice(self.X.shape[0], size=self.m, replace=True)
+        X_cs = self.X[indices, :]
+        w_cs = 1.0/(self.m*q[indices])
+        return X_cs, w_cs
+\end{lstlisting}

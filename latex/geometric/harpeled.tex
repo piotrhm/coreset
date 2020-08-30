@@ -2,9 +2,9 @@
 
 W tym podrozdziale omówimy część pracy \cite{10.1145/1007352.1007400}.
 Tematem pracy są konstrukcje algorytmów dla problemów $k$-means oraz $k$-median.
-W kontekście problemu $k$-means autorzy zaproponowali algorytm rozwiązujący problem $k$-means bazujący na budowie coresetu, który uzyskuje lepszą złożoność od \cite{Matousek99onapproximate}.
-Matoušek w swojej pracy przedstawił wielomianowy schemat aproksymacji, którego złożoność to $O(n\epsilon^{-2k^2d}\log^kn)$.
-Autorzy \cite{10.1145/1007352.1007400} poprawili tą złożoność uzyskując $O(n+k^{k+2}\epsilon^{-(2d+1)k}\log^{k+1}n \log^k\frac{1}{\epsilon})$.
+W kontekście problemu $k$-means autorzy zaproponowali algorytm rozwiązujący problem $k$-means bazujący na budowie coresetu, który uzyskuje lepszą złożoność od algorytmu przedstawionego w \cite{Matousek99onapproximate}.
+Matoušek w swojej pracy \cite{Matousek99onapproximate} przedstawił w pełni wielomianowy schemat aproksymacji, którego złożoność to $O(n\epsilon^{-2k^2d}\log^kn)$.
+Autorzy \cite{10.1145/1007352.1007400} poprawili tę złożoność uzyskując $O(n+k^{k+2}\epsilon^{-(2d+1)k}\log^{k+1}n \log^k\frac{1}{\epsilon})$.
 Schemat konstrukcji jest następujący:
 \begin{itemize}
     \item Obliczmy szybką ale niedokładną aproksymację dla problemu $k$-means z pewną dużą wartością $k$.
@@ -12,7 +12,7 @@ Schemat konstrukcji jest następujący:
 \end{itemize}
 
 
-\subsection{Szybka aproksymacja dla problemu K-means.}
+\subsection{Szybka aproksymacja dla problemu K-means}
 \noindent
 Zacznijmy od pierwszej części.
 Dokładniej, udowodnimy następujące twierdzenie.
@@ -27,6 +27,14 @@ Dokładniej, udowodnimy następujące twierdzenie.
 \end{thm}
 
 \noindent
+Twierdzenie 4.1 w pracy \cite{10.1145/1007352.1007400} ma trochę inną formę.
+Ograniczenie jest następujące:
+\begin{equation}
+    \phi_{P}(X) \leq 32 \phi_{opt}^{k}(P)
+\end{equation}
+Z analizy, którą zaraz przeprowadzimy wynika, że wspóczynnik aproksymacji jest równy $20$.
+Autorzy potrzebowali wspóczynnika równego $32$ z uwagi na inne zastosowanie twierdzenia 4.1 niż nasze.
+\\~\\
 Niech $P \subset \mathbb{R}^{d}$ będzie danym na wejściu zbiórem $n$ punktów.
 Chcemy szybko obliczyć aproksymację dla problemu $k$-means na tym zbiorze, gdzie rozmiar wynikowego zbioru punktów będzie rzędu $O(k \log^{3}n)$.
 
@@ -42,24 +50,28 @@ Chcemy szybko obliczyć aproksymację dla problemu $k$-means na tym zbiorze, gdz
 \noindent
 Na początku opiszemy procedurę, która dla danego $P$, wyznacza zbiór punktów $X$ o mocy rzędu $O(k \log^{2}n)$ oraz zbiór $P^{'} \subset P$.
 Zbiór $P^{'}$ będzie zawierać \textit{dobre} punkty dla zbioru $X$.
+Intuicyjnie procedura ma na celu przekształcenie obliczonej 2-aproksymacji problemu k-centrów dla zbioru $P$ tak, aby rozwiązanie było aplikowalne do problem $k$-means z zachowaniem pewnych gwarancji teoretycznych.
+Punkty \textit{dobre} nie wymagają od nas dodatowej pracy, ponieważ dla każego punktu $p \in P^{'}$ instnieje punkt $x \in X$, który \textit{dobrze} aproksymuje wartość $d(p, C_{opt})$, a dokładniej $ d(p, x) \leq 2d(p, C_{opt})$.
 \\~\\
 Konstrukcję zbioru $X$ zaczynamy od obliczenia 2-aproksymacji problemu k-centrów dla zbioru $P$.
 Niech obliczony zbiór centrów to $V$.
 Taką aproksymację dla $k = O(n^{\frac{1}{4}})$ możemy obliczyć w czasie $O(n)$ oraz dla $k = \Omega(n^{\frac{1}{4}})$ w czasie $O(n \log k)$ \cite{10.1145/62212.62255}.
 Są to wyniki teoretyczne, które zakładamy na potrzebę analizy.
-W podrozdziale 4.1 przedstawiliśmy algorytm aproksymacyjny rozwiązujący ten problem w czasie $O(nk)$ dla dowolnego $k$.
+W podrozdziale 4.1 przedstawiliśmy algorytm aproksymacyjny z pracy \cite{Gonzalez1985ClusteringTM}, rozwiązujący ten problem w czasie $O(nk)$ dla dowolnego $k$.
 Algorytmy o lepszej złożoności są w istotny sposób bardziej skomplikowane, dlatego w naszej implementacji zastosowaliśmy algorytm Gonzaleza.
-Niech $L$ będzie promieniem takiej aproksymacji, czyli największą odległością pomiędzy punktem $v \in V$ a punktem $p \in P-V$.
+Niech $L$ będzie promieniem takiej aproksymacji, czyli największą odległością pomiędzy punktem $v \in V$ a punktem $p \in P-V$, dla którego punkt $v$ jest centrem.
+Dla przypomnienia, punkt $v \in V$ będzie centrem dla punktu $p \in P-V$, jeżeli wartość $d(v,p)$ jest najmniejsza spośród wszystkich punktów z $V$.
 Ponieważ algorytm z pracy \cite{10.1145/62212.62255} bazuje na algorytmie przedstawionym w podrozdziale 4.1 z pracy \cite{Gonzalez1985ClusteringTM} to dystans pomiędzy dowolną parą punktów z $V$ wynosi co najmniej $L$.
 To implikuje następujące ograniczenia:
 \begin{equation}
     \Big( \frac{L}{2 } \Big)^2 \leq \phi_{opt}^{k}(V) \leq \phi_{opt}^{k}(P) \leq nL^{2}
 \end{equation}
 Dolne ograniczenie argumentujemy tym, że możemy ograniczyć $\phi_{opt}^{k}(V)$ przez $d(v_{1}, v_{2})^2$, gdzie $v_{1}, v_{2} \in V$.
-Górne ograniczenie wynika z faktu, że promień aproksymacji jest równy $L$, więc dla $n$ elementowego zbioru $P$ wartość funkcji $\phi_{opt}^{k}(P)$ nie może być większa niż $nL^2$.
+Górne ograniczenie wynika z faktu, że promień aproksymacji jest równy $L$, zatem dla $n$ elementowego zbioru $P$ wartość funkcji $\phi_{opt}^{k}(P)$ nie może być większa niż $nL^2$.
 \\~\\
 Następnym krokiem konstrukcji jest wylosowanie $\rho = \gamma k \log^{2} n$ punktów ze zbioru $P$, gdzie $\gamma$ jest stałą, która wynika z analizy, którą zaraz przeprowadzimy.
-Niech $Y$ będzie zbiorem wylosowanych punktów z $P$ oraz $X = Y \cup V$ będzie zbiorem środków klastów.
+Niech $Y$ będzie zbiorem wylosowanych punktów z $P$ oraz $X = Y \cup V$ będzie zbiorem środków klastrów.
+Klasterem nazywamy skończony zbioru punktów $x_{1}, \dots, x_{k} \in \mathbb{R}^{d}$, które łączy pewna wspólna cecha.
 Dla $\rho > n$ przyjmujemy $X = P$.
 \\~\\
 Konstrukcja zbioru $X$ jest stosunkowo prosta.
@@ -69,7 +81,7 @@ Dużo cięższym zadaniem jest zbudowanie zbioru $P^{'}$, który jest zbiorem \t
 
 Rozpatrzmy zbiór $C_{opt}$, który jest optymalnym zbiorem centrów problemu $k$-means dla zbioru $P$ i liczby $k$.
 Dla każdego $c_{i} \in C_{opt}$ tworzymy kulę $B_{i}$ o środku w $c_{i}$.
-Każda taka kula będzie zawierać $\eta = \frac{n}{20k \log n}$ punktów z $P$.
+Każda taka kula będzie zawierać co najwyżej $\eta = \frac{n}{20k \log n}$ punktów z $P$.
 Jeżeli zastosowana do wylosowania zbioru $X$ stała $\gamma$ jest odpowiednio duża to z wysokim prawdopodobieństwem w każdym $B_{i}$ jest przynajmniej jeden punkt z $X$.
 Dokładniej:
 \begin{equation}
@@ -77,10 +89,10 @@ Dokładniej:
 \end{equation}
 
 \noindent
-Niech $P_{bad}$ będzie zbiorem złych punktów $P$ w kontekście zbioru $X$.
-Załóżmy, że dla każdego $B_{i}$ istnieje punkt $x_{i} \in X$, który $x_{i} \in B_{i}$.
-Zauważmy, że dla każdego punktu $p \in P \setminus B_{i}$, dla którego $x_{i}$ jest najbliższym punktem z $X$ mamy $||p - x_{i}|| \leq 2||p - c_{i}||$.
-W szczególności takie punkty są \textit{dobre}, jeżeli $c_{i}$ jest najbliższym punktem z $C_{opt}$.
+Niech $P_{bad}$ będzie zbiorem złych punktów z $P$ dla zbioru $X$.
+Załóżmy, że dla każdego $B_{i}$ istnieje punkt $x_{i} \in X \cap B_{i}$.
+Zauważmy, że dla każdego punktu $p \in P \setminus B_{i}$, dla którego $x_{i}$ jest najbliższym punktem z $X$ mamy $||p - x_{i}|| \leq 2||p - c_{i}||$, ponieważ $V \subseteq X$.
+W szczególności, jeżeli $c_{i}$ jest najbliższym punktem z $C_{opt}$ dla punktu  $p \in P \setminus B_{i}$, to taki punkt jest \textit{dobry} dla zbioru $X$.
 Zatem z wysokim prawdopodobieństwem jedyne \textit{złe} punkty będą w kulach $B_{i}$ dla $ i = 1, \dots, k$.
 To implikuje, że z wysokim prawdopodobieństwem liczba złych punktów w $P$ dla zbioru $X$ to co najwyżej $\beta = k\eta = \frac{n}{20 \log n}$.
 \\~\\
@@ -116,7 +128,7 @@ Chcielibyśmy aby $|P^{'}| \geq \frac{n}{2}$ oraz $\phi_{P^{'}}(X) = O(\phi_{P^{
 Teraz udowodnimy, że faktycznie tak zdefiniowane $P^{'}$ spełnia powyższe założenia.
 
 \begin{proof}
-    Moc zbioru $P^{'}$ jest na pewno równa conajmniej $\Big(n - |P_{\infty}| - M\frac{n}{10 \log n} \Big)$, gdzie ostatni składni jest mocą wszystkich $M$ zbiorów $P_{i}$, które zawierają nie więcej niż $2\beta$ punktów.
+    Moc zbioru $P^{'}$ jest na pewno równa conajmniej $\Big(n - |P_{\infty}| - M\frac{n}{10 \log n} \Big)$, gdzie ostatni składni jest mocą wszystkich zbiorów $P_{i}$, które zawierają nie więcej niż $2\beta$ punktów, których jest co najwyżej $M$.
     Zauważmy, że $P_{\infty} \subseteq P_{bad}$ oraz $|P_{bad}| \leq \beta$.
     Zatem:
     \begin{equation}
@@ -177,10 +189,10 @@ Złożoność pozostanie taka sama, czyli $O(n)$ dla $k = O(n^{\frac{1}{4}})$ or
 \subsection{Krata wykładnicza.}
 
 Przejdzmy teraz do kluczowej części tego podrozdziału, czyli budowy kraty wykładniczej, która jest autorską konstrukcją \cite{10.1145/1007352.1007400}.
-Krata wykładnicza jest obiektem geometryczny zbudowanym z komórek, które są hipersześcianami.
+Krata wykładnicza jest obiektem geometrycznym zbudowanym z komórek, które są hipersześcianami.
 Każda krata posiada punkt początkowy, od którego zaczynamy konstrukcję przylegających do siebie komórek o zwiększających się długościach boków.
 Komórki zawierają punkty z danego na wejścu zbioru danych oraz punkt początkowy jest ustalonym punktem z tego zbioru.
-Konstrukcję dzielimy na $\log n$ poziomów, gdzie $n$ to moc wejściowego zbioru.
+Konstrukcję dzielimy na $\log n$ poziomów, gdzie $n$ jest mocą wejściowego zbioru.
 Komórki o tych samych długościach boków należą do tego samego poziomu.
 Na rysunku 4.1 widzimy 3 poziomową kartę wykładniczą w $\mathbb{R}^2$.
 Komórki są kwadratami a punktem początkowym jest $c$.
@@ -203,6 +215,7 @@ Do takiego punktu przypisujemy wagę, która bedzie równa liczbie punktów z ko
 Po przejściu całej kraty otrzymamy zbiór $S_{i}$ takich punktów.
 Definujemy $S = \bigcup_{i} S_{i}$, który jest  $(\epsilon, k)$ coresetem.
 Dowód tego, że zbiór $S$ jest $(\epsilon, k)$ coresetem pomijamy z uwagi na jego mechniczność i żmudność.
+Można do znaleźć w \cite{10.1145/1007352.1007400}.
 Zauważmy, że $|S| = O\Big( \frac{|A| \log n }{ (c\epsilon)^{d} } \Big)$, ponieważ każda krata ma $\log n$ poziomów, a każdy poziom stałą liczbę komórek.
 \begin{figure}[H]
     \centering
@@ -210,6 +223,6 @@ Zauważmy, że $|S| = O\Big( \frac{|A| \log n }{ (c\epsilon)^{d} } \Big)$, ponie
     \caption{Krata wykładnicza, gdzie $c = x_{i}$. W najbliższym otoczeniu punktu $c$ widzimy kratę $V_{i,0}$ z długością komórki równej $r_{0} = \epsilon R$.
     Dla uproszczenia pomijam zmienne w mianowniku wcześniej podanej definicji $r_{j}$.
     Kolejny poziom to krata $V_{i,1}$ o długości komórek równej $r_{1} = 2 \epsilon R$.
-    Zielone punkty to reprezentanci danej komórki, którym przyjmujemy odpowienie wagi równe ilości punktów w komórce. 
+    Zielone punkty to reprezentanci danej komórki, którym przypisujemy odpowienie wagi równe liczbie punktów w komórce. 
     }
 \end{figure}

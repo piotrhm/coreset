@@ -34,6 +34,11 @@
 \newblock {\em The Discrepancy Method: Randomness and Complexity}.
 \newblock Cambridge University Press, 2000.
 
+\bibitem{doi:10.1137/S0036144599352836}
+{\sc Du, Q., Faber, V., and Gunzburger, M.}
+\newblock Centroidal voronoi tessellations: Applications and algorithms.
+\newblock {\em SIAM Review 41}, 4 (1999), 637--676.
+
 \bibitem{10.1145/62212.62255}
 {\sc Feder, T., and Greene, D.}
 \newblock Optimal algorithms for approximate clustering.

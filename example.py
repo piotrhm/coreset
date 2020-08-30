@@ -3,6 +3,7 @@ import algorithm.lightweight.coreset as alc
 import common.utils as utils
 import matplotlib.pyplot as plt
 import numpy as np
+import statistics
 
 from sklearn.cluster import KMeans
 
@@ -30,14 +31,18 @@ def test_coreset():
     return cost
 
 
-# cost = test_no_coreset()
-# cost_cs = test_coreset()
+cost = test_no_coreset()
 
-plt.scatter(data[:, 0], data[:, 1])
-plt.scatter(coreset[:, 0], coreset[:, 1])
+results = []
+for i in range(100):
+    coreset, weights = lwcs.compute()
+    cost_cs = test_coreset()
+    results.append((cost-cost_cs)/cost)
+
+
+print(statistics.mean(results))
+
 
 # print("cost no coreset ", cost)
 # print("cost coreset ", cost_cs)
 # print("coreset improvment: {:.1%} ".format(np.abs(cost-cost_cs)/cost))
-
-plt.show()

@@ -15,7 +15,7 @@ To jak określamy charakterystykę ważnych informacji jest ściśle zależne od
 Coresety są strukturą algorytmiczną, która ma na celu indentyfikacje takich cech oraz określenie akceptowalnego kompromisu dla różnych funkcji celu.
 
 Mówiąc ogólniej, mamy na wejściu zbiór danych $A \subset U$, gdzie $U$ oznacza jakieś uniwersum, zbiór potencjalnych rozwiązań $C$ pewnego problemu oraz funkcję celu $f:P(U) \times C \rightarrow \mathbb{R}_{\geq0}$, gdzie $P(U)$ oznacza zbiór potęgowy dla uniwersum.
-Chcemy znaleźć istotnie mniejszy zbiór danych $S \subset U$, dla którego dla każdego potencjalnego rozwiązania $c \in C$ daje wartość $f(S, c)$ \textit{dobrze} aproksymujące $f(A,c)$.
+Chcemy znaleźć istotnie mniejszy zbiór danych $S \subset U$, dla którego dla każdego potencjalnego rozwiązania $c \in C$ daje wartość $f(S, c)$ \textit{dobrze} aproksymującą $f(A,c)$.
 A dokładniej:
 \begin{equation}
     |f(A,c) - f(S,c)| < \epsilon f(A,c)
@@ -28,6 +28,6 @@ W tej pracy skupimy się na konstrukcjach dla problemu $k$-means, który należy
 Najpopularniejszym algorytmem heurystycznym dla tego problemu jest algorytm Lloyd'a \cite{1056489}.
 Z uwagi na to, że złożoność algorytmu istotnie zależy od rozmiaru wejściowych danych, jest on idealnym kandydatem do optymalizacji poprzez odpowiednią konstrukcję coresetu.
 
+Rozdział 2 niniejszej pracy poświęcony jest wpowadzeniu potrzebnych definicji i pojęć.
 W rozdziale 3 opiszemy budowę \textit{lightweight coresetu} z pracy \cite{bachem2017scalable}.
-Następnie, w rozdziale 4 przedstawimy konstrukcję \textit{coresetu} bazującą na geomtrycznej dekompozycji problemu korzystając z badań \cite{DBLP:journals/ki/MunteanuS18}
-W ostatnim, 5 rozdziale omówimy przeprowadzone eksperymenty dla zaimplementowanych konstrukcji coresetów oraz porównamy ich wyniki. 
+Następnie, w rozdziale 4 przedstawimy konstrukcję \textit{coresetu} bazującą na geomtrycznej dekompozycji problemu korzystając z badań \cite{DBLP:journals/ki/MunteanuS18}.

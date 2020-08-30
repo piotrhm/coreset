@@ -14,7 +14,7 @@ Praca \cite{DBLP:journals/ki/MunteanuS18} przedstawia inną technikę, która ba
 Dla przybliżenia idei konstrukcji załóżmy, że znamy $OPT = \phi_{opt}^{k}(A)$.
 Algorytm zaczyna od budowy kul o promieniach równych $\frac{1}{n}OPT$ a kończy na promieniach równych $10 OPT$, gdzie $n$ to moc zbioru $A$.
 Dla takich kul budujemy $\epsilon$-pokrycie kuli.
-W pracy pod pojęciem \textit{kula} rozmumiemy sferę w przestrzeni o wymiarze $d$.
+W pracy pod pojęciem \textit{kula} rozumiemy sferę w przestrzeni o wymiarze $d$.
 
 \begin{lemma}{\cite{pisier_1989}}
     Niech $U$ będzie sferą jednostkową w $\mathbb{R}^{d}$.
@@ -64,24 +64,25 @@ Jest to problematyczne w kontekście implementacji jednak tę kwestię poruszymy
 \end{proof}
 \noindent
 Powyżej zdefiniowana procedura zaczyna konstruckję w punkcie o współrzędnych zerowych $(0, \dots, 0)$.
-W dowodzie twierdzenia 4.3 wykorzystamy lemacie 8, aplikując go do każdego punktu z $C^{'}$.
+W dowodzie twierdzenia 4.3 wykorzystamy lemat 4.6, aplikując go do każdego punktu z $C^{'}$.
 \begin{thm}
-    Dla dowolnego zbioru $n$ punktów $A \subset \mathbb{R}^d$ istnieje coreset dla problemu k-means zawierający $O(k\epsilon^{-d} \log n)$ punktów, gdzie $d$ to wymiar (skończony) przestrzeni.
+    Dla dowolnego zbioru $n$ punktów $A \subset \mathbb{R}^d$ istnieje $(\epsilon, k)$-coreset dla problemu $k$-means zawierający $O(k\epsilon^{-d} \log n)$ punktów, gdzie $d$ to wymiar (skończony) przestrzeni.
 \end{thm}
 \begin{proof}
     Dla każdego z $k$ centrów ze zbioru $C^{'}$, który obliczyliśmy korzystając z algorytmu 10-aproksymacyjnego \cite{Arya2004LocalSH}, tworzymy $\log 10n$ kul o rożnych promieniach.
-    Dla każdej takiej kuli o promieniu $r$ obliczamy $\frac{\epsilon}{16}r$-pokrycie oraz dla każdego punktu $x \in A$, niech $B(x)$ będzie najbliższym punktem w sumie wszystkich pokryć kul $S$.
-    Z lematu 8 wynika, że:
+    Dla każdej takiej kuli o promieniu $r$ obliczamy $\frac{\epsilon}{16}r$-pokrycie.
+    Niech $S$ będzie sumą wszystkich pokryć kul oraz niech $B(x)$ będzie najbliższym punktem w $S$ dla każdego punktu $x \in A$.
+    Z lematu 4.6 wynika, że:
     \begin{equation}
         \sum_{x\in A} ||x - B(x)||^{2} \leq \Big( \frac{\epsilon}{16} \Big)^{2} \sum_{x\in A} ||x||^{2}
     \end{equation}
     Zauważmy, że koszt punktów $A_{c} \subseteq A$, dla których $c \in C^{'}$ jest centrem wynosi $\sum_{x\in A_{c}} ||x - c||^{2}$.
     Jeżeli założmy, że punkt $c$ jest początkiem przestrzeni to $\sum_{x\in A_{c}} ||x - c||^{2} = \sum_{x\in A_{c}} ||x||^{2}$.
-    Zatem:
+    Zatem, ponieważ $C^{'}$ został uzyskany algorytmem 10-aproksymacyjnym uzyskujemy:
     \begin{equation}
         \sum_{x\in A} ||x - B(x)||^{2} \leq \Big( \frac{\epsilon}{16} \Big)^{2} \cdot 10 \cdot OPT
     \end{equation}
-    Teraz, rozpatrzmy dowolny zbiór $k$ centrów $C$:
+    Aby pokazać, że $S$ jest szukanym zbiorem rozpatrzmy dowolny zbiór $k$ centrów $C$:
     \begin{equation}
         \Big|\sum_{x\in A} \min_{c \in C} ||x - c||^{2} - \sum_{s\in S} \min_{c \in C} ||s - c||^{2}\Big|
     \end{equation}
@@ -89,7 +90,7 @@ W dowodzie twierdzenia 4.3 wykorzystamy lemacie 8, aplikując go do każdego pun
         \leq\Big|\sum_{x\in A} \min_{c \in C} ||x - c||^{2} - \sum_{x\in A} \min_{c \in C} ||B(x) - c||^{2}\Big|
     \end{equation}
     \begin{equation}
-        \leq_{\text{lemat 7}} \frac{12}{\epsilon} \sum_{x\in A} ||x - B(x)||^{2} + 2\epsilon \sum_{x\in A} \min_{c \in C} ||x - c||^{2}
+        \leq_{\text{lemat 4.5}} \frac{12}{\epsilon} \sum_{x\in A} ||x - B(x)||^{2} + 2\epsilon \sum_{x\in A} \min_{c \in C} ||x - c||^{2}
     \end{equation}
     \begin{equation}
         \leq \frac{12}{\epsilon} \Big( \frac{\epsilon}{16} \Big)^{2} \cdot 10 \cdot OPT + 2\epsilon \sum_{x\in A} \min_{c \in C} ||x - c||^{2}
@@ -102,6 +103,6 @@ W dowodzie twierdzenia 4.3 wykorzystamy lemacie 8, aplikując go do każdego pun
     \end{equation}
     gdzie ostatnia nierówność zachodzi ponieważ $OPT \leq \sum_{x\in A} \min_{c \in C} ||x - c||^{2}$ dla dowolnego zbioru center $C$.
     \\~\\
-    Skalując $\epsilon$ przez $\frac{1}{4}$ kończymy dowód, a szukany zbiór to $S$.
+    Skalując $\epsilon$ przez $\frac{1}{4}$ kończymy dowód.
     Rozmiar coresetu $S$ to $O(k\epsilon^{-d} \log n)$, ponieważ obliczamy $k \log 10n$ razy $(\frac{\epsilon}{64})$- pokrycie o rozmiarze $\epsilon^{-O(d)}$.
 \end{proof}

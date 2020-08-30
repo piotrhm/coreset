@@ -14,22 +14,34 @@ W tej pracy przyjmujemy, że działamy w przestrzeni euklidesowej w skończonym 
 Załóżmy, że mamy dany konkretny problem optymalizacyjny. 
 
 \begin{definition}
-    \emph{$\alpha$-aproksymacją} dla problemu optymalizującego nazywamy wielomianowy algorytm, który dla każdej instancji problemu minimalizacyjnego oblicza rozwiązanie, którego wartość spełnia: 
+    \emph{$\alpha$-aproksymacją} dla problemu optymalizacyjnego nazywamy wielomianowy algorytm, który dla każdej instancji $I$ problemu minimalizacyjnego oblicza rozwiązanie, którego wartość spełnia: 
     \begin{equation}
-        A \leq \alpha \cdot OPT
+        A(I) \leq \alpha \cdot OPT
     \end{equation}
-    gdzie $A$ jest wartością obliczonego rozwiązania, a $OPT$ jest wartością optymalnego rozwiązania.
+    gdzie $A$ jest wartością obliczonego rozwiązania dla instancji $I$, a $OPT$ jest wartością optymalnego rozwiązania tej instancji.
     Zmienną $\alpha$ nazywamy \textit{współczynnikiem aproksymacji}.
-    Analogicznie możemy zdefiniować  \emph{$\alpha$-aproksymacja} dla instancji problemu maksymalizacyjnego, gdzie wartość $A$ obliczonego rozwiązania spełnia:
+    Analogicznie możemy zdefiniować  \emph{$\alpha$-aproksymację} dla problemu maksymalizacyjnego.
+    Jest nim wielomianowy algorytm, który dla każdej instancji $I$ spełnia:
     \begin{equation}
-        A \geq \frac{1}{\alpha} \cdot OPT
+        A(I) \geq \frac{1}{\alpha} \cdot OPT
     \end{equation}
+    gdzie $A$ i $OPT$ są zdefiniowane tak jak wyżej.
 \end{definition}
 
 \begin{definition}
-    \emph{Wielomianowym schematem aproksymacji} dla problemu optymalizującego nazywamy zbiór algorytmów, który dla danego $\epsilon > 0$ zawiera algorytm aproksymacyjny $A$ o wspołczynniku aproksymacji równym $(1+\epsilon)$.
-    Złożoność algorytmu $A$ jest wielomianowa ze względu na rozmiar instancji problemu podanej na wejściu A dla danego $\epsilon$.
+    \emph{Wielomianowym schematem aproksymacji} dla problemu optymalizacyjnego nazywamy rodzinę algorytmów $\{A_{\epsilon}\}$, która dla danego $\epsilon > 0$ zawiera algorytm aproksymacyjny $A_{\epsilon}$ o wspołczynniku aproksymacji równym $(1+\epsilon)$ dla problemu minimalizacyjnego albo $(1-\epsilon)$ dla problemu maksymalizacyjnego.
+    Złożoność algorytmu $A_{\epsilon}$ jest wielomianowa ze względu na rozmiar instancji problemu podanej na wejściu $A_{\epsilon}$.
 \end{definition}
+
+\noindent
+W poprzedniej definicji złożoność algorytmu $A_{\epsilon}$ jest niegraniczona względem $\frac{1}{\epsilon}$.
+Oznacza to, że złożoność algorytmu $A_{\epsilon}$ może być wykładniczo zależna od $\frac{1}{\epsilon}$.
+W związku z tym wprowadzimy silniejszą definicję 2.3.
+
+\begin{definition}
+    \emph{W pełni wielomianowym schematem aproksymacji} jest wielomianowy schemat aproksymacji, dla którego złożoność algorytmu $A_{\epsilon}$  jest wielomianowa od $\frac{1}{\epsilon}$.  
+\end{definition}
+
 
 \begin{definition}
     \emph{Centroidem} dla skończonego zbioru punktów $x_{1}, \dots, x_{k} \in \mathbb{R}^{d}$ nazywamy:
@@ -51,7 +63,7 @@ Zacznijmy od zdefiniowania problemu, dla którego będziemy analizować konstruk
 \end{definition}
 
 \noindent
-Definicja 2.4 zakłada, że działamy w przestrzeni euklidesowej.
+Definicja 2.6 zakłada, że działamy w przestrzeni euklidesowej.
 Uogólnioną wersję można zdefiniować analogicznie, zamieniając $d$ na odpowiednią funkcję miary w danej przestrzeni.
 
 \begin{figure}[H]
@@ -98,8 +110,8 @@ Zacznijmy od podstawowej definicji coresetu dla problemu $k$-means.
 \end{definition}
 
 \noindent
-Intuicyjnie $(\epsilon, k)$-aproksymacje zbioru centroidów możemy rozumieć jako zbiór $A \subset \mathbb{R}^{d}$, który zawiera $k$ elementowy podzbiór $C \subseteq A$ \textit{dobrze} aproksymujący $C_{opt}$.
-Definicja 2.8 pojawia się tutaj z dwóch powodów.
+Intuicyjnie $(\epsilon, k)$-aproksymację zbioru centroidów możemy rozumieć jako zbiór $A \subset \mathbb{R}^{d}$, który zawiera $k$ elementowy podzbiór $C \subseteq A$ \textit{dobrze} aproksymujący $C_{opt}$.
+Definicja 2.9 pojawia się tutaj z dwóch powodów.
 Po pierwsze jest ona pewngo rodzaju prekursorem coresetów, a po drugie jest ona konieczna w definicji 2.10.
 
 \begin{definition}
@@ -114,17 +126,28 @@ Po pierwsze jest ona pewngo rodzaju prekursorem coresetów, a po drugie jest ona
 Zauważmy, że taka definicja daje nam bardzo moce gwarancje teoretyczne.
 Wartość funkcji $\phi_{C}(Q)$ aproksymuje $\phi_{X}(Q)$ ze współczynnikiem aproksymacji równym $(1+\epsilon)$ dla dowolnego zbioru $k$ kandydatów $Q$ na rozwiązanie problemu $k$-means.
 Jest to na tyle istotne, że w literaturze odróżnimy taką wersję nazywając ją \textit{strong coresetem}.
-Definicja 2.9 jest wariantem ciągłym, czyli punkty należące do coresetu są dowolnymi punktami przestrzeni, w szczególności nie muszą należeć do zbioru $X$.
+Definicja 2.10 jest wariantem ciągłym, czyli punkty należące do coresetu są dowolnymi punktami przestrzeni, w szczególności nie muszą należeć do zbioru $X$.
 W praktyce stosuje się wariant dyskretny, który zakłada, że $C \subseteq X$.
-Tak samo jak w problemie $k$-means, coreset może być zdefiniowany w wariancie ważonym.
-Oznacza to, że dla zbióru $C$ z definicji 2.9 definujemy funkcję wag $w: C \rightarrow \mathbb{R}_{\ge0}$. 
-Reszta pozostaje bez zmian, ponieważ funkcja $\phi$ uwzględnia $C$ będące zbiorem ważonym.
+
 \begin{figure}[H]
     \centering
     \includegraphics[totalheight=7cm]{coreset.png}
     \caption{Pomarańczowe punkty tworzą coreset dla zbioru niebieskich punktów. 
     Parametry: $k=15$, $\epsilon = 0.1$, $n = 15000$.}
 \end{figure}
+
+\begin{definition}
+    \emph{Coreset - wersja ważona.} Niech $X_{w}$ będzie skończonym zbiórem punktów z $\mathbb{R}^{d}$ oraz niech $w$ będzie funkcją $w_{x}: X_{w} \rightarrow \mathbb{R}_{\ge0}$.
+    Skończony zbiór $C_{w} \subset \mathbb{R}^{d}$ wraz z funkcją $w_{c}: C_{w} \rightarrow \mathbb{R}_{\ge0}$ nazywamy $(\epsilon, k)$ coresetem, gdzie $\epsilon \in (0, 1)$, jeżeli dla dowolnego $k \in \mathbb{N}$ elementowego zbioru $Q \subset \mathbb{R}^{d}$ zachodzi:
+    \begin{equation}
+        |\phi_{X_{w}}(Q) - \phi_{C_{w}}(Q)| \leq \epsilon\phi_{X_{w}}(Q)
+    \end{equation}
+\end{definition}
+
+\noindent
+Tak samo jak w problemie $k$-means, coreset może być zdefiniowany w wariancie ważonym.
+Oznacza to, że dla zbióru $C$ z definicji 2.10  musimy zdefinujować funkcję wag $w_{c}: C \rightarrow \mathbb{R}_{\ge0}$.
+Nierówność pozostaje bez zmian, ponieważ funkcja $\phi$ uwzględnia $C_{w}$ oraz $X_{w}$ będące zbiorami ważonymi.
 
 \begin{definition}
     \emph{Coreset - weak (w wariancie dyskretnym).} Niech $X$ będzie skończonym zbiorem punktów z $\mathbb{R}^{d}$.
@@ -137,7 +160,7 @@ Reszta pozostaje bez zmian, ponieważ funkcja $\phi$ uwzględnia $C$ będące zb
 \end{definition}
 
 \noindent
-\textit{Słabość} definicji 2.10 wynika z konieczności budowy zbioru $A$.
+\textit{Słabość} definicji 2.12 wynika z konieczności budowy zbioru $A$.
 Intuicyjnie zbiór $A$ pomaga coresetowi w zachowaniu odpowiedniego współczynnika aproksymacji, ponieważ w zbiorze $A$ istnieje \textit{dobry} kandydat na rozwiązanie.
-W pracy korzystamy wyłącznie z definicji 2.9.
+W pracy korzystamy wyłącznie z definicji 2.10 oraz 2.11.
 Z uwagi na to, że nasza praca ma charakter przeglądowy zdefiniowaliśmy wszystkie możliwe warianty coresetów.

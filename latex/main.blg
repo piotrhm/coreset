@@ -6,45 +6,45 @@ Database file #1: bibliography.bib
 Warning--empty journal in bachem2017scalable
 Warning--empty journal in 10.1145/1007352.1007400
 Warning--empty journal in Matousek99onapproximate
-You've used 14 entries,
+You've used 15 entries,
             2253 wiz_defined-function locations,
-            620 strings with 6312 characters,
-and the built_in function-call counts, 4706 in all, are:
-= -- 453
-> -- 218
+            627 strings with 6497 characters,
+and the built_in function-call counts, 5051 in all, are:
+= -- 486
+> -- 235
 < -- 0
-+ -- 93
-- -- 76
-* -- 359
-:= -- 766
-add.period$ -- 41
-call.type$ -- 14
-change.case$ -- 78
++ -- 100
+- -- 82
+* -- 391
+:= -- 823
+add.period$ -- 44
+call.type$ -- 15
+change.case$ -- 84
 chr.to.int$ -- 0
-cite$ -- 17
-duplicate$ -- 177
-empty$ -- 363
-format.name$ -- 76
-if$ -- 987
+cite$ -- 18
+duplicate$ -- 186
+empty$ -- 390
+format.name$ -- 82
+if$ -- 1058
 int.to.chr$ -- 0
-int.to.str$ -- 14
-missing$ -- 16
-newline$ -- 71
-num.names$ -- 28
-pop$ -- 75
+int.to.str$ -- 15
+missing$ -- 17
+newline$ -- 76
+num.names$ -- 30
+pop$ -- 79
 preamble$ -- 1
-purify$ -- 66
+purify$ -- 71
 quote$ -- 0
-skip$ -- 121
+skip$ -- 126
 stack$ -- 0
-substring$ -- 289
-swap$ -- 57
+substring$ -- 315
+swap$ -- 59
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 52
+type$ -- 56
 warning$ -- 3
-while$ -- 39
-width$ -- 16
-write$ -- 140
+while$ -- 42
+width$ -- 17
+write$ -- 150
 (There were 3 warnings)

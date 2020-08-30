@@ -1,8 +1,8 @@
 \chapter{Lightweight Coreset}
 
-Budowa coresetów w kontekście problemu \textit{k-means} ma bardzo długo historię.
+Budowa coresetów w kontekście problemu \textit{k-means} ma bardzo długą historię.
 Za przełomową pracę uznaje się \cite{Matousek99onapproximate}, która jako 
-pierwsza przedstawiła wielomianowy schemat aproksymacji o złożoności $O(n\epsilon^{-2k^2d}\log^kn)$ budujący coreset dla problemu $k$-means.
+pierwsza przedstawiła w pełni wielomianowy schemat aproksymacji o złożoności $O(n\epsilon^{-2k^2d}\log^kn)$ rozwiązujący problemu $k$-means, bazując na budowie coresetu.
 \\~\\
 Wyróżnia się trzy techniki budowania coresetów:
 \begin{itemize}
@@ -12,7 +12,7 @@ Wyróżnia się trzy techniki budowania coresetów:
 \end{itemize}
 Pierwsza i trzecia technika cechuje się mocnymi gwarancjami teoretycznymi.
 Niestety większość rozwiązań jest mało praktyczna i kosztowna czasowo.
-Losowe próbkowanie w praktyce daje bardzo przyzwoite wyniki jednak bardzo często nie daje nam żadnej gwarancji odnośnie optymalności rozwiązania.
+Losowe próbkowanie w praktyce daje zadowalające wyniki jednak bardzo często nie daje nam żadnej gwarancji odnośnie optymalności rozwiązania.
 Autorzy pracy \cite{bachem2017scalable} zaproponowali rozwiązanie o nazwie \textit{lightweight coreset}, które w swoich założeniach ma łączyć:
 \begin{itemize}
     \item Prostą implementacje.

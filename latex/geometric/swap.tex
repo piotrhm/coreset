@@ -1,6 +1,11 @@
 \section{Heurystyka single swap}
 
-W tym podrozdziale opiszemy heurystykę single swap \cite{Arya2004LocalSH}, która jest przykładem techinki \textit{local search}.
+W tym podrozdziale opiszemy heurystykę single swap \cite{Arya2004LocalSH}, która jest przykładem techniki \textit{local search}.
+Metoda local search jest heurystyką, która zaczyna od dowolnego rozwiązania $S$ problemu optymalizującego.
+Następnie sprawdza czy niewielka zmiana rozwiązania $S$ poprawia wartość funkcji celu problemu.
+Jeżeli tak, to wykonuje tą zmianę.
+Heurystyka kończy swoje działanie w momencie kiedy zmiana w rozwiązaniu nie poprawia funkcji celu.
+W efekcie otrzymujemy lokalnie optymalne rozwiązanie dla danego na wejściu problemu optymalizującego.
 Algorytm jest $(25 + \epsilon)$ aproksymacją problemu $k$-means, która zakłada, że na wejściu dostajemy zbiór kandydatów na centra $C$ oraz zbiór $n$ punktów $P \subset \mathbb{R}^d$.
 Autorzy \cite{Arya2004LocalSH} w celu wyznaczenia $C$ wykorzystują algorytm z pracy \cite{Matousek99onapproximate}, którą zastąpimy pracą \cite{10.1145/1007352.1007400} z uwagi na lepsze gwarancje teoretyczne.
 Korzystając z algorytmu opisanego w podrozdziale 4.2.3 wyznaczamy zbiór $C$, który będzie obliczonym $(\epsilon, k)$-coresetem.
@@ -11,7 +16,7 @@ Początkowy stan $S$ może zostać zainicjalizowany losowo albo może być oblic
 Niech $S^{'} = S - \{s\} \cup \{s^{'}\}$ będzie nowym zbiorem centrów, gdzie taką operację na zbiorze $S$ nazwyamy \textit{wymianą} a punkty $s$, $s^{'}$ \textit{swap parą}.
 Jeżeli $\phi_{P}(S^{'}) \leq \phi_{P}(S)$ to zastępujemy zbiór $S$ zbiorem $S^{'}$, w przeciwnym przypadku $S$ pozostaje bez zmian.
 W praktyce taki proces powtarzamy do momentu, kiedy $|\phi_{P}(S^{'}) - \phi_{P}(S) | < \epsilon$.
-Formalnie możemy udowodnić, że dla każdego $\epsilon > 0$, po wielomianiwej liczbie wymian punktów $s$, $s^{'}$ algorytm zakończy swoje działanie.
+Formalnie można udowodnić, że dla każdego $\epsilon > 0$, po wielomianiwej liczbie wymian punktów $s$, $s^{'}$ algorytm zakończy swoje działanie.
 Autorzy nie dowodzą tego wprost ale powołują się na pracę \cite{10.1145/380752.380755}.
 \\~\\
 Dla uproszczenia zakładamy, że algorytm kończy się kiedy pojedyńcza wymiana elementów $s$, $s^{'}$ nie poprawia wyniku.
@@ -43,6 +48,14 @@ gdzie $s_{q}$ to najbliższy punkt dla $q$ w $S$ oraz $P \subset \mathbb{R}^{d}$
 \end{definition}
 
 \noindent
+Autorzy pracy \cite{Arya2004LocalSH} w analizie powołują się na kryterium dla lokalnej minimalności rozwiązania problemu $k$-means \cite{doi:10.1137/S0036144599352836}.
+Mówi ono, że dla dowolnego lokalnie minimalnego rozwiązania $C_{min}$ problemu $k$-means, każde centrum $c_{i} \in C_{min}$ jest centroidem jego sąsiedztwa.
+Rozwiązanie $C_{min}$ nazywamy \textit{centroidalnym}.
+Zatem, ponieważ punkty interpretujemy jak wektory oraz z powyższego kryterium:
+\begin{equation}
+    s = \frac{1}{|N_{S}(s)|}\sum_{u \in N_{S}(s)} u
+\end{equation}
+\\~\\
 W ramach tego podrozdziału udowodnimy następujące twierdzenie.
 
 \begin{thm}{\cite{10.1145/1007352.1007400}}
@@ -82,8 +95,8 @@ Na potrzebę dowodu załóżmy, że znamy zbiór $C_{opt}$.
 Dla każdego optymalnego $c \in C_{opt}$ wyznaczamy $s_{c}$, który jest najbliższym punktem w $S$ dla punktu $c$.
 Punkt $s_{c}$ nazywamy heurystycznym centrum dla punktu $c$.
 W takim kontekście powiemy, że $c$ jest \textit{schwytane} przez $s_{c}$.
-Tutaj warto zaznaczyć, że każde optymalne centrum jest schwytane przez jedno heurystyczne centrum, ale każde heurystyczne centrum może być schwytane przez kilka optymalnych centrów.
-Heurystyczne centrum nazwiemy \textit{samotnym} jeżeli nie jest schwytane przez żadne optymalne centrum.
+Tutaj warto zaznaczyć, że każde optymalne centrum jest schwytane przez jedno heurystyczne centrum, ale każde heurystyczne centrum może chwytać kilka optymalnych centrów.
+Heurystyczne centrum nazwiemy \textit{samotnym} jeżeli nie chwyta żadne optymalne centrum.
 
 \begin{proof}
     Dowód twierdzenia 4.2 zaczniemy od zdefniowania podziału $S$ oraz $C_{opt}$ na zbiory $S_{1}, \dots, S_{r}$ oraz $O_{1}, \dots, O_{r}$ dla pewnego $r$, gdzie $|S_{i}| = |O_{i}|$ dla $i = 1, \dots, r$.
@@ -104,7 +117,7 @@ Heurystyczne centrum nazwiemy \textit{samotnym} jeżeli nie jest schwytane przez
         \includegraphics[totalheight=8cm]{swap.png}
         \caption{}
     \end{figure}
-    Wyznaczymy teraz ograniczenie górne na zmianię funkcji $\Delta$ po wymianie punktów ze swap pary $(s, o)$.
+    Wyznaczymy teraz ograniczenie górne na zmianę funkcji $\Delta$ po wymianie punktów ze swap pary $(s, o)$.
     Zaczniemy od obliczenia najbliższych centrów z $S - \{s\} \cup \{o\}$ dla zadanego na wejściu zbioru $P$.
     Niech $N_{X}(x)$ będzie \textit{sąsiedztwem} punktu $x$, czyli podzbiorem punktów z $P$, dla których $x$ jest najbliższym punktem spośród punktów z $X$. 
     Dla punktów, które należą do $N_{C_{opt}}(o)$ zmiana $\Delta$ będzie następująca:
@@ -126,7 +139,7 @@ Heurystyczne centrum nazwiemy \textit{samotnym} jeżeli nie jest schwytane przez
         \begin{equation}
             0 \leq \Delta(C_{opt}) - 3\Delta(S) + 2R
         \end{equation}
-        gdzie, $R = \sum_{q \in P} \Delta(q, s_{o_{q}})$.
+        gdzie $R = \sum_{q \in P} \Delta(q, s_{o_{q}})$.
     \end{lemma}
     \begin{proof}
         Na potrzeby dowodu ustalmy swap parę $(s, o)$.
@@ -152,7 +165,7 @@ Heurystyczne centrum nazwiemy \textit{samotnym} jeżeli nie jest schwytane przez
     \end{proof}
     \noindent
     Wcześniej zdefiniowane $R$ nazywamy sumarycznym kosztem przepisania centrów.
-    Korzystając z lematu 3 przekształcamy:
+    Korzystając z lematu 4.1 przekształcamy:
     \begin{equation}
         R = \sum_{o \in C_{opt}} \sum_{q \in N_{C_{opt}}(o)} \Delta(q, s_{o}) = \sum_{o \in O} \Delta(N_{C_{opt}}(o), s_{o}) 
     \end{equation}
@@ -208,10 +221,10 @@ Heurystyczne centrum nazwiemy \textit{samotnym} jeżeli nie jest schwytane przez
     Niech $\langle o_{i} \rangle$ będzie ciągiem $d(q, o_{q})$ oraz niech $\langle s_{i} \rangle$ będzie ciągiem $d(q,s_{q})$ dla wszystkich $q \in P$.
     Z tego wynika, że współczynnik aproksymacji możemy przedstawić jako:
     \begin{equation}
-        \delta^{2} = \frac{\Delta(S)}{\Delta(C_{opt})} = \frac{\sum_{q \in P} d(q,s_{q})^{2}}{\sum_{q \in P} d(q,o_{q})^{2}} =\frac{\sum_{i=1}^{n} s_{i}^{2}}{\sum_{i=1}^{n} o_{i}^{2}}
+        \alpha = \delta^{2} = \frac{\Delta(S)}{\Delta(C_{opt})} = \frac{\sum_{q \in P} d(q,s_{q})^{2}}{\sum_{q \in P} d(q,o_{q})^{2}} =\frac{\sum_{i=1}^{n} s_{i}^{2}}{\sum_{i=1}^{n} o_{i}^{2}}
     \end{equation}
     gdzie $S$ jest zbiorem 1-stable uzyskanym przez wcześniej przedstawiony algorytm.
-    Korzystając z lematu 5:
+    Korzystając z lematu 4.3:
     \begin{equation}
         R \leq 2\Delta(C_{opt}) + \Delta(S) + 2\sum_{q \in P} d(o_{q}, q)d(q, s_{q}) 
     \end{equation}
@@ -224,7 +237,7 @@ Heurystyczne centrum nazwiemy \textit{samotnym} jeżeli nie jest schwytane przez
     \begin{equation}
         = 2\Delta(C_{opt}) + \Big(1 + \frac{2}{\delta} \Big)\Delta(S)
     \end{equation}
-    Z lematu 4 wiemy, że:
+    Z lematu 4.2 wiemy, że:
     \begin{equation}
         0 \leq \Delta(C_{opt}) - 3\Delta(S) + 2R
     \end{equation}
@@ -244,5 +257,5 @@ Heurystyczne centrum nazwiemy \textit{samotnym} jeżeli nie jest schwytane przez
     \begin{equation}
         0 \geq (\delta - 5)(\delta + 1)
     \end{equation}
-    To implikuje, że $\delta \leq 5$, zatem współczynnik omawianego algorytmu możemy ograniczyć przez $\delta^{2} \leq 25$, co kończy dowód twierdzenia 4.2.
+    To implikuje, że $\delta \leq 5$, zatem współczynnik omawianego algorytmu możemy ograniczyć przez $\alpha = \delta^{2} \leq 25$, co kończy dowód twierdzenia 4.2.
 \end{proof}
