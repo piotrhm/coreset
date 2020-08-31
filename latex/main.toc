@@ -16,4 +16,4 @@
 \contentsline {section}{\numberline {4.3}Heurystyka single swap}{21}{section.4.3}
 \contentsline {section}{\numberline {4.4}Podsumowanie}{27}{section.4.4}
 \contentsline {chapter}{\numberline {5}Podsumowanie}{30}{chapter.5}
-\contentsline {chapter}{\numberline {6}Bibliografia}{32}{chapter.6}
+\contentsline {chapter}{\numberline {6}Bibliografia}{33}{chapter.6}

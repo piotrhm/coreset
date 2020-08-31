@@ -19,15 +19,9 @@
   Theory of Computing\/} (New York, NY, USA, 2001), STOC ’01, Association for
   Computing Machinery, p.~21–29.
 
-\bibitem{Arya2004LocalSH}
-{\sc Arya, V., Garg, N., Khandekar, R., Meyerson, A., Munagala, K., and Pandit,
-  V.}
-\newblock Local search heuristics for k-median and facility location problems.
-\newblock {\em SIAM J. Comput. 33\/} (2004), 544--562.
-
 \bibitem{bachem2017scalable}
 {\sc Bachem, O., Lucic, M., and Krause, A.}
-\newblock Scalable k-means clustering via lightweight coresets.
+\newblock Scalable k-means clustering via lightweight coresets, 2017.
 
 \bibitem{chazelle_2000}
 {\sc Chazelle, B.}
@@ -51,10 +45,24 @@
 \newblock Clustering to minimize the maximum intercluster distance.
 \newblock {\em Theor. Comput. Sci. 38\/} (1985), 293--306.
 
+\bibitem{10.5555/3116656.3116964}
+{\sc Har-Peled, S.}
+\newblock Clustering motion.
+\newblock {\em Discrete Comput. Geom. 31}, 4 (Mar. 2004), 545–565.
+
 \bibitem{10.1145/1007352.1007400}
 {\sc Har-Peled, S., and Mazumdar, S.}
 \newblock On coresets for k-means and k-median clustering.
-\newblock 291–300.
+\newblock In {\em Proceedings of the Thirty-Sixth Annual ACM Symposium on
+  Theory of Computing\/} (New York, NY, USA, 2004), STOC '04, Association for
+  Computing Machinery, p.~291–300.
+
+\bibitem{Arya2004LocalSH}
+{\sc Kanungo, T., Mount, D.~M., Netanyahu, N.~S., Piatko, C.~D., Silverman, R.,
+  and Wu, A.~Y.}
+\newblock A local search approximation algorithm for k-means clustering.
+\newblock {\em Computational Geometry 28}, 2 (2004), 89 -- 112.
+\newblock Special Issue on the 18th Annual Symposium on Computational Geometry.
 
 \bibitem{LI2001516}
 {\sc Li, Y., Long, P.~M., and Srinivasan, A.}
@@ -70,6 +78,7 @@
 \bibitem{Matousek99onapproximate}
 {\sc Matousek, J.}
 \newblock On approximate geometric k-clustering.
+\newblock {\em Discrete and Computational Geometry 24\/} (2000), 61--84.
 
 \bibitem{DBLP:journals/ki/MunteanuS18}
 {\sc Munteanu, A., and Schwiegelshohn, C.}

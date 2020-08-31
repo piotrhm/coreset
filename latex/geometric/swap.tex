@@ -3,10 +3,10 @@
 W tym podrozdziale opiszemy heurystykę single swap \cite{Arya2004LocalSH}, która jest przykładem techniki \textit{local search}.
 Metoda local search jest heurystyką, która zaczyna od dowolnego rozwiązania $S$ problemu optymalizującego.
 Następnie sprawdza czy niewielka zmiana rozwiązania $S$ poprawia wartość funkcji celu problemu.
-Jeżeli tak, to wykonuje tą zmianę.
+Jeżeli tak, to wykonuje tę zmianę.
 Heurystyka kończy swoje działanie w momencie kiedy zmiana w rozwiązaniu nie poprawia funkcji celu.
 W efekcie otrzymujemy lokalnie optymalne rozwiązanie dla danego na wejściu problemu optymalizującego.
-Algorytm jest $(25 + \epsilon)$ aproksymacją problemu $k$-means, która zakłada, że na wejściu dostajemy zbiór kandydatów na centra $C$ oraz zbiór $n$ punktów $P \subset \mathbb{R}^d$.
+Algorytm jest 25-aproksymacją problemu $k$-means, która zakłada, że na wejściu dostajemy zbiór kandydatów na centra $C$ oraz zbiór $n$ punktów $P \subset \mathbb{R}^d$.
 Autorzy \cite{Arya2004LocalSH} w celu wyznaczenia $C$ wykorzystują algorytm z pracy \cite{Matousek99onapproximate}, którą zastąpimy pracą \cite{10.1145/1007352.1007400} z uwagi na lepsze gwarancje teoretyczne.
 Korzystając z algorytmu opisanego w podrozdziale 4.2.3 wyznaczamy zbiór $C$, który będzie obliczonym $(\epsilon, k)$-coresetem.
 \\~\\
@@ -58,7 +58,7 @@ Zatem, ponieważ punkty interpretujemy jak wektory oraz z powyższego kryterium:
 \\~\\
 W ramach tego podrozdziału udowodnimy następujące twierdzenie.
 
-\begin{thm}{\cite{10.1145/1007352.1007400}}
+\begin{thm}{\cite{Arya2004LocalSH}}
     Niech $S$ będzie zbiorem $k$ punktów spełniającym definicję 1-stable oraz niech $C_{opt}$ będzie optymalnym zbiorem dla problemu $k$-means.
     Wtedy zachodzi następującą nierówność:
     \begin{equation}
@@ -66,7 +66,7 @@ W ramach tego podrozdziału udowodnimy następujące twierdzenie.
     \end{equation} 
 \end{thm}
 
-\begin{lemma}{\cite{10.1145/1007352.1007400}}
+\begin{lemma}{\cite{Arya2004LocalSH}}
     Dla danego skończonego podzbioru $S$ punktów z $\mathbb{R}^d$, niech $c$ będzie centroidem dla $S$. Wtedy dla dowolnego $c^{'} \in \mathbb{R}^d$, $\Delta(S, c^{'}) = \Delta(S, c) + |S|\Delta(c, c^{'})$.
 \end{lemma}
 \begin{proof}
@@ -134,7 +134,7 @@ Heurystyczne centrum nazwiemy \textit{samotnym} jeżeli nie chwyta żadne optyma
     \end{equation}
     Na tym etapie dowodu koniecznie będzie wprowadzenie dwóch lematów.
     
-    \begin{lemma}{\cite{10.1145/1007352.1007400}}
+    \begin{lemma}{\cite{Arya2004LocalSH}}
         Niech $S$ będzie zbiorem $k$ punktów spełniającym definicję 1-stable oraz niech $C_{opt}$ będzie optymalnym zbiorem dla problemu $k$-means.        Wtedy zachodzi następującą nierówność:
         \begin{equation}
             0 \leq \Delta(C_{opt}) - 3\Delta(S) + 2R
@@ -195,7 +195,7 @@ Heurystyczne centrum nazwiemy \textit{samotnym} jeżeli nie chwyta żadne optyma
     \begin{equation}
         = 2\Delta(C_{opt}) + \Delta(S) + 2\sum_{q \in P} d(o_{q}, q)d(q, s_{q})
     \end{equation}
-    \begin{lemma}{\cite{10.1145/1007352.1007400}}
+    \begin{lemma}{\cite{Arya2004LocalSH}}
         Niech $\langle o_{i} \rangle$ oraz $\langle s_{i} \rangle$ będą ciągami liczb rzeczywistych, dla których zachodzi:
         \begin{equation}
             \delta^2 = \frac{\sum_{i} s_{i}^{2}}{\sum_{i} o_{i}^{2}}

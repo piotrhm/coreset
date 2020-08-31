@@ -16,16 +16,16 @@ Załóżmy, że mamy dany konkretny problem optymalizacyjny.
 \begin{definition}
     \emph{$\alpha$-aproksymacją} dla problemu optymalizacyjnego nazywamy wielomianowy algorytm, który dla każdej instancji $I$ problemu minimalizacyjnego oblicza rozwiązanie, którego wartość spełnia: 
     \begin{equation}
-        A(I) \leq \alpha \cdot OPT
+        A(I) \leq \alpha \cdot OPT(I)
     \end{equation}
-    gdzie $A$ jest wartością obliczonego rozwiązania dla instancji $I$, a $OPT$ jest wartością optymalnego rozwiązania tej instancji.
+    gdzie $A(I)$ jest wartością obliczonego rozwiązania dla instancji $I$, a $OPT(I)$ jest wartością optymalnego rozwiązania tej instancji.
     Zmienną $\alpha$ nazywamy \textit{współczynnikiem aproksymacji}.
     Analogicznie możemy zdefiniować  \emph{$\alpha$-aproksymację} dla problemu maksymalizacyjnego.
     Jest nim wielomianowy algorytm, który dla każdej instancji $I$ spełnia:
     \begin{equation}
-        A(I) \geq \frac{1}{\alpha} \cdot OPT
+        A(I) \geq \frac{1}{\alpha} \cdot OPT(I)
     \end{equation}
-    gdzie $A$ i $OPT$ są zdefiniowane tak jak wyżej.
+    gdzie $A(I)$ i $OPT(I)$ są zdefiniowane tak jak wyżej.
 \end{definition}
 
 \begin{definition}

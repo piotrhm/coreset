@@ -1,10 +1,15 @@
 @article{Arya2004LocalSH,
-  title={Local Search Heuristics for k-Median and Facility Location Problems},
-  author={Vijay Arya and Naveen Garg and Rohit Khandekar and Adam Meyerson and Kamesh Munagala and Vinayaka Pandit},
-  journal={SIAM J. Comput.},
-  year={2004},
-  volume={33},
-  pages={544-562}
+  title = "A local search approximation algorithm for k-means clustering",
+journal = "Computational Geometry",
+volume = "28",
+number = "2",
+pages = "89 - 112",
+year = "2004",
+note = "Special Issue on the 18th Annual Symposium on Computational Geometry",
+issn = "0925-7721",
+doi = "https://doi.org/10.1016/j.comgeo.2004.03.003",
+url = "http://www.sciencedirect.com/science/article/pii/S0925772104000215",
+author = "Tapas Kanungo and David M. Mount and Nathan S. Netanyahu and Christine D. Piatko and Ruth Silverman and Angela Y. Wu",
 }
 @inproceedings{10.1145/62212.62255,
 author = {Feder, Tom\'{a}s and Greene, Daniel},
@@ -21,6 +26,23 @@ numpages = {11},
 location = {Chicago, Illinois, USA},
 series = {STOC ’88}
 }
+@article{10.5555/3116656.3116964,
+author = {Har-Peled, Sariel},
+title = {Clustering Motion},
+year = {2004},
+issue_date = {March     2004},
+publisher = {Springer-Verlag},
+address = {Berlin, Heidelberg},
+volume = {31},
+number = {4},
+issn = {0179-5376},
+abstract = {   Given a set of moving points in undefinedd, we show how to   cluster them in advance, using a small number of   clusters, so that at any time this static clustering is   competitive with the optimal k-center clustering at   that time. The advantage of this approach is that it   avoids updating the clustering as time passes. We also   show how to maintain this static clustering efficiently   under insertions and deletions.     To implement this static clustering efficiently, we   describe a simple technique for speeding up clustering   algorithms and apply it to achieve faster clustering   algorithms for several problems. In particular, we   present a linear time algorithm for computing a   2-approximation to the k-center clustering of a set of   n points in undefinedd. This slightly improves the   algorithm of Feder and Greene, that runs in undefined(n   log k) time (which is optimal in the algebraic   decision tree model). },
+journal = {Discrete Comput. Geom.},
+month = mar,
+pages = {545–565},
+numpages = {21}
+}
+
 @article{doi:10.1137/S0036144599352836,
 author = {Du, Qiang and Faber, Vance and Gunzburger, Max},
 title = {Centroidal Voronoi Tessellations: Applications and Algorithms},
@@ -155,7 +177,7 @@ series = {STOC ’01}
   biburl    = {https://dblp.org/rec/journals/ki/MunteanuS18.bib},
   bibsource = {dblp computer science bibliography, https://dblp.org}
 }
-@article{bachem2017scalable,
+@misc{bachem2017scalable,
     title={Scalable k-Means Clustering via Lightweight Coresets},
     author={Olivier Bachem and Mario Lucic and Andreas Krause},
     year={2017},
@@ -163,7 +185,8 @@ series = {STOC ’01}
     archivePrefix={arXiv},
     primaryClass={stat.ML}
 }
-@article{10.1145/1007352.1007400,
+
+@inproceedings{10.1145/1007352.1007400,
 author = {Har-Peled, Sariel and Mazumdar, Soham},
 title = {On Coresets for K-Means and k-Median Clustering},
 year = {2004},
@@ -172,16 +195,21 @@ publisher = {Association for Computing Machinery},
 address = {New York, NY, USA},
 url = {https://doi.org/10.1145/1007352.1007400},
 doi = {10.1145/1007352.1007400},
+abstract = {In this paper, we show the existence of small coresets for the problems of computing k-median and k-means clustering for points in low dimension. In other words, we show that given a point set P in Rd, one can compute a weighted set S ⊆ P, of size O(k ε-d log n), such that one can compute the k-median/means clustering on S instead of on P, and get an (1+ε)-approximation. As a result, we improve the fastest known algorithms for (1+ε)-approximate k-means and k-median. Our algorithms have linear running time for a fixed k and ε. In addition, we can maintain the (1+ε)-approximate k-median or k-means clustering of a stream when points are being only inserted, using polylogarithmic space and update time.},
 booktitle = {Proceedings of the Thirty-Sixth Annual ACM Symposium on Theory of Computing},
 pages = {291–300},
 numpages = {10},
-keywords = {k-median, streaming, clustering, k-means, Coreset},
+keywords = {k-means, clustering, Coreset, streaming, k-median},
 location = {Chicago, IL, USA},
-series = {STOC ’04}
+series = {STOC '04}
 }
+
 @article{Matousek99onapproximate,
     author = {Jirí Matousek},
     title = {On Approximate Geometric K-Clustering},
-    year = {1999}
+    journal={Discrete and Computational Geometry},
+    year={2000},
+    volume={24},
+    pages={61-84}
 }
   

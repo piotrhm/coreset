@@ -55,7 +55,7 @@ Punkty \textit{dobre} nie wymagają od nas dodatowej pracy, ponieważ dla każeg
 \\~\\
 Konstrukcję zbioru $X$ zaczynamy od obliczenia 2-aproksymacji problemu k-centrów dla zbioru $P$.
 Niech obliczony zbiór centrów to $V$.
-Taką aproksymację dla $k = O(n^{\frac{1}{4}})$ możemy obliczyć w czasie $O(n)$ oraz dla $k = \Omega(n^{\frac{1}{4}})$ w czasie $O(n \log k)$ \cite{10.1145/62212.62255}.
+Taką aproksymację dla $k = O(n^{\frac{1}{4}})$ możemy obliczyć w czasie $O(n)$ \cite{10.5555/3116656.3116964} oraz dla $k = \Omega(n^{\frac{1}{4}})$ w czasie $O(n \log k)$ \cite{10.1145/62212.62255}.
 Są to wyniki teoretyczne, które zakładamy na potrzebę analizy.
 W podrozdziale 4.1 przedstawiliśmy algorytm aproksymacyjny z pracy \cite{Gonzalez1985ClusteringTM}, rozwiązujący ten problem w czasie $O(nk)$ dla dowolnego $k$.
 Algorytmy o lepszej złożoności są w istotny sposób bardziej skomplikowane, dlatego w naszej implementacji zastosowaliśmy algorytm Gonzaleza.
@@ -71,7 +71,7 @@ Górne ograniczenie wynika z faktu, że promień aproksymacji jest równy $L$, z
 \\~\\
 Następnym krokiem konstrukcji jest wylosowanie $\rho = \gamma k \log^{2} n$ punktów ze zbioru $P$, gdzie $\gamma$ jest stałą, która wynika z analizy, którą zaraz przeprowadzimy.
 Niech $Y$ będzie zbiorem wylosowanych punktów z $P$ oraz $X = Y \cup V$ będzie zbiorem środków klastrów.
-Klasterem nazywamy skończony zbioru punktów $x_{1}, \dots, x_{k} \in \mathbb{R}^{d}$, które łączy pewna wspólna cecha.
+W tym kontekście klastrem nazywamy skończony zbioru punktów z $\mathbb{R}^{d}$, które są przyporządkowane do tego samego środka.
 Dla $\rho > n$ przyjmujemy $X = P$.
 \\~\\
 Konstrukcja zbioru $X$ jest stosunkowo prosta.
@@ -81,7 +81,7 @@ Dużo cięższym zadaniem jest zbudowanie zbioru $P^{'}$, który jest zbiorem \t
 
 Rozpatrzmy zbiór $C_{opt}$, który jest optymalnym zbiorem centrów problemu $k$-means dla zbioru $P$ i liczby $k$.
 Dla każdego $c_{i} \in C_{opt}$ tworzymy kulę $B_{i}$ o środku w $c_{i}$.
-Każda taka kula będzie zawierać co najwyżej $\eta = \frac{n}{20k \log n}$ punktów z $P$.
+Każda taka kula będzie zawierać co najmniej $\eta = \frac{n}{20k \log n}$ punktów z $P$.
 Jeżeli zastosowana do wylosowania zbioru $X$ stała $\gamma$ jest odpowiednio duża to z wysokim prawdopodobieństwem w każdym $B_{i}$ jest przynajmniej jeden punkt z $X$.
 Dokładniej:
 \begin{equation}
@@ -128,7 +128,7 @@ Chcielibyśmy aby $|P^{'}| \geq \frac{n}{2}$ oraz $\phi_{P^{'}}(X) = O(\phi_{P^{
 Teraz udowodnimy, że faktycznie tak zdefiniowane $P^{'}$ spełnia powyższe założenia.
 
 \begin{proof}
-    Moc zbioru $P^{'}$ jest na pewno równa conajmniej $\Big(n - |P_{\infty}| - M\frac{n}{10 \log n} \Big)$, gdzie ostatni składni jest mocą wszystkich zbiorów $P_{i}$, które zawierają nie więcej niż $2\beta$ punktów, których jest co najwyżej $M$.
+    Moc zbioru $P^{'}$ jest na pewno równa conajmniej $\Big(n - |P_{\infty}| - M\frac{n}{10 \log n} \Big)$, gdzie ostatni składnik jest mocą wszystkich zbiorów $P_{i}$, które zawierają nie więcej niż $2\beta$ punktów i których jest co najwyżej $M$.
     Zauważmy, że $P_{\infty} \subseteq P_{bad}$ oraz $|P_{bad}| \leq \beta$.
     Zatem:
     \begin{equation}

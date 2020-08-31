@@ -19,12 +19,12 @@ Na potrzeby tego rozdziału wprowadzimy kilka definicji.
 \end{definition}
 
 \begin{definition}
-    Zbiory $B_{i}$ podziału k-podziału nazywamy \emph{klastrami}.
+    Zbiory $B_{i}$ k-podziału nazywamy \emph{klastrami}.
     W każdym klastrze wyrózniamy jeden punkt nazywając go \emph{środkiem}.
 \end{definition}
 
 \noindent
-Niech $X \subset \mathbb{R}^{d}$ będzie zbiorem, na którym chcemy rozwiązać problem $k$-centrów oraz niech $T$ będzie podzbiorem $X$.
+Niech $X \subset \mathbb{R}^{d}$ będzie zbiorem, na którym chcemy rozwiązać problem $k$-centrów.
 Zakładamy, że $|X| > k$ ponieważ w przeciwnym przypadku problem $k$-centrów jest trywialnie rozwiązywalny.
 Niech $\rho_{opt}^{k}(X)$ oznacza optymalne rozwiązanie problemu $k$-centrów dla zbioru $X$ oraz niech $T^{*}$ będzie zbiorem $k$ elementowym realizującym $\rho_{opt}^{k}(X)$.
 \\~\\
@@ -61,7 +61,7 @@ Każdy punkt, dla którego dystans do $v$ jest nie większy niż dystans do śro
 Algorytm 2 buduje jakiś $k$-podział oraz zbiór środków klastrów $T$.
 Teraz pokażemy, że dla takiego $k$-podziału wartość funkcji celu $\rho_{X}(T)$ jest ograniczona przez $2 \cdot \rho_{X}(T^{*})$.
 \\~\\
-Niech $L=\rho_{X}(T)$ oraz niech $x_{0}$ będzie punktem, dla którego wartość funkcji $\rho_{X}(T)$ osiągnęła maksimum.
+Niech $L=\rho_{X}(T)$ oraz niech $x_{0} \in T$ będzie punktem, dla którego wartość funkcji $\rho_{X}(T)$ osiągnęła maksimum.
 Z konstrukcji $k$-podziału wiemy, że zbiór $T\cup \{x_{0}\}$ zawiera $k+1$ punktów, gdzie każdy z nich jest odległy od siebie o co najmniej $L$.
 Zauważmy, że przynajmniej dla 2 punktów ze zbioru $T\cup \{x_{0}\}$, ich najkrótsza odległość do zbioru punktów $T^{*}$ będzie zrealizowana przez ten sam punkt $t \in T^{*}$.
 Zatem przynajmniej 2 punkty odległe od siebie o co najmniej $L$ są przyporządkowane do jednego punktu z $T^{*}$.
