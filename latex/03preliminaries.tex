@@ -112,7 +112,7 @@ Zacznijmy od podstawowej definicji coresetu dla problemu $k$-means.
 \noindent
 Intuicyjnie $(\epsilon, k)$-aproksymację zbioru centroidów możemy rozumieć jako zbiór $A \subset \mathbb{R}^{d}$, który zawiera $k$ elementowy podzbiór $C \subseteq A$ \textit{dobrze} aproksymujący $C_{opt}$.
 Definicja 2.9 pojawia się tutaj z dwóch powodów.
-Po pierwsze jest ona pewngo rodzaju prekursorem coresetów, a po drugie jest ona konieczna w definicji 2.10.
+Po pierwsze jest ona pewngo rodzaju prekursorem coresetów, a po drugie jest ona konieczna w definicji 2.12.
 
 \begin{definition}
     \emph{Coreset.} Niech $X$ będzie skończonym zbiórem punktów z $\mathbb{R}^{d}$.
@@ -146,7 +146,7 @@ W praktyce stosuje się wariant dyskretny, który zakłada, że $C \subseteq X$.
 
 \noindent
 Tak samo jak w problemie $k$-means, coreset może być zdefiniowany w wariancie ważonym.
-Oznacza to, że dla zbióru $C$ z definicji 2.10  musimy zdefinujować funkcję wag $w_{c}: C \rightarrow \mathbb{R}_{\ge0}$.
+Oznacza to, że dla zbióru $C$ z definicji 2.10  musimy zdefiniować funkcję wag $w_{c}: C \rightarrow \mathbb{R}_{\ge0}$.
 Nierówność pozostaje bez zmian, ponieważ funkcja $\phi$ uwzględnia $C_{w}$ oraz $X_{w}$ będące zbiorami ważonymi.
 
 \begin{definition}

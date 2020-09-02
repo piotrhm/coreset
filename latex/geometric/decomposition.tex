@@ -8,7 +8,7 @@ Dowolna aproksymacja o stałym błędzie może zostać użyta w tej metodzie.
 Na potrzeby analizy zakładamy, że wykonujemy algorytm 10-aproksymacyjny dla problemu $k$-means i uzyskaliśmy zbiór $C^{'}$ oraz, że mamy dany na wejściu zbiór punktów $A \subset \mathbb{R}^d$.
 \\~\\
 Geometryczna dekompozycja bazuje na dyskretyzacji punktów z $A$, czyli na zgrupowaniu ze sobą najbliższych punktów, a następnie zbudowaniu ważonego zbioru punktów $S$ o zredukowanym rozmaiarze.
-Taką techinkę mogliśmy już zobaczyć w części 4.2, gdzie odpowiednio grupowaliśmy punkty w komórki kraty wykładniczej.
+Taką technikę mogliśmy już zobaczyć w części 4.2, gdzie odpowiednio grupowaliśmy punkty w komórki kraty wykładniczej.
 \\~\\
 Praca \cite{DBLP:journals/ki/MunteanuS18} przedstawia inną technikę, która bazuje na budowaniu kul o wykładniczo rosnącym promieniu wokół każdego punktu z $C^{'}$.
 Dla przybliżenia idei konstrukcji załóżmy, że znamy $OPT = \phi_{opt}^{k}(A)$.
@@ -27,8 +27,8 @@ W pracy pod pojęciem \textit{kula} rozumiemy sferę w przestrzeni o wymiarze $d
 \noindent
 Niestety nie istnieją efektywne metody budowania takich $\epsilon$-pokryć.
 My w analizie przyjmujemy, że  $|B| = \epsilon^{-O(d)}$.
-Jako referenrencję jak zbudować taką konstrukcję autorzy \cite{DBLP:journals/ki/MunteanuS18} sugureują analizę pracy \cite{chazelle_2000}.
-Jest to problematyczne w kontekście implementacji jednak tę kwestię poruszymy w następnym rodziale.
+Jako referencję jak zbudować taką konstrukcję autorzy \cite{DBLP:journals/ki/MunteanuS18} sugerują analizę pracy \cite{chazelle_2000}.
+Jest to problematyczne w kontekście implementacji jednak tę kwestię poruszymy w następnym rozdziale.
 \begin{lemma}{\cite{DBLP:journals/ki/MunteanuS18}}
     Niech $a$, $b$, $c$ będą punktami z $\mathbb{R}^{d}$.
     Wtedy dla dowolnego $\epsilon \in (0,1)$ zachodzi:

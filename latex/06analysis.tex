@@ -36,7 +36,7 @@ Nasza implementacja geometrycznej dekompozycji problemu $k$-means ma następują
     \begin{enumerate}
         \item Oblicz 2-aproksymację dla problemu $k^{*}$-center korzystając z algorytmu Gonzaleza opisanego w 4.1, gdzie $k^{*} = O(k \log^2 n)$.
         \item Obliczoną 2-aproksymację dla problemu $k^{*}$-center zamień na 20 - aproksymację dla problemu $k^{**}$-means, korzystając z konstrukcji opisanej w 4.2.1, gdzie $k^{**} = O(k \log^3 n)$.
-        \item Korzystajac z konstrukcji kraty wykładniczej opisanej w 4.2.3 zamień 20-aproksymację dla problemu $k^{**}$-means na $(\epsilon, k^{**})$-coreset.
+        \item Korzystając z konstrukcji kraty wykładniczej opisanej w 4.2.3 zamień 20-aproksymację dla problemu $k^{**}$-means na $(\epsilon, k^{**})$-coreset.
         \item Oblicz 25-aproksymację dla problemu $k$-means korzystając z heurystyki single swap, gdzie obliczony $(\epsilon, k^{**})$-coreset jest zbiorem kandydatów na centra.
     \end{enumerate}
     \item Oblicz $\epsilon$-pokrycie dla kul o środkach należących do zbioru $C$, gdzie $C$ to obliczona 25-aproksymacja dla problemu $k$-means.
@@ -65,16 +65,21 @@ for i in range(levels):
 \noindent
 Krok 2.(b) jest autorską konstrukcją.
 Rozwiązanie bazuje na losowym próbkowaniu.
-Algorytm nie została przetestowany jakościowo jednak lokanie otrzymywane wyniki dają akceptowalną dokładność. 
+Ideą algorytmu jest podzielenie kuli $B_{i}$ na $\log n$ poziomów.
+Pierwszym poziomem jest kula $B_{i}^{0}$ o tym samym środku co $B_{i}$ oraz promieniu równym $\frac{R}{2}$. 
+Kolejnymi poziomami są zbiory punktów $B_{i}^{j+1} \setminus B_{i}^{j}$, gdzie $B_{i}^{j}$ to kula o tym samym środku co $B_{i}$ oraz promieniu równym $R_{i} = \frac{R}{2} + \sum_{j=0}^{i} \frac{R}{2^{j+2}}$.
+Z każdego poziomu losowo wybieramy sample\_size\_current punktów, gdzie z każdą iteracją zminiejszamy zmienną sample\_size\_current o połowę.
+Intuicyjnie taki wybór punktów powinien wybrać odpowiednio dużo punktów blisko środka kuli $B_{i}$, która daje nam \textit{dobrą} aproksymację tego, gdzie leży środek klastra optymalnego rozwiązania problemu $k$-means.
+Wybieramy też odpowiednio dużo punktów z dalszych poziomów, które mają większy wpływ na wartość funkcji $\phi$ niż punkty z bliskiego otoczenia środka klastra. 
 \\~\\
-W ogólności, większość algorytmów budowy coresetów bazujach na geometrycznym podejściu cechuje skomplikowana konstrukcja oraz mało atrakcyjna złożoność.
+W ogólności, większość algorytmów budowy coresetów bazujących na geometrycznym podejściu cechuje skomplikowana konstrukcja oraz mało atrakcyjna złożoność.
 Nasza konstrukcja nie jest w tej kwestii wyjątkiem, jednak tym co ją wyrożnia to kroki 1.(a)-1.(c) wyżej opisanego schematu, które bazują na pracy \cite{10.1145/1007352.1007400}.
 \\~\\
 Autorzy pracy \cite{10.1145/1007352.1007400} zauważyli, że dla odpowiednio dużego $k$ jesteśmy w stanie szybko obliczać najbliższego sąsiada z danego zbioru dla punktu.
 Jest to kluczowe w kontekście analizy gwarancji teoretycznych jednak w praktyce zaproponowne rozwiązania są zupełnie nieużyteczne.
 Szkic konstrukcji znajduje się w \cite{10.1145/1007352.1007400}.
 W naszej implementacji zastosowaliśmy gotowe rozwiązanie z biblioteki \textit{sklearn.neighbors}.
-Dodatkowo zamieniliśmy wykorzystany w pracy \cite{10.1145/1007352.1007400} algorytm 2-aproksymacjny dla problemu $k$-center o liniowej złożoności względem rozmiaru dancyh \cite{10.5555/3116656.3116964}.
+Dodatkowo zamieniliśmy wykorzystany w pracy \cite{10.1145/1007352.1007400} algorytm 2-aproksymacyjny dla problemu $k$-center o liniowej złożoności względem rozmiaru dancyh \cite{10.5555/3116656.3116964}.
 Zamiast niego wykorzystaliśmy algorytm Gonzaleza, który został opisany w rozdziale 4.1.
 \\~\\
 Kolejną optymalizacją jest zainicjalizowanie początkowego rozwiązania $S$ w heurystyce single swap korzystając z algorytmu Gonzaleza.
@@ -82,7 +87,8 @@ Pomysłodawcami są autorzy \cite{10.1145/1007352.1007400}, którzy nie dowodzą
 \\~\\
 Zaimplementowana przez nas konstrukcja geometrycznej dekompozycji problemu $k$-means miała być próbą zaproponowania konkurencyjnego rozwiązania dla lightweight coresetu, czyli konstrukcji omówionej w rozdziale 3.
 Niestety, z uwagi na wyżej opisane problemy nie udało się dostarczyć rozwiązania, które byłoby zgodne z udowodnionymi gwarancjami teoretycznymi.
-Aktualny stan implementacji przedstawia mocną bazę do dalszych optymalizacji.   
+Przeprowadziliśmy kilka wstępnych testów konstrukcji, które pokazują, że implementacja jest obiecująca.
+Jej aktualny stan przedstawia mocną bazę do dalszych optymalizacji.   
 \\~\\
 Naturalnym pytaniem jest to czy istnieje \textit{praktyczny} i \textit{łatwy} w implementacji algorytm budujący coreset dla problemu $k$-means.
 Podobne pytanie zadali sobie autorzy pracy \cite{bachem2017scalable}, którzy zaproponowali konstrukcję o nazwie lightweight coreset.
@@ -96,7 +102,7 @@ Całą konstrukcję można streścić w kilku linijach kodu widocznego poniżej.
         dist = np.power(self.X-self.X.mean(axis=0), 2).sum(axis=1)
         q = 0.5/self.X.shape[0] + 0.5*dist/dist.sum()
         indices = np.random.choice(self.X.shape[0], size=self.m, replace=True)
-        X_cs = self.X[indices, :]
+        X_cs = self.X[indices]
         w_cs = 1.0/(self.m*q[indices])
         return X_cs, w_cs
 \end{lstlisting}

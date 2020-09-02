@@ -6,7 +6,7 @@ Następnie sprawdza czy niewielka zmiana rozwiązania $S$ poprawia wartość fun
 Jeżeli tak, to wykonuje tę zmianę.
 Heurystyka kończy swoje działanie w momencie kiedy zmiana w rozwiązaniu nie poprawia funkcji celu.
 W efekcie otrzymujemy lokalnie optymalne rozwiązanie dla danego na wejściu problemu optymalizującego.
-Algorytm jest 25-aproksymacją problemu $k$-means, która zakłada, że na wejściu dostajemy zbiór kandydatów na centra $C$ oraz zbiór $n$ punktów $P \subset \mathbb{R}^d$.
+Algorytm opisany w tym podrozdziale jest 25-aproksymacją problemu $k$-means, która zakłada, że na wejściu dostajemy zbiór kandydatów na centra $C$ oraz zbiór $n$ punktów $P \subset \mathbb{R}^d$.
 Autorzy \cite{Arya2004LocalSH} w celu wyznaczenia $C$ wykorzystują algorytm z pracy \cite{Matousek99onapproximate}, którą zastąpimy pracą \cite{10.1145/1007352.1007400} z uwagi na lepsze gwarancje teoretyczne.
 Korzystając z algorytmu opisanego w podrozdziale 4.2.3 wyznaczamy zbiór $C$, który będzie obliczonym $(\epsilon, k)$-coresetem.
 \\~\\
@@ -86,7 +86,7 @@ W ramach tego podrozdziału udowodnimy następujące twierdzenie.
     \begin{equation}
         = \Delta(S, c) + |S|\Delta(c,c^{'})
     \end{equation}
-    Ostanie przejście korzysta z faktu, że jeżeli $c$ jest centroidem $S$ to z definicji zachodzi $\sum_{u \in S} (u - c) = 0$.
+    Ostatnie przejście korzysta z faktu, że jeżeli $c$ jest centroidem $S$ to z definicji zachodzi $\sum_{u \in S} (u - c) = 0$.
 \end{proof}
 
 %\epsilon
@@ -96,7 +96,7 @@ Dla każdego optymalnego $c \in C_{opt}$ wyznaczamy $s_{c}$, który jest najbli�
 Punkt $s_{c}$ nazywamy heurystycznym centrum dla punktu $c$.
 W takim kontekście powiemy, że $c$ jest \textit{schwytane} przez $s_{c}$.
 Tutaj warto zaznaczyć, że każde optymalne centrum jest schwytane przez jedno heurystyczne centrum, ale każde heurystyczne centrum może chwytać kilka optymalnych centrów.
-Heurystyczne centrum nazwiemy \textit{samotnym} jeżeli nie chwyta żadne optymalne centrum.
+Heurystyczne centrum nazwiemy \textit{samotnym} jeżeli nie chwyta żadnego optymalnego centrum.
 
 \begin{proof}
     Dowód twierdzenia 4.2 zaczniemy od zdefniowania podziału $S$ oraz $C_{opt}$ na zbiory $S_{1}, \dots, S_{r}$ oraz $O_{1}, \dots, O_{r}$ dla pewnego $r$, gdzie $|S_{i}| = |O_{i}|$ dla $i = 1, \dots, r$.
@@ -132,7 +132,7 @@ Heurystyczne centrum nazwiemy \textit{samotnym} jeżeli nie chwyta żadne optyma
     \begin{equation}
         \sum_{q \in N_{S}(s_{i}) \setminus N_{C_{opt}}(o_{i})} (\Delta(q, s_{o_{q}}) - \Delta(q, s))
     \end{equation}
-    Na tym etapie dowodu koniecznie będzie wprowadzenie dwóch lematów.
+    Na tym etapie dowodu konieczne będzie wprowadzenie dwóch lematów.
     
     \begin{lemma}{\cite{Arya2004LocalSH}}
         Niech $S$ będzie zbiorem $k$ punktów spełniającym definicję 1-stable oraz niech $C_{opt}$ będzie optymalnym zbiorem dla problemu $k$-means.        Wtedy zachodzi następującą nierówność:
@@ -152,7 +152,7 @@ Heurystyczne centrum nazwiemy \textit{samotnym} jeżeli nie chwyta żadne optyma
         \end{equation}
         Aby rozszerzyć sumę na wszystkie możliwe swap pary zauważmy, że dla każdego optymalnego centrum, jest ono wymienione tylko raz.
         Zatem każdy punkt $q$ kontrybuuje w pierwszej sumie tylko raz.
-        Po drugie zaważmy, że różnca w drugiej sumie jest zawsze niezerowa dlatego rozszerzając zakres sumowania mozemy tylko zwiększyć sumaryczny wynik.
+        Po drugie zaważmy, że różnca w drugiej sumie jest zawsze niezerowa, dlatego rozszerzając zakres sumowania możemy tylko zwiększyć sumaryczny wynik.
         \begin{equation}
             0 \leq \sum_{q \in P} (\Delta(q, o_{q}) - \Delta(q, s_{q})) + \sum_{q \in P} (\Delta(q, s_{o_{q}}) - \Delta(q, s_{q}))
         \end{equation}

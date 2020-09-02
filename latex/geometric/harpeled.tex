@@ -33,7 +33,7 @@ Ograniczenie jest następujące:
     \phi_{P}(X) \leq 32 \phi_{opt}^{k}(P)
 \end{equation}
 Z analizy, którą zaraz przeprowadzimy wynika, że wspóczynnik aproksymacji jest równy $20$.
-Autorzy potrzebowali wspóczynnika równego $32$ z uwagi na inne zastosowanie twierdzenia 4.1 niż nasze.
+Autorzy potrzebowali współczynnika równego $32$ z uwagi na inne zastosowanie twierdzenia 4.1 niż nasze.
 \\~\\
 Niech $P \subset \mathbb{R}^{d}$ będzie danym na wejściu zbiórem $n$ punktów.
 Chcemy szybko obliczyć aproksymację dla problemu $k$-means na tym zbiorze, gdzie rozmiar wynikowego zbioru punktów będzie rzędu $O(k \log^{3}n)$.
@@ -77,7 +77,7 @@ Dla $\rho > n$ przyjmujemy $X = P$.
 Konstrukcja zbioru $X$ jest stosunkowo prosta.
 Dużo cięższym zadaniem jest zbudowanie zbioru $P^{'}$, który jest zbiorem \textit{dobrych} punktów dla $X$.
 
-\subsection{Konstrukcja zbioru dobrych punktów dla $X$.}
+\subsection{Konstrukcja zbioru dobrych punktów dla $X$}
 
 Rozpatrzmy zbiór $C_{opt}$, który jest optymalnym zbiorem centrów problemu $k$-means dla zbioru $P$ i liczby $k$.
 Dla każdego $c_{i} \in C_{opt}$ tworzymy kulę $B_{i}$ o środku w $c_{i}$.
@@ -186,12 +186,12 @@ Ponieważ za każdym razem zbiór $P_{i}$ zmieniejsza się co najmniej o połow�
 Finalnie otrzymamy zbiór $X^{'} = X \cup X_{1} \dots X_{i}$ o mocy $O(k \log^{3} n)$, dla którego $\phi_{P}(X^{'}) \leq 20\phi_{P}(C_{opt})$.
 Złożoność pozostanie taka sama, czyli $O(n)$ dla $k = O(n^{\frac{1}{4}})$ oraz $O(n \log (k \log n))$ w przeciwnym przypadku.
 
-\subsection{Krata wykładnicza.}
+\subsection{Krata wykładnicza}
 
 Przejdzmy teraz do kluczowej części tego podrozdziału, czyli budowy kraty wykładniczej, która jest autorską konstrukcją \cite{10.1145/1007352.1007400}.
 Krata wykładnicza jest obiektem geometrycznym zbudowanym z komórek, które są hipersześcianami.
 Każda krata posiada punkt początkowy, od którego zaczynamy konstrukcję przylegających do siebie komórek o zwiększających się długościach boków.
-Komórki zawierają punkty z danego na wejścu zbioru danych oraz punkt początkowy jest ustalonym punktem z tego zbioru.
+Komórki zawierają punkty z danego na wejścu zbioru danych oraz punkt początkowy, który jest ustalonym punktem z tego zbioru.
 Konstrukcję dzielimy na $\log n$ poziomów, gdzie $n$ jest mocą wejściowego zbioru.
 Komórki o tych samych długościach boków należą do tego samego poziomu.
 Na rysunku 4.1 widzimy 3 poziomową kartę wykładniczą w $\mathbb{R}^2$.
@@ -206,12 +206,12 @@ Niech $P_{i}$ będzie podzbiorem punktów z $P$, dla których punkt $x_{i} \in A
 Dla dowolnego $p \in P_{i}$, mamy $||px_{i}|| \leq \sqrt{xn}R$, ponieważ $||px_{i}||^{2} \leq \phi_{P}(A)$ dla $i = 1, \dots, m$.
 \\~\\
 Kolejnym krokiem będzie budowa kraty wykładniczej wokół każdego punktu $x_{i}$.
-Niech $Q_{i,j}$ będzie kwatratem o boku długości $R2^{j}$ o środku w punkcie $x_{i}$ dla $j = 0, \dots, M$, gdzie $M = \lceil 2 \lg(cn) \rceil$, który jest równoległy do osi układu współrzednych dla danej przestrzeni.
+Niech $Q_{i,j}$ będzie kwatratem o boku długości $R2^{j}$ o środku w punkcie $x_{i}$ dla $j = 0, \dots, M$, gdzie $M = \lceil 2 \lg(cn) \rceil$, który jest równoległy do osi układu współrzędnych dla danej przestrzeni.
 Następnie, niech $V_{i, 0} = Q_{i, 0}$ oraz niech $V_{i,j} = Q_{i,j} \setminus Q_{i,j-1}$ dla $j = 0, \dots, M$.
 Kolejnym krokiem będzie przekształcenie $V_{i,j}$ w kratę, której komórki będą długości $r_{j} = \frac{\epsilon R2^{j}}{10cd}$ oraz niech $G_{i}$ oznacza wynikową kratę wykładniczą dla $V_{i,0}, \dots, V_{i,M}$.
 Mając $G_{i}$ obliczamy dla każdego punktu z $P_{i}$ komórkę, do której należy.
 Dla każdej niepustej komórki z kraty wybieramy losowy punkt do niej należący, który będzie jej reprezentantem.
-Do takiego punktu przypisujemy wagę, która bedzie równa liczbie punktów z komórki, dla której jest reprezentantem.
+Do takiego punktu przypisujemy wagę, która będzie równa liczbie punktów z komórki, dla której jest reprezentantem.
 Po przejściu całej kraty otrzymamy zbiór $S_{i}$ takich punktów.
 Definujemy $S = \bigcup_{i} S_{i}$, który jest  $(\epsilon, k)$ coresetem.
 Dowód tego, że zbiór $S$ jest $(\epsilon, k)$ coresetem pomijamy z uwagi na jego mechniczność i żmudność.

@@ -21,7 +21,10 @@
 
 \bibitem{bachem2017scalable}
 {\sc Bachem, O., Lucic, M., and Krause, A.}
-\newblock Scalable k-means clustering via lightweight coresets, 2017.
+\newblock Scalable k -means clustering via lightweight coresets.
+\newblock In {\em Proceedings of the 24th ACM SIGKDD International Conference
+  on Knowledge Discovery and Data Mining\/} (New York, NY, USA, 2018), KDD '18,
+  Association for Computing Machinery, p.~1119–1127.
 
 \bibitem{chazelle_2000}
 {\sc Chazelle, B.}

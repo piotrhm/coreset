@@ -11,8 +11,8 @@
 \contentsline {section}{\numberline {4.1}Algorytm Gonzalez'a}{14}{section.4.1}
 \contentsline {section}{\numberline {4.2}Konstrukcja kraty wyk\IeC {\l }adniczej}{16}{section.4.2}
 \contentsline {subsection}{\numberline {4.2.1}Szybka aproksymacja dla problemu K-means}{16}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}Konstrukcja zbioru dobrych punkt\IeC {\'o}w dla $X$.}{17}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}Krata wyk\IeC {\l }adnicza.}{19}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.2}Konstrukcja zbioru dobrych punkt\IeC {\'o}w dla $X$}{17}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}Krata wyk\IeC {\l }adnicza}{19}{subsection.4.2.3}
 \contentsline {section}{\numberline {4.3}Heurystyka single swap}{21}{section.4.3}
 \contentsline {section}{\numberline {4.4}Podsumowanie}{27}{section.4.4}
 \contentsline {chapter}{\numberline {5}Podsumowanie}{30}{chapter.5}
